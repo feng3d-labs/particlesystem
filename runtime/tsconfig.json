@@ -14,7 +14,7 @@
         "outFile": "out/particlesystem.js",
     },
     "files": [
-        "libs/feng3d.d.ts",
+        "../../../feng3d/out/feng3d.d.ts",
         //粒子系统
         "src/Particle.ts",
         "src/ParticlesAdditive.shader.ts",
