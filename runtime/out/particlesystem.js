@@ -278,7 +278,7 @@ var feng3d;
             get: function () {
                 return this._isPlaying;
             },
-            enumerable: true,
+            enumerable: false,
             configurable: true
         });
         Object.defineProperty(ParticleSystem.prototype, "isStopped", {
@@ -290,7 +290,7 @@ var feng3d;
             get: function () {
                 return !this._isPlaying && this.time == 0;
             },
-            enumerable: true,
+            enumerable: false,
             configurable: true
         });
         Object.defineProperty(ParticleSystem.prototype, "isPaused", {
@@ -302,7 +302,7 @@ var feng3d;
             get: function () {
                 return !this._isPlaying && this.time != 0;
             },
-            enumerable: true,
+            enumerable: false,
             configurable: true
         });
         Object.defineProperty(ParticleSystem.prototype, "particleCount", {
@@ -314,7 +314,7 @@ var feng3d;
             get: function () {
                 return this._activeParticles.length;
             },
-            enumerable: true,
+            enumerable: false,
             configurable: true
         });
         Object.defineProperty(ParticleSystem.prototype, "main", {
@@ -328,7 +328,7 @@ var feng3d;
                 this._main = v;
                 feng3d.watcher.watch(this._main, "simulationSpace", this._simulationSpaceChanged, this);
             },
-            enumerable: true,
+            enumerable: false,
             configurable: true
         });
         Object.defineProperty(ParticleSystem.prototype, "emission", {
@@ -338,7 +338,7 @@ var feng3d;
                 v.particleSystem = this;
                 this._emission = v;
             },
-            enumerable: true,
+            enumerable: false,
             configurable: true
         });
         Object.defineProperty(ParticleSystem.prototype, "shape", {
@@ -348,7 +348,7 @@ var feng3d;
                 v.particleSystem = this;
                 this._shape = v;
             },
-            enumerable: true,
+            enumerable: false,
             configurable: true
         });
         Object.defineProperty(ParticleSystem.prototype, "velocityOverLifetime", {
@@ -358,7 +358,7 @@ var feng3d;
                 v.particleSystem = this;
                 this._velocityOverLifetime = v;
             },
-            enumerable: true,
+            enumerable: false,
             configurable: true
         });
         Object.defineProperty(ParticleSystem.prototype, "limitVelocityOverLifetime", {
@@ -368,7 +368,7 @@ var feng3d;
                 v.particleSystem = this;
                 this._limitVelocityOverLifetime = v;
             },
-            enumerable: true,
+            enumerable: false,
             configurable: true
         });
         Object.defineProperty(ParticleSystem.prototype, "inheritVelocity", {
@@ -383,7 +383,7 @@ var feng3d;
                 v.particleSystem = this;
                 this._inheritVelocity = v;
             },
-            enumerable: true,
+            enumerable: false,
             configurable: true
         });
         Object.defineProperty(ParticleSystem.prototype, "forceOverLifetime", {
@@ -393,7 +393,7 @@ var feng3d;
                 v.particleSystem = this;
                 this._forceOverLifetime = v;
             },
-            enumerable: true,
+            enumerable: false,
             configurable: true
         });
         Object.defineProperty(ParticleSystem.prototype, "colorOverLifetime", {
@@ -403,7 +403,7 @@ var feng3d;
                 v.particleSystem = this;
                 this._colorOverLifetime = v;
             },
-            enumerable: true,
+            enumerable: false,
             configurable: true
         });
         Object.defineProperty(ParticleSystem.prototype, "colorBySpeed", {
@@ -416,7 +416,7 @@ var feng3d;
                 v.particleSystem = this;
                 this._colorBySpeed = v;
             },
-            enumerable: true,
+            enumerable: false,
             configurable: true
         });
         Object.defineProperty(ParticleSystem.prototype, "sizeOverLifetime", {
@@ -426,7 +426,7 @@ var feng3d;
                 v.particleSystem = this;
                 this._sizeOverLifetime = v;
             },
-            enumerable: true,
+            enumerable: false,
             configurable: true
         });
         Object.defineProperty(ParticleSystem.prototype, "sizeBySpeed", {
@@ -439,7 +439,7 @@ var feng3d;
                 v.particleSystem = this;
                 this._sizeBySpeed = v;
             },
-            enumerable: true,
+            enumerable: false,
             configurable: true
         });
         Object.defineProperty(ParticleSystem.prototype, "rotationOverLifetime", {
@@ -449,7 +449,7 @@ var feng3d;
                 v.particleSystem = this;
                 this._rotationOverLifetime = v;
             },
-            enumerable: true,
+            enumerable: false,
             configurable: true
         });
         Object.defineProperty(ParticleSystem.prototype, "rotationBySpeed", {
@@ -462,7 +462,7 @@ var feng3d;
                 v.particleSystem = this;
                 this._rotationBySpeed = v;
             },
-            enumerable: true,
+            enumerable: false,
             configurable: true
         });
         Object.defineProperty(ParticleSystem.prototype, "noise", {
@@ -475,7 +475,7 @@ var feng3d;
                 v.particleSystem = this;
                 this._noise = v;
             },
-            enumerable: true,
+            enumerable: false,
             configurable: true
         });
         Object.defineProperty(ParticleSystem.prototype, "subEmitters", {
@@ -488,7 +488,7 @@ var feng3d;
                 v.particleSystem = this;
                 this._subEmitters = v;
             },
-            enumerable: true,
+            enumerable: false,
             configurable: true
         });
         Object.defineProperty(ParticleSystem.prototype, "textureSheetAnimation", {
@@ -501,12 +501,12 @@ var feng3d;
                 v.particleSystem = this;
                 this._textureSheetAnimation = v;
             },
-            enumerable: true,
+            enumerable: false,
             configurable: true
         });
         Object.defineProperty(ParticleSystem.prototype, "single", {
             get: function () { return true; },
-            enumerable: true,
+            enumerable: false,
             configurable: true
         });
         ParticleSystem.prototype.update = function (interval) {
@@ -1214,7 +1214,7 @@ var feng3d;
             set: function (v) {
                 this.count.constantMin = v;
             },
-            enumerable: true,
+            enumerable: false,
             configurable: true
         });
         Object.defineProperty(ParticleEmissionBurst.prototype, "maxCount", {
@@ -1229,7 +1229,7 @@ var feng3d;
             set: function (v) {
                 this.count.constantMax = v;
             },
-            enumerable: true,
+            enumerable: false,
             configurable: true
         });
         Object.defineProperty(ParticleEmissionBurst.prototype, "isProbability", {
@@ -1239,7 +1239,7 @@ var feng3d;
             get: function () {
                 return this._isProbability;
             },
-            enumerable: true,
+            enumerable: false,
             configurable: true
         });
         /**
@@ -1947,7 +1947,7 @@ var feng3d;
             set: function (v) {
                 this._module.radius = v;
             },
-            enumerable: true,
+            enumerable: false,
             configurable: true
         });
         /**
@@ -2044,7 +2044,7 @@ var feng3d;
             set: function (v) {
                 this._module.angle = v;
             },
-            enumerable: true,
+            enumerable: false,
             configurable: true
         });
         Object.defineProperty(ParticleSystemShapeCone.prototype, "radius", {
@@ -2057,7 +2057,7 @@ var feng3d;
             set: function (v) {
                 this._module.radius = v;
             },
-            enumerable: true,
+            enumerable: false,
             configurable: true
         });
         Object.defineProperty(ParticleSystemShapeCone.prototype, "length", {
@@ -2073,7 +2073,7 @@ var feng3d;
             set: function (v) {
                 this._module.length = v;
             },
-            enumerable: true,
+            enumerable: false,
             configurable: true
         });
         Object.defineProperty(ParticleSystemShapeCone.prototype, "arc", {
@@ -2086,7 +2086,7 @@ var feng3d;
             set: function (v) {
                 this._module.arc = v;
             },
-            enumerable: true,
+            enumerable: false,
             configurable: true
         });
         Object.defineProperty(ParticleSystemShapeCone.prototype, "arcMode", {
@@ -2100,7 +2100,7 @@ var feng3d;
             set: function (v) {
                 this._module.arcMode = v;
             },
-            enumerable: true,
+            enumerable: false,
             configurable: true
         });
         Object.defineProperty(ParticleSystemShapeCone.prototype, "arcSpread", {
@@ -2114,7 +2114,7 @@ var feng3d;
             set: function (v) {
                 this._module.arcSpread = v;
             },
-            enumerable: true,
+            enumerable: false,
             configurable: true
         });
         Object.defineProperty(ParticleSystemShapeCone.prototype, "arcSpeed", {
@@ -2128,7 +2128,7 @@ var feng3d;
             set: function (v) {
                 this._module.arcSpeed = v;
             },
-            enumerable: true,
+            enumerable: false,
             configurable: true
         });
         /**
@@ -2255,7 +2255,7 @@ var feng3d;
             set: function (v) {
                 this._module.box.x = v;
             },
-            enumerable: true,
+            enumerable: false,
             configurable: true
         });
         Object.defineProperty(ParticleSystemShapeBox.prototype, "boxY", {
@@ -2268,7 +2268,7 @@ var feng3d;
             set: function (v) {
                 this._module.box.y = v;
             },
-            enumerable: true,
+            enumerable: false,
             configurable: true
         });
         Object.defineProperty(ParticleSystemShapeBox.prototype, "boxZ", {
@@ -2281,7 +2281,7 @@ var feng3d;
             set: function (v) {
                 this._module.box.z = v;
             },
-            enumerable: true,
+            enumerable: false,
             configurable: true
         });
         /**
@@ -2363,7 +2363,7 @@ var feng3d;
             set: function (v) {
                 this._module.radius = v;
             },
-            enumerable: true,
+            enumerable: false,
             configurable: true
         });
         Object.defineProperty(ParticleSystemShapeCircle.prototype, "arc", {
@@ -2373,7 +2373,7 @@ var feng3d;
             set: function (v) {
                 this._module.arc = v;
             },
-            enumerable: true,
+            enumerable: false,
             configurable: true
         });
         Object.defineProperty(ParticleSystemShapeCircle.prototype, "arcMode", {
@@ -2389,7 +2389,7 @@ var feng3d;
             set: function (v) {
                 this._module.arcMode = v;
             },
-            enumerable: true,
+            enumerable: false,
             configurable: true
         });
         Object.defineProperty(ParticleSystemShapeCircle.prototype, "arcSpread", {
@@ -2404,7 +2404,7 @@ var feng3d;
             set: function (v) {
                 this._module.arcSpread = v;
             },
-            enumerable: true,
+            enumerable: false,
             configurable: true
         });
         Object.defineProperty(ParticleSystemShapeCircle.prototype, "arcSpeed", {
@@ -2418,7 +2418,7 @@ var feng3d;
             set: function (v) {
                 this._module.arcSpeed = v;
             },
-            enumerable: true,
+            enumerable: false,
             configurable: true
         });
         /**
@@ -2500,7 +2500,7 @@ var feng3d;
             set: function (v) {
                 this._module.radius = v;
             },
-            enumerable: true,
+            enumerable: false,
             configurable: true
         });
         Object.defineProperty(ParticleSystemShapeEdge.prototype, "radiusMode", {
@@ -2515,7 +2515,7 @@ var feng3d;
             set: function (v) {
                 this._module.radiusMode = v;
             },
-            enumerable: true,
+            enumerable: false,
             configurable: true
         });
         Object.defineProperty(ParticleSystemShapeEdge.prototype, "radiusSpread", {
@@ -2530,7 +2530,7 @@ var feng3d;
             set: function (v) {
                 this._module.radiusSpread = v;
             },
-            enumerable: true,
+            enumerable: false,
             configurable: true
         });
         Object.defineProperty(ParticleSystemShapeEdge.prototype, "radiusSpeed", {
@@ -2545,7 +2545,7 @@ var feng3d;
             set: function (v) {
                 this._module.radiusSpeed = v;
             },
-            enumerable: true,
+            enumerable: false,
             configurable: true
         });
         /**
@@ -2765,7 +2765,7 @@ var feng3d;
             get: function () {
                 return this.startDelay.curveMultiplier;
             },
-            enumerable: true,
+            enumerable: false,
             configurable: true
         });
         Object.defineProperty(ParticleMainModule.prototype, "startLifetimeMultiplier", {
@@ -2782,7 +2782,7 @@ var feng3d;
             set: function (v) {
                 this.startLifetime.curveMultiplier = v;
             },
-            enumerable: true,
+            enumerable: false,
             configurable: true
         });
         Object.defineProperty(ParticleMainModule.prototype, "startSpeedMultiplier", {
@@ -2799,7 +2799,7 @@ var feng3d;
             set: function (v) {
                 this.startSpeed.curveMultiplier = v;
             },
-            enumerable: true,
+            enumerable: false,
             configurable: true
         });
         Object.defineProperty(ParticleMainModule.prototype, "startSize", {
@@ -2814,7 +2814,7 @@ var feng3d;
             set: function (v) {
                 this.startSize3D.xCurve = v;
             },
-            enumerable: true,
+            enumerable: false,
             configurable: true
         });
         Object.defineProperty(ParticleMainModule.prototype, "startSizeMultiplier", {
@@ -2831,7 +2831,7 @@ var feng3d;
             set: function (v) {
                 this.startSize.curveMultiplier = v;
             },
-            enumerable: true,
+            enumerable: false,
             configurable: true
         });
         Object.defineProperty(ParticleMainModule.prototype, "startSizeX", {
@@ -2846,7 +2846,7 @@ var feng3d;
             set: function (v) {
                 this.startSize3D.xCurve = v;
             },
-            enumerable: true,
+            enumerable: false,
             configurable: true
         });
         Object.defineProperty(ParticleMainModule.prototype, "startSizeXMultiplier", {
@@ -2863,7 +2863,7 @@ var feng3d;
             set: function (v) {
                 this.startSizeX.curveMultiplier = v;
             },
-            enumerable: true,
+            enumerable: false,
             configurable: true
         });
         Object.defineProperty(ParticleMainModule.prototype, "startSizeY", {
@@ -2878,7 +2878,7 @@ var feng3d;
             set: function (v) {
                 this.startSize3D.yCurve = v;
             },
-            enumerable: true,
+            enumerable: false,
             configurable: true
         });
         Object.defineProperty(ParticleMainModule.prototype, "startSizeYMultiplier", {
@@ -2895,7 +2895,7 @@ var feng3d;
             set: function (v) {
                 this.startSizeY.curveMultiplier = v;
             },
-            enumerable: true,
+            enumerable: false,
             configurable: true
         });
         Object.defineProperty(ParticleMainModule.prototype, "startSizeZ", {
@@ -2910,7 +2910,7 @@ var feng3d;
             set: function (v) {
                 this.startSize3D.zCurve = v;
             },
-            enumerable: true,
+            enumerable: false,
             configurable: true
         });
         Object.defineProperty(ParticleMainModule.prototype, "startSizeZMultiplier", {
@@ -2927,7 +2927,7 @@ var feng3d;
             set: function (v) {
                 this.startSizeZ.curveMultiplier = v;
             },
-            enumerable: true,
+            enumerable: false,
             configurable: true
         });
         Object.defineProperty(ParticleMainModule.prototype, "startRotation", {
@@ -2942,7 +2942,7 @@ var feng3d;
             set: function (v) {
                 this.startRotation3D.zCurve = v;
             },
-            enumerable: true,
+            enumerable: false,
             configurable: true
         });
         Object.defineProperty(ParticleMainModule.prototype, "startRotationMultiplier", {
@@ -2959,7 +2959,7 @@ var feng3d;
             set: function (v) {
                 this.startRotation.curveMultiplier = v;
             },
-            enumerable: true,
+            enumerable: false,
             configurable: true
         });
         Object.defineProperty(ParticleMainModule.prototype, "startRotationX", {
@@ -2974,7 +2974,7 @@ var feng3d;
             set: function (v) {
                 this.startRotation3D.xCurve = v;
             },
-            enumerable: true,
+            enumerable: false,
             configurable: true
         });
         Object.defineProperty(ParticleMainModule.prototype, "startRotationXMultiplier", {
@@ -2991,7 +2991,7 @@ var feng3d;
             set: function (v) {
                 this.startRotationX.curveMultiplier = v;
             },
-            enumerable: true,
+            enumerable: false,
             configurable: true
         });
         Object.defineProperty(ParticleMainModule.prototype, "startRotationY", {
@@ -3006,7 +3006,7 @@ var feng3d;
             set: function (v) {
                 this.startRotation3D.yCurve = v;
             },
-            enumerable: true,
+            enumerable: false,
             configurable: true
         });
         Object.defineProperty(ParticleMainModule.prototype, "startRotationYMultiplier", {
@@ -3023,7 +3023,7 @@ var feng3d;
             set: function (v) {
                 this.startRotationY.curveMultiplier = v;
             },
-            enumerable: true,
+            enumerable: false,
             configurable: true
         });
         Object.defineProperty(ParticleMainModule.prototype, "startRotationZ", {
@@ -3038,7 +3038,7 @@ var feng3d;
             set: function (v) {
                 this.startRotation3D.zCurve = v;
             },
-            enumerable: true,
+            enumerable: false,
             configurable: true
         });
         Object.defineProperty(ParticleMainModule.prototype, "startRotationZMultiplier", {
@@ -3055,7 +3055,7 @@ var feng3d;
             set: function (v) {
                 this.startRotationZ.curveMultiplier = v;
             },
-            enumerable: true,
+            enumerable: false,
             configurable: true
         });
         /**
@@ -3266,7 +3266,7 @@ var feng3d;
             set: function (v) {
                 this.rateOverTime.curveMultiplier = v;
             },
-            enumerable: true,
+            enumerable: false,
             configurable: true
         });
         Object.defineProperty(ParticleEmissionModule.prototype, "rateOverDistanceMultiplier", {
@@ -3283,7 +3283,7 @@ var feng3d;
             set: function (v) {
                 this.rateOverDistance.curveMultiplier = v;
             },
-            enumerable: true,
+            enumerable: false,
             configurable: true
         });
         Object.defineProperty(ParticleEmissionModule.prototype, "burstCount", {
@@ -3295,7 +3295,7 @@ var feng3d;
             get: function () {
                 return this.bursts.length;
             },
-            enumerable: true,
+            enumerable: false,
             configurable: true
         });
         /**
@@ -3491,7 +3491,7 @@ var feng3d;
             set: function (v) {
                 this.arcSpeed.curveMultiplier = v;
             },
-            enumerable: true,
+            enumerable: false,
             configurable: true
         });
         Object.defineProperty(ParticleShapeModule.prototype, "radiusSpeedMultiplier", {
@@ -3506,7 +3506,7 @@ var feng3d;
             set: function (v) {
                 this.radiusSpeed.curveMultiplier = v;
             },
-            enumerable: true,
+            enumerable: false,
             configurable: true
         });
         /**
@@ -3813,7 +3813,7 @@ var feng3d;
             set: function (v) {
                 this.velocity.xCurve = v;
             },
-            enumerable: true,
+            enumerable: false,
             configurable: true
         });
         Object.defineProperty(ParticleVelocityOverLifetimeModule.prototype, "xMultiplier", {
@@ -3828,7 +3828,7 @@ var feng3d;
             set: function (v) {
                 this.x.curveMultiplier = v;
             },
-            enumerable: true,
+            enumerable: false,
             configurable: true
         });
         Object.defineProperty(ParticleVelocityOverLifetimeModule.prototype, "y", {
@@ -3843,7 +3843,7 @@ var feng3d;
             set: function (v) {
                 this.velocity.yCurve = v;
             },
-            enumerable: true,
+            enumerable: false,
             configurable: true
         });
         Object.defineProperty(ParticleVelocityOverLifetimeModule.prototype, "yMultiplier", {
@@ -3858,7 +3858,7 @@ var feng3d;
             set: function (v) {
                 this.y.curveMultiplier = v;
             },
-            enumerable: true,
+            enumerable: false,
             configurable: true
         });
         Object.defineProperty(ParticleVelocityOverLifetimeModule.prototype, "z", {
@@ -3873,7 +3873,7 @@ var feng3d;
             set: function (v) {
                 this.velocity.zCurve = v;
             },
-            enumerable: true,
+            enumerable: false,
             configurable: true
         });
         Object.defineProperty(ParticleVelocityOverLifetimeModule.prototype, "zMultiplier", {
@@ -3888,7 +3888,7 @@ var feng3d;
             set: function (v) {
                 this.z.curveMultiplier = v;
             },
-            enumerable: true,
+            enumerable: false,
             configurable: true
         });
         /**
@@ -3983,7 +3983,7 @@ var feng3d;
             set: function (v) {
                 this.limit.curveMultiplier = v;
             },
-            enumerable: true,
+            enumerable: false,
             configurable: true
         });
         Object.defineProperty(ParticleLimitVelocityOverLifetimeModule.prototype, "limitX", {
@@ -3998,7 +3998,7 @@ var feng3d;
             set: function (v) {
                 this.limit3D.xCurve = v;
             },
-            enumerable: true,
+            enumerable: false,
             configurable: true
         });
         Object.defineProperty(ParticleLimitVelocityOverLifetimeModule.prototype, "limitXMultiplier", {
@@ -4013,7 +4013,7 @@ var feng3d;
             set: function (v) {
                 this.limit3D.xCurve.curveMultiplier = v;
             },
-            enumerable: true,
+            enumerable: false,
             configurable: true
         });
         Object.defineProperty(ParticleLimitVelocityOverLifetimeModule.prototype, "limitY", {
@@ -4028,7 +4028,7 @@ var feng3d;
             set: function (v) {
                 this.limit3D.yCurve = v;
             },
-            enumerable: true,
+            enumerable: false,
             configurable: true
         });
         Object.defineProperty(ParticleLimitVelocityOverLifetimeModule.prototype, "limitYMultiplier", {
@@ -4043,7 +4043,7 @@ var feng3d;
             set: function (v) {
                 this.limit3D.yCurve.curveMultiplier = v;
             },
-            enumerable: true,
+            enumerable: false,
             configurable: true
         });
         Object.defineProperty(ParticleLimitVelocityOverLifetimeModule.prototype, "limitZ", {
@@ -4058,7 +4058,7 @@ var feng3d;
             set: function (v) {
                 this.limit3D.zCurve = v;
             },
-            enumerable: true,
+            enumerable: false,
             configurable: true
         });
         Object.defineProperty(ParticleLimitVelocityOverLifetimeModule.prototype, "limitZMultiplier", {
@@ -4073,7 +4073,7 @@ var feng3d;
             set: function (v) {
                 this.limit3D.zCurve.curveMultiplier = v;
             },
-            enumerable: true,
+            enumerable: false,
             configurable: true
         });
         /**
@@ -4192,7 +4192,7 @@ var feng3d;
             set: function (v) {
                 this.multiplier = v;
             },
-            enumerable: true,
+            enumerable: false,
             configurable: true
         });
         Object.defineProperty(ParticleInheritVelocityModule.prototype, "curveMultiplier", {
@@ -4207,7 +4207,7 @@ var feng3d;
             set: function (v) {
                 this.multiplier.curveMultiplier = v;
             },
-            enumerable: true,
+            enumerable: false,
             configurable: true
         });
         /**
@@ -4296,7 +4296,7 @@ var feng3d;
             set: function (v) {
                 this.force.xCurve = v;
             },
-            enumerable: true,
+            enumerable: false,
             configurable: true
         });
         Object.defineProperty(ParticleForceOverLifetimeModule.prototype, "xMultiplier", {
@@ -4311,7 +4311,7 @@ var feng3d;
             set: function (v) {
                 this.x.curveMultiplier = v;
             },
-            enumerable: true,
+            enumerable: false,
             configurable: true
         });
         Object.defineProperty(ParticleForceOverLifetimeModule.prototype, "y", {
@@ -4326,7 +4326,7 @@ var feng3d;
             set: function (v) {
                 this.force.yCurve = v;
             },
-            enumerable: true,
+            enumerable: false,
             configurable: true
         });
         Object.defineProperty(ParticleForceOverLifetimeModule.prototype, "yMultiplier", {
@@ -4341,7 +4341,7 @@ var feng3d;
             set: function (v) {
                 this.y.curveMultiplier = v;
             },
-            enumerable: true,
+            enumerable: false,
             configurable: true
         });
         Object.defineProperty(ParticleForceOverLifetimeModule.prototype, "z", {
@@ -4356,7 +4356,7 @@ var feng3d;
             set: function (v) {
                 this.force.zCurve = v;
             },
-            enumerable: true,
+            enumerable: false,
             configurable: true
         });
         Object.defineProperty(ParticleForceOverLifetimeModule.prototype, "zMultiplier", {
@@ -4371,7 +4371,7 @@ var feng3d;
             set: function (v) {
                 this.z.curveMultiplier = v;
             },
-            enumerable: true,
+            enumerable: false,
             configurable: true
         });
         /**
@@ -4550,7 +4550,7 @@ var feng3d;
             set: function (v) {
                 this.size3D.xCurve = v;
             },
-            enumerable: true,
+            enumerable: false,
             configurable: true
         });
         Object.defineProperty(ParticleSizeOverLifetimeModule.prototype, "sizeMultiplier", {
@@ -4565,7 +4565,7 @@ var feng3d;
             set: function (v) {
                 this.size.curveMultiplier = v;
             },
-            enumerable: true,
+            enumerable: false,
             configurable: true
         });
         Object.defineProperty(ParticleSizeOverLifetimeModule.prototype, "x", {
@@ -4580,7 +4580,7 @@ var feng3d;
             set: function (v) {
                 this.size3D.xCurve;
             },
-            enumerable: true,
+            enumerable: false,
             configurable: true
         });
         Object.defineProperty(ParticleSizeOverLifetimeModule.prototype, "xMultiplier", {
@@ -4595,7 +4595,7 @@ var feng3d;
             set: function (v) {
                 this.x.curveMultiplier = v;
             },
-            enumerable: true,
+            enumerable: false,
             configurable: true
         });
         Object.defineProperty(ParticleSizeOverLifetimeModule.prototype, "y", {
@@ -4610,7 +4610,7 @@ var feng3d;
             set: function (v) {
                 this.size3D.yCurve;
             },
-            enumerable: true,
+            enumerable: false,
             configurable: true
         });
         Object.defineProperty(ParticleSizeOverLifetimeModule.prototype, "yMultiplier", {
@@ -4625,7 +4625,7 @@ var feng3d;
             set: function (v) {
                 this.y.curveMultiplier = v;
             },
-            enumerable: true,
+            enumerable: false,
             configurable: true
         });
         Object.defineProperty(ParticleSizeOverLifetimeModule.prototype, "z", {
@@ -4640,7 +4640,7 @@ var feng3d;
             set: function (v) {
                 this.size3D.zCurve;
             },
-            enumerable: true,
+            enumerable: false,
             configurable: true
         });
         Object.defineProperty(ParticleSizeOverLifetimeModule.prototype, "zMultiplier", {
@@ -4655,7 +4655,7 @@ var feng3d;
             set: function (v) {
                 this.z.curveMultiplier = v;
             },
-            enumerable: true,
+            enumerable: false,
             configurable: true
         });
         /**
@@ -4742,7 +4742,7 @@ var feng3d;
             set: function (v) {
                 this.size3D.xCurve = v;
             },
-            enumerable: true,
+            enumerable: false,
             configurable: true
         });
         Object.defineProperty(ParticleSizeBySpeedModule.prototype, "sizeMultiplier", {
@@ -4757,7 +4757,7 @@ var feng3d;
             set: function (v) {
                 this.size.curveMultiplier = v;
             },
-            enumerable: true,
+            enumerable: false,
             configurable: true
         });
         Object.defineProperty(ParticleSizeBySpeedModule.prototype, "x", {
@@ -4772,7 +4772,7 @@ var feng3d;
             set: function (v) {
                 this.size3D.xCurve;
             },
-            enumerable: true,
+            enumerable: false,
             configurable: true
         });
         Object.defineProperty(ParticleSizeBySpeedModule.prototype, "xMultiplier", {
@@ -4787,7 +4787,7 @@ var feng3d;
             set: function (v) {
                 this.x.curveMultiplier = v;
             },
-            enumerable: true,
+            enumerable: false,
             configurable: true
         });
         Object.defineProperty(ParticleSizeBySpeedModule.prototype, "y", {
@@ -4802,7 +4802,7 @@ var feng3d;
             set: function (v) {
                 this.size3D.yCurve;
             },
-            enumerable: true,
+            enumerable: false,
             configurable: true
         });
         Object.defineProperty(ParticleSizeBySpeedModule.prototype, "yMultiplier", {
@@ -4817,7 +4817,7 @@ var feng3d;
             set: function (v) {
                 this.y.curveMultiplier = v;
             },
-            enumerable: true,
+            enumerable: false,
             configurable: true
         });
         Object.defineProperty(ParticleSizeBySpeedModule.prototype, "z", {
@@ -4832,7 +4832,7 @@ var feng3d;
             set: function (v) {
                 this.size3D.zCurve;
             },
-            enumerable: true,
+            enumerable: false,
             configurable: true
         });
         Object.defineProperty(ParticleSizeBySpeedModule.prototype, "zMultiplier", {
@@ -4847,7 +4847,7 @@ var feng3d;
             set: function (v) {
                 this.z.curveMultiplier = v;
             },
-            enumerable: true,
+            enumerable: false,
             configurable: true
         });
         /**
@@ -4928,7 +4928,7 @@ var feng3d;
             set: function (v) {
                 this.angularVelocity.xCurve = v;
             },
-            enumerable: true,
+            enumerable: false,
             configurable: true
         });
         Object.defineProperty(ParticleRotationOverLifetimeModule.prototype, "xMultiplier", {
@@ -4943,7 +4943,7 @@ var feng3d;
             set: function (v) {
                 this.x.curveMultiplier = v;
             },
-            enumerable: true,
+            enumerable: false,
             configurable: true
         });
         Object.defineProperty(ParticleRotationOverLifetimeModule.prototype, "y", {
@@ -4958,7 +4958,7 @@ var feng3d;
             set: function (v) {
                 this.angularVelocity.yCurve = v;
             },
-            enumerable: true,
+            enumerable: false,
             configurable: true
         });
         Object.defineProperty(ParticleRotationOverLifetimeModule.prototype, "yMultiplier", {
@@ -4973,7 +4973,7 @@ var feng3d;
             set: function (v) {
                 this.y.curveMultiplier = v;
             },
-            enumerable: true,
+            enumerable: false,
             configurable: true
         });
         Object.defineProperty(ParticleRotationOverLifetimeModule.prototype, "z", {
@@ -4988,7 +4988,7 @@ var feng3d;
             set: function (v) {
                 this.angularVelocity.zCurve = v;
             },
-            enumerable: true,
+            enumerable: false,
             configurable: true
         });
         Object.defineProperty(ParticleRotationOverLifetimeModule.prototype, "zMultiplier", {
@@ -5003,7 +5003,7 @@ var feng3d;
             set: function (v) {
                 this.z.curveMultiplier = v;
             },
-            enumerable: true,
+            enumerable: false,
             configurable: true
         });
         /**
@@ -5085,7 +5085,7 @@ var feng3d;
             set: function (v) {
                 this.angularVelocity.xCurve = v;
             },
-            enumerable: true,
+            enumerable: false,
             configurable: true
         });
         Object.defineProperty(ParticleRotationBySpeedModule.prototype, "xMultiplier", {
@@ -5100,7 +5100,7 @@ var feng3d;
             set: function (v) {
                 this.x.curveMultiplier = v;
             },
-            enumerable: true,
+            enumerable: false,
             configurable: true
         });
         Object.defineProperty(ParticleRotationBySpeedModule.prototype, "y", {
@@ -5115,7 +5115,7 @@ var feng3d;
             set: function (v) {
                 this.angularVelocity.yCurve = v;
             },
-            enumerable: true,
+            enumerable: false,
             configurable: true
         });
         Object.defineProperty(ParticleRotationBySpeedModule.prototype, "yMultiplier", {
@@ -5130,7 +5130,7 @@ var feng3d;
             set: function (v) {
                 this.y.curveMultiplier = v;
             },
-            enumerable: true,
+            enumerable: false,
             configurable: true
         });
         Object.defineProperty(ParticleRotationBySpeedModule.prototype, "z", {
@@ -5145,7 +5145,7 @@ var feng3d;
             set: function (v) {
                 this.angularVelocity.zCurve = v;
             },
-            enumerable: true,
+            enumerable: false,
             configurable: true
         });
         Object.defineProperty(ParticleRotationBySpeedModule.prototype, "zMultiplier", {
@@ -5160,7 +5160,7 @@ var feng3d;
             set: function (v) {
                 this.z.curveMultiplier = v;
             },
-            enumerable: true,
+            enumerable: false,
             configurable: true
         });
         /**
@@ -5310,7 +5310,7 @@ var feng3d;
             set: function (v) {
                 this.strength3D.xCurve = v;
             },
-            enumerable: true,
+            enumerable: false,
             configurable: true
         });
         Object.defineProperty(ParticleNoiseModule.prototype, "strengthX", {
@@ -5325,7 +5325,7 @@ var feng3d;
             set: function (v) {
                 this.strength3D.xCurve = v;
             },
-            enumerable: true,
+            enumerable: false,
             configurable: true
         });
         Object.defineProperty(ParticleNoiseModule.prototype, "strengthY", {
@@ -5340,7 +5340,7 @@ var feng3d;
             set: function (v) {
                 this.strength3D.yCurve = v;
             },
-            enumerable: true,
+            enumerable: false,
             configurable: true
         });
         Object.defineProperty(ParticleNoiseModule.prototype, "strengthZ", {
@@ -5355,7 +5355,7 @@ var feng3d;
             set: function (v) {
                 this.strength3D.zCurve = v;
             },
-            enumerable: true,
+            enumerable: false,
             configurable: true
         });
         Object.defineProperty(ParticleNoiseModule.prototype, "remap", {
@@ -5370,7 +5370,7 @@ var feng3d;
             set: function (v) {
                 this.remap3D.xCurve = v;
             },
-            enumerable: true,
+            enumerable: false,
             configurable: true
         });
         Object.defineProperty(ParticleNoiseModule.prototype, "remapX", {
@@ -5385,7 +5385,7 @@ var feng3d;
             set: function (v) {
                 this.remap3D.xCurve = v;
             },
-            enumerable: true,
+            enumerable: false,
             configurable: true
         });
         Object.defineProperty(ParticleNoiseModule.prototype, "remapY", {
@@ -5400,7 +5400,7 @@ var feng3d;
             set: function (v) {
                 this.remap3D.yCurve = v;
             },
-            enumerable: true,
+            enumerable: false,
             configurable: true
         });
         Object.defineProperty(ParticleNoiseModule.prototype, "remapZ", {
@@ -5415,7 +5415,7 @@ var feng3d;
             set: function (v) {
                 this.remap3D.zCurve = v;
             },
-            enumerable: true,
+            enumerable: false,
             configurable: true
         });
         /**
@@ -5669,7 +5669,7 @@ var feng3d;
             get: function () {
                 return this.subEmitters.length;
             },
-            enumerable: true,
+            enumerable: false,
             configurable: true
         });
         /**
@@ -5858,7 +5858,7 @@ var feng3d;
             set: function (v) {
                 this._rowIndex = Math.clamp(v, 0, this.tiles.y - 1);
             },
-            enumerable: true,
+            enumerable: false,
             configurable: true
         });
         Object.defineProperty(ParticleTextureSheetAnimationModule.prototype, "flipU", {
@@ -5873,7 +5873,7 @@ var feng3d;
             set: function (v) {
                 this.flipUV.x = v;
             },
-            enumerable: true,
+            enumerable: false,
             configurable: true
         });
         Object.defineProperty(ParticleTextureSheetAnimationModule.prototype, "flipV", {
@@ -5888,7 +5888,7 @@ var feng3d;
             set: function (v) {
                 this.flipUV.y = v;
             },
-            enumerable: true,
+            enumerable: false,
             configurable: true
         });
         Object.defineProperty(ParticleTextureSheetAnimationModule.prototype, "frameOverTimeMultiplier", {
@@ -5903,7 +5903,7 @@ var feng3d;
             set: function (v) {
                 this.frameOverTime.curveMultiplier = v;
             },
-            enumerable: true,
+            enumerable: false,
             configurable: true
         });
         Object.defineProperty(ParticleTextureSheetAnimationModule.prototype, "numTilesX", {
@@ -5918,7 +5918,7 @@ var feng3d;
             set: function (v) {
                 this.tiles.x = v;
             },
-            enumerable: true,
+            enumerable: false,
             configurable: true
         });
         Object.defineProperty(ParticleTextureSheetAnimationModule.prototype, "numTilesY", {
@@ -5933,7 +5933,7 @@ var feng3d;
             set: function (v) {
                 this.tiles.y = v;
             },
-            enumerable: true,
+            enumerable: false,
             configurable: true
         });
         Object.defineProperty(ParticleTextureSheetAnimationModule.prototype, "startFrameMultiplier", {
@@ -5948,7 +5948,7 @@ var feng3d;
             set: function (v) {
                 this.startFrame.curveMultiplier = v;
             },
-            enumerable: true,
+            enumerable: false,
             configurable: true
         });
         /**

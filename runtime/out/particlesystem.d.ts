@@ -164,92 +164,108 @@ declare namespace feng3d {
          *
          * 粒子系统正在运行吗?
          */
-        readonly isPlaying: boolean;
+        get isPlaying(): boolean;
         private _isPlaying;
         /**
          * Is the particle system stopped right now ?
          *
          * 粒子系统现在停止了吗?
          */
-        readonly isStopped: boolean;
+        get isStopped(): boolean;
         /**
          * Is the particle system paused right now ?
          *
          * 粒子系统现在暂停了吗?
          */
-        readonly isPaused: boolean;
+        get isPaused(): boolean;
         /**
          * The current number of particles (Read Only).
          *
          * 当前粒子数(只读)。
          */
-        readonly particleCount: number;
+        get particleCount(): number;
         /**
          * Playback position in seconds.
          *
          * 回放位置(秒)
          */
         time: number;
-        main: ParticleMainModule;
+        get main(): ParticleMainModule;
+        set main(v: ParticleMainModule);
         private _main;
-        emission: ParticleEmissionModule;
+        get emission(): ParticleEmissionModule;
+        set emission(v: ParticleEmissionModule);
         private _emission;
-        shape: ParticleShapeModule;
+        get shape(): ParticleShapeModule;
+        set shape(v: ParticleShapeModule);
         private _shape;
-        velocityOverLifetime: ParticleVelocityOverLifetimeModule;
+        get velocityOverLifetime(): ParticleVelocityOverLifetimeModule;
+        set velocityOverLifetime(v: ParticleVelocityOverLifetimeModule);
         private _velocityOverLifetime;
-        limitVelocityOverLifetime: ParticleLimitVelocityOverLifetimeModule;
+        get limitVelocityOverLifetime(): ParticleLimitVelocityOverLifetimeModule;
+        set limitVelocityOverLifetime(v: ParticleLimitVelocityOverLifetimeModule);
         private _limitVelocityOverLifetime;
         /**
          * Script interface for the Particle System velocity inheritance module.
          *
          * 粒子系统速度继承模块。
          */
-        inheritVelocity: ParticleInheritVelocityModule;
+        get inheritVelocity(): ParticleInheritVelocityModule;
+        set inheritVelocity(v: ParticleInheritVelocityModule);
         private _inheritVelocity;
-        forceOverLifetime: ParticleForceOverLifetimeModule;
+        get forceOverLifetime(): ParticleForceOverLifetimeModule;
+        set forceOverLifetime(v: ParticleForceOverLifetimeModule);
         private _forceOverLifetime;
-        colorOverLifetime: ParticleColorOverLifetimeModule;
+        get colorOverLifetime(): ParticleColorOverLifetimeModule;
+        set colorOverLifetime(v: ParticleColorOverLifetimeModule);
         private _colorOverLifetime;
         /**
          * 颜色随速度变化模块。
          */
-        colorBySpeed: ParticleColorBySpeedModule;
+        get colorBySpeed(): ParticleColorBySpeedModule;
+        set colorBySpeed(v: ParticleColorBySpeedModule);
         private _colorBySpeed;
-        sizeOverLifetime: ParticleSizeOverLifetimeModule;
+        get sizeOverLifetime(): ParticleSizeOverLifetimeModule;
+        set sizeOverLifetime(v: ParticleSizeOverLifetimeModule);
         private _sizeOverLifetime;
         /**
          * 缩放随速度变化模块
          */
-        sizeBySpeed: ParticleSizeBySpeedModule;
+        get sizeBySpeed(): ParticleSizeBySpeedModule;
+        set sizeBySpeed(v: ParticleSizeBySpeedModule);
         private _sizeBySpeed;
-        rotationOverLifetime: ParticleRotationOverLifetimeModule;
+        get rotationOverLifetime(): ParticleRotationOverLifetimeModule;
+        set rotationOverLifetime(v: ParticleRotationOverLifetimeModule);
         private _rotationOverLifetime;
         /**
          * 旋转角度随速度变化模块
          */
-        rotationBySpeed: ParticleRotationBySpeedModule;
+        get rotationBySpeed(): ParticleRotationBySpeedModule;
+        set rotationBySpeed(v: ParticleRotationBySpeedModule);
         private _rotationBySpeed;
         /**
          * 旋转角度随速度变化模块
          */
-        noise: ParticleNoiseModule;
+        get noise(): ParticleNoiseModule;
+        set noise(v: ParticleNoiseModule);
         private _noise;
         /**
          * 旋转角度随速度变化模块
          */
-        subEmitters: ParticleSubEmittersModule;
+        get subEmitters(): ParticleSubEmittersModule;
+        set subEmitters(v: ParticleSubEmittersModule);
         private _subEmitters;
         /**
          * 粒子系统纹理表动画模块。
          */
-        textureSheetAnimation: ParticleTextureSheetAnimationModule;
+        get textureSheetAnimation(): ParticleTextureSheetAnimationModule;
+        set textureSheetAnimation(v: ParticleTextureSheetAnimationModule);
         private _textureSheetAnimation;
         geometry: QuadGeometry;
         material: Material;
         castShadows: boolean;
         receiveShadows: boolean;
-        readonly single: boolean;
+        get single(): boolean;
         constructor();
         update(interval: number): void;
         /**
@@ -466,13 +482,15 @@ declare namespace feng3d {
          * Minimum number of bursts to be emitted.
          * 要发射的最小爆发数量。
          */
-        minCount: number;
+        get minCount(): number;
+        set minCount(v: number);
         /**
          * Maximum number of bursts to be emitted.
          *
          * 要发射的最大爆发数量。
          */
-        maxCount: number;
+        get maxCount(): number;
+        set maxCount(v: number);
         /**
          * 喷发被触发的几率。
          */
@@ -480,7 +498,7 @@ declare namespace feng3d {
         /**
          * 是否喷发
          */
-        readonly isProbability: boolean;
+        get isProbability(): boolean;
         private _isProbability;
         /**
          * 通过触发的几率计算是否喷发。
@@ -1108,7 +1126,8 @@ declare namespace feng3d {
         /**
          * 球体半径
          */
-        radius: number;
+        get radius(): number;
+        set radius(v: number);
         /**
          * 是否从球面发射
          */
@@ -1152,36 +1171,43 @@ declare namespace feng3d {
          * Angle of the cone.
          * 圆锥的角度。
          */
-        angle: number;
+        get angle(): number;
+        set angle(v: number);
         /**
          * 圆锥体底部半径。
          */
-        radius: number;
+        get radius(): number;
+        set radius(v: number);
         /**
          * Length of the cone.
          *
          * 圆锥的长度（高度）。
          */
-        length: number;
+        get length(): number;
+        set length(v: number);
         /**
          * Circle arc angle.
          */
-        arc: number;
+        get arc(): number;
+        set arc(v: number);
         /**
          * The mode used for generating particles around the arc.
          * 在弧线周围产生粒子的模式。
          */
-        arcMode: ParticleSystemShapeMultiModeValue;
+        get arcMode(): ParticleSystemShapeMultiModeValue;
+        set arcMode(v: ParticleSystemShapeMultiModeValue);
         /**
          * Control the gap between emission points around the arc.
          * 控制弧线周围发射点之间的间隙。
          */
-        arcSpread: number;
+        get arcSpread(): number;
+        set arcSpread(v: number);
         /**
          * When using one of the animated modes, how quickly to move the emission position around the arc.
          * 当使用一个动画模式时，如何快速移动发射位置周围的弧。
          */
-        arcSpeed: MinMaxCurve;
+        get arcSpeed(): MinMaxCurve;
+        set arcSpeed(v: MinMaxCurve);
         /**
          * 粒子系统圆锥体发射类型。
          */
@@ -1218,15 +1244,18 @@ declare namespace feng3d {
         /**
          * 盒子X方向缩放。
          */
-        boxX: number;
+        get boxX(): number;
+        set boxX(v: number);
         /**
          * 盒子Y方向缩放。
          */
-        boxY: number;
+        get boxY(): number;
+        set boxY(v: number);
         /**
          * 盒子Z方向缩放。
          */
-        boxZ: number;
+        get boxZ(): number;
+        set boxZ(v: number);
         /**
          * 粒子系统盒子发射类型。
          */
@@ -1246,25 +1275,30 @@ declare namespace feng3d {
      * 粒子系统 发射圆盘
      */
     class ParticleSystemShapeCircle extends ParticleSystemShape {
-        radius: number;
-        arc: number;
+        get radius(): number;
+        set radius(v: number);
+        get arc(): number;
+        set arc(v: number);
         /**
          * The mode used for generating particles around the arc.
          *
          * 在弧线周围产生粒子的模式。
          */
-        arcMode: ParticleSystemShapeMultiModeValue;
+        get arcMode(): ParticleSystemShapeMultiModeValue;
+        set arcMode(v: ParticleSystemShapeMultiModeValue);
         /**
          * Control the gap between emission points around the arc.
          *
          * 控制弧线周围发射点之间的间隙。
          */
-        arcSpread: number;
+        get arcSpread(): number;
+        set arcSpread(v: number);
         /**
          * When using one of the animated modes, how quickly to move the emission position around the arc.
          * 当使用一个动画模式时，如何快速移动发射位置周围的弧。
          */
-        arcSpeed: MinMaxCurve;
+        get arcSpeed(): MinMaxCurve;
+        set arcSpeed(v: MinMaxCurve);
         /**
          * 是否从圆形边缘发射。
          */
@@ -1287,25 +1321,29 @@ declare namespace feng3d {
         /**
          * 边长的一半。
          */
-        radius: number;
+        get radius(): number;
+        set radius(v: number);
         /**
          * The mode used for generating particles around the radius.
          *
          * 在弧线周围产生粒子的模式。
          */
-        radiusMode: ParticleSystemShapeMultiModeValue;
+        get radiusMode(): ParticleSystemShapeMultiModeValue;
+        set radiusMode(v: ParticleSystemShapeMultiModeValue);
         /**
          * Control the gap between emission points around the radius.
          *
          * 控制弧线周围发射点之间的间隙。
          */
-        radiusSpread: number;
+        get radiusSpread(): number;
+        set radiusSpread(v: number);
         /**
          * When using one of the animated modes, how quickly to move the emission position around the radius.
          *
          * 当使用一个动画模式时，如何快速移动发射位置周围的弧。
          */
-        radiusSpeed: MinMaxCurve;
+        get radiusSpeed(): MinMaxCurve;
+        set radiusSpeed(v: MinMaxCurve);
         /**
          * 计算粒子的发射位置与方向
          *
@@ -1379,7 +1417,7 @@ declare namespace feng3d {
          *
          * 启动延迟乘数(以秒为单位)。
          */
-        readonly startDelayMultiplier: number;
+        get startDelayMultiplier(): number;
         /**
          * The total lifetime in seconds that each new particle will have.
          *
@@ -1393,7 +1431,8 @@ declare namespace feng3d {
          * 起始寿命乘数。
          * 如果您只想更改总体寿命乘数，则此方法比访问整个曲线更有效。
          */
-        startLifetimeMultiplier: number;
+        get startLifetimeMultiplier(): number;
+        set startLifetimeMultiplier(v: number);
         /**
          * The initial speed of particles when emitted.
          *
@@ -1407,7 +1446,8 @@ declare namespace feng3d {
          * 粒子发射时的初始速度的乘子。
          * 这种方法比访问整个曲线更有效，如果你只想改变整体速度乘数。
          */
-        startSpeedMultiplier: number;
+        get startSpeedMultiplier(): number;
+        set startSpeedMultiplier(v: number);
         /**
          * A flag to enable specifying particle size individually for each axis.
          *
@@ -1419,7 +1459,8 @@ declare namespace feng3d {
          *
          * 粒子发射时的初始大小。
          */
-        startSize: MinMaxCurve;
+        get startSize(): MinMaxCurve;
+        set startSize(v: MinMaxCurve);
         /**
          * Start size multiplier.
          * This method is more efficient than accessing the whole curve, if you only want to change the overall size multiplier.
@@ -1427,7 +1468,8 @@ declare namespace feng3d {
          * 开始尺寸乘数。
          * 如果您只想更改整体尺寸倍增器，则此方法比访问整个曲线更有效。
          */
-        startSizeMultiplier: number;
+        get startSizeMultiplier(): number;
+        set startSizeMultiplier(v: number);
         /**
          * The initial size of particles when emitted.
          *
@@ -1439,7 +1481,8 @@ declare namespace feng3d {
          *
          * 发射时沿X轴的粒子的初始大小。
          */
-        startSizeX: MinMaxCurve;
+        get startSizeX(): MinMaxCurve;
+        set startSizeX(v: MinMaxCurve);
         /**
          * Start rotation multiplier along the X axis.
          * This method is more efficient than accessing the whole curve, if you only want to change the overall size multiplier.
@@ -1447,13 +1490,15 @@ declare namespace feng3d {
          * 启动旋转乘法器沿X轴。
          * 如果您只想更改整体大小倍增器，则此方法比访问整个曲线更有效。
          */
-        startSizeXMultiplier: number;
+        get startSizeXMultiplier(): number;
+        set startSizeXMultiplier(v: number);
         /**
          * The initial size of particles along the Y axis when emitted.
          *
          * 发射时沿Y轴的粒子的初始大小。
          */
-        startSizeY: MinMaxCurve;
+        get startSizeY(): MinMaxCurve;
+        set startSizeY(v: MinMaxCurve);
         /**
          * Start rotation multiplier along the Y axis.
          * This method is more efficient than accessing the whole curve, if you only want to change the overall size multiplier.
@@ -1461,13 +1506,15 @@ declare namespace feng3d {
          * 启动旋转乘法器沿Y轴。
          * 如果您只想更改整体大小倍增器，则此方法比访问整个曲线更有效。
          */
-        startSizeYMultiplier: number;
+        get startSizeYMultiplier(): number;
+        set startSizeYMultiplier(v: number);
         /**
          * The initial size of particles along the Z axis when emitted.
          *
          * 发射时沿Z轴的粒子的初始大小。
          */
-        startSizeZ: MinMaxCurve;
+        get startSizeZ(): MinMaxCurve;
+        set startSizeZ(v: MinMaxCurve);
         /**
          * Start rotation multiplier along the Z axis.
          * This method is more efficient than accessing the whole curve, if you only want to change the overall size multiplier.
@@ -1475,7 +1522,8 @@ declare namespace feng3d {
          * 启动旋转乘法器沿Z轴。
          * 如果您只想更改整体大小倍增器，则此方法比访问整个曲线更有效。
          */
-        startSizeZMultiplier: number;
+        get startSizeZMultiplier(): number;
+        set startSizeZMultiplier(v: number);
         /**
          * A flag to enable 3D particle rotation.
          * 一个启用粒子3D旋转的标记。
@@ -1485,7 +1533,8 @@ declare namespace feng3d {
          * The initial rotation of particles when emitted.
          * 粒子发射时的初始旋转。
          */
-        startRotation: MinMaxCurve;
+        get startRotation(): MinMaxCurve;
+        set startRotation(v: MinMaxCurve);
         /**
          * Start rotation multiplier.
          * This method is more efficient than accessing the whole curve, if you only want to change the overall rotation multiplier.
@@ -1493,7 +1542,8 @@ declare namespace feng3d {
          * 开始旋转乘数。
          * 这种方法比访问整个曲线更有效，如果你只想改变整体旋转乘数。
          */
-        startRotationMultiplier: number;
+        get startRotationMultiplier(): number;
+        set startRotationMultiplier(v: number);
         /**
          * The initial rotation of particles when emitted.
          *
@@ -1505,7 +1555,8 @@ declare namespace feng3d {
          *
          * 发射时粒子围绕X轴的初始旋转。
          */
-        startRotationX: MinMaxCurve;
+        get startRotationX(): MinMaxCurve;
+        set startRotationX(v: MinMaxCurve);
         /**
          * Start rotation multiplier around the X axis.
          * This method is more efficient than accessing the whole curve, if you only want to change the overall rotation multiplier.
@@ -1513,13 +1564,15 @@ declare namespace feng3d {
          * 开始绕X轴旋转乘法器。
          * 这种方法比访问整个曲线更有效，如果你只想改变整体旋转乘数。
          */
-        startRotationXMultiplier: number;
+        get startRotationXMultiplier(): number;
+        set startRotationXMultiplier(v: number);
         /**
          * The initial rotation of particles around the Y axis when emitted.
          *
          * 发射时粒子围绕Y轴的初始旋转。
          */
-        startRotationY: MinMaxCurve;
+        get startRotationY(): MinMaxCurve;
+        set startRotationY(v: MinMaxCurve);
         /**
          * Start rotation multiplier around the Y axis.
          * This method is more efficient than accessing the whole curve, if you only want to change the overall rotation multiplier.
@@ -1527,13 +1580,15 @@ declare namespace feng3d {
          * 开始绕Y轴旋转乘法器。
          * 这种方法比访问整个曲线更有效，如果你只想改变整体旋转乘数。
          */
-        startRotationYMultiplier: number;
+        get startRotationYMultiplier(): number;
+        set startRotationYMultiplier(v: number);
         /**
          * The initial rotation of particles around the Z axis when emitted.
          *
          * 发射时粒子围绕Z轴的初始旋转。
          */
-        startRotationZ: MinMaxCurve;
+        get startRotationZ(): MinMaxCurve;
+        set startRotationZ(v: MinMaxCurve);
         /**
          * Start rotation multiplier around the Z axis.
          * This method is more efficient than accessing the whole curve, if you only want to change the overall rotation multiplier.
@@ -1541,7 +1596,8 @@ declare namespace feng3d {
          * 开始绕Z轴旋转乘法器。
          * 这种方法比访问整个曲线更有效，如果你只想改变整体旋转乘数。
          */
-        startRotationZMultiplier: number;
+        get startRotationZMultiplier(): number;
+        set startRotationZMultiplier(v: number);
         /**
          * Cause some particles to spin in the opposite direction. Set between 0 and 1, where higher values will cause a higher proportion of particles to spin in the opposite direction.
          *
@@ -1623,7 +1679,8 @@ declare namespace feng3d {
          * 如果您只想更改整体的速率乘数，那么这比访问整个曲线更有效。
          * 只在
          */
-        rateOverTimeMultiplier: number;
+        get rateOverTimeMultiplier(): number;
+        set rateOverTimeMultiplier(v: number);
         /**
          * The rate at which new particles are spawned, over distance.
          * New particles will only be emitted when the emitter moves.
@@ -1639,7 +1696,8 @@ declare namespace feng3d {
          * 改变速率随距离变化的乘数。
          * 如果您只想更改整体的速率乘数，那么这比访问整个曲线更有效。
          */
-        rateOverDistanceMultiplier: number;
+        get rateOverDistanceMultiplier(): number;
+        set rateOverDistanceMultiplier(v: number);
         /**
          * 爆发数组
          */
@@ -1649,7 +1707,7 @@ declare namespace feng3d {
          *
          * 当前的爆发次数。
          */
-        readonly burstCount: number;
+        get burstCount(): number;
         /**
          * Get the burst array.
          * 获取爆发数组。
@@ -1736,7 +1794,8 @@ declare namespace feng3d {
          *
          * 发射形状的电弧速度的乘数。
          */
-        arcSpeedMultiplier: number;
+        get arcSpeedMultiplier(): number;
+        set arcSpeedMultiplier(v: number);
         /**
          * Control the gap between emission points around the arc.
          *
@@ -1848,7 +1907,8 @@ declare namespace feng3d {
          *
          * 发射形状的半径速度的乘法器。
          */
-        radiusSpeedMultiplier: number;
+        get radiusSpeedMultiplier(): number;
+        set radiusSpeedMultiplier(v: number);
         /**
          * Control the gap between emission points around the radius.
          *
@@ -1897,37 +1957,43 @@ declare namespace feng3d {
          *
          * 曲线控制粒子速度基于寿命，在X轴上。
          */
-        x: MinMaxCurve;
+        get x(): MinMaxCurve;
+        set x(v: MinMaxCurve);
         /**
          * X axis speed multiplier.
          *
          * X轴速度倍增器。
          */
-        xMultiplier: number;
+        get xMultiplier(): number;
+        set xMultiplier(v: number);
         /**
          * Curve to control particle speed based on lifetime, on the Y axis.
          *
          * 曲线控制粒子速度基于寿命，在Y轴上。
          */
-        y: MinMaxCurve;
+        get y(): MinMaxCurve;
+        set y(v: MinMaxCurve);
         /**
          * Y axis speed multiplier.
          *
          * Y轴速度倍增器。
          */
-        yMultiplier: number;
+        get yMultiplier(): number;
+        set yMultiplier(v: number);
         /**
          * Curve to control particle speed based on lifetime, on the Z axis.
          *
          * 曲线控制粒子速度基于寿命，在Z轴上。
          */
-        z: MinMaxCurve;
+        get z(): MinMaxCurve;
+        set z(v: MinMaxCurve);
         /**
          * Z axis speed multiplier.
          *
          * Z轴速度倍增器。
          */
-        zMultiplier: number;
+        get zMultiplier(): number;
+        set zMultiplier(v: number);
         /**
          * 初始化粒子状态
          * @param particle 粒子
@@ -1983,43 +2049,50 @@ declare namespace feng3d {
          *
          * 改变限制乘法因子。
          */
-        limitMultiplier: number;
+        get limitMultiplier(): number;
+        set limitMultiplier(v: number);
         /**
          * Maximum velocity curve for the X axis.
          *
          * X轴的最大速度曲线。
          */
-        limitX: MinMaxCurve;
+        get limitX(): MinMaxCurve;
+        set limitX(v: MinMaxCurve);
         /**
          * Change the limit multiplier on the X axis.
          *
          * 改变X轴上的极限乘法器。
          */
-        limitXMultiplier: number;
+        get limitXMultiplier(): number;
+        set limitXMultiplier(v: number);
         /**
          * Maximum velocity curve for the Y axis.
          *
          * Y轴的最大速度曲线。
          */
-        limitY: MinMaxCurve;
+        get limitY(): MinMaxCurve;
+        set limitY(v: MinMaxCurve);
         /**
          * Change the limit multiplier on the Y axis.
          *
          * 改变Y轴上的极限乘法器。
          */
-        limitYMultiplier: number;
+        get limitYMultiplier(): number;
+        set limitYMultiplier(v: number);
         /**
          * Maximum velocity curve for the Z axis.
          *
          * Z轴的最大速度曲线。
          */
-        limitZ: MinMaxCurve;
+        get limitZ(): MinMaxCurve;
+        set limitZ(v: MinMaxCurve);
         /**
          * Change the limit multiplier on the Z axis.
          *
          * 更改Z轴上的极限乘法器。
          */
-        limitZMultiplier: number;
+        get limitZMultiplier(): number;
+        set limitZMultiplier(v: number);
         /**
          * 初始化粒子状态
          *
@@ -2059,13 +2132,15 @@ declare namespace feng3d {
          *
          * 曲线，用来定义在粒子的生命周期内应用了多少发射速度。
          */
-        curve: MinMaxCurve;
+        get curve(): MinMaxCurve;
+        set curve(v: MinMaxCurve);
         /**
          * Change the curve multiplier.
          *
          * 改变曲线的乘数。
          */
-        curveMultiplier: number;
+        get curveMultiplier(): number;
+        set curveMultiplier(v: number);
         /**
          * 初始化粒子状态
          * @param particle 粒子
@@ -2109,37 +2184,43 @@ declare namespace feng3d {
          *
          * 在X轴上定义粒子力的曲线。
          */
-        x: MinMaxCurve;
+        get x(): MinMaxCurve;
+        set x(v: MinMaxCurve);
         /**
          * Change the X axis mulutiplier.
          *
          * 改变X轴的乘数。
          */
-        xMultiplier: number;
+        get xMultiplier(): number;
+        set xMultiplier(v: number);
         /**
          * The curve defining particle forces in the Y axis.
          *
          * 在Y轴上定义粒子力的曲线。
          */
-        y: MinMaxCurve;
+        get y(): MinMaxCurve;
+        set y(v: MinMaxCurve);
         /**
          * Change the Y axis mulutiplier.
          *
          * 改变Y轴的乘数。
          */
-        yMultiplier: number;
+        get yMultiplier(): number;
+        set yMultiplier(v: number);
         /**
          * The curve defining particle forces in the Z axis.
          *
          * 在Z轴上定义粒子力的曲线。
          */
-        z: MinMaxCurve;
+        get z(): MinMaxCurve;
+        set z(v: MinMaxCurve);
         /**
          * Change the Z axis mulutiplier.
          *
          * 改变Z轴的乘数。
          */
-        zMultiplier: number;
+        get zMultiplier(): number;
+        set zMultiplier(v: number);
         /**
          * 初始化粒子状态
          * @param particle 粒子
@@ -2221,13 +2302,15 @@ declare namespace feng3d {
          *
          * 基于寿命的粒度控制曲线。
          */
-        size: MinMaxCurve;
+        get size(): MinMaxCurve;
+        set size(v: MinMaxCurve);
         /**
          * Size multiplier.
          *
          * 尺寸的乘数。
          */
-        sizeMultiplier: number;
+        get sizeMultiplier(): number;
+        set sizeMultiplier(v: number);
         /**
          * Curve to control particle size based on lifetime.
          *
@@ -2239,37 +2322,43 @@ declare namespace feng3d {
          *
          * X轴的尺寸随生命周期变化曲线。
          */
-        x: MinMaxCurve;
+        get x(): MinMaxCurve;
+        set x(v: MinMaxCurve);
         /**
          * X axis size multiplier.
          *
          * X轴尺寸的乘数。
          */
-        xMultiplier: number;
+        get xMultiplier(): number;
+        set xMultiplier(v: number);
         /**
          * Size over lifetime curve for the Y axis.
          *
          * Y轴的尺寸随生命周期变化曲线。
          */
-        y: MinMaxCurve;
+        get y(): MinMaxCurve;
+        set y(v: MinMaxCurve);
         /**
          * Y axis size multiplier.
          *
          * Y轴尺寸的乘数。
          */
-        yMultiplier: number;
+        get yMultiplier(): number;
+        set yMultiplier(v: number);
         /**
          * Size over lifetime curve for the Z axis.
          *
          * Z轴的尺寸随生命周期变化曲线。
          */
-        z: MinMaxCurve;
+        get z(): MinMaxCurve;
+        set z(v: MinMaxCurve);
         /**
          * Z axis size multiplier.
          *
          * Z轴尺寸的乘数。
          */
-        zMultiplier: number;
+        get zMultiplier(): number;
+        set zMultiplier(v: number);
         /**
          * 初始化粒子状态
          * @param particle 粒子
@@ -2300,7 +2389,8 @@ declare namespace feng3d {
          *
          * 基于速度的粒度控制曲线。
          */
-        size: MinMaxCurve;
+        get size(): MinMaxCurve;
+        set size(v: MinMaxCurve);
         /**
          * Curve to control particle size based on speed.
          *
@@ -2318,43 +2408,50 @@ declare namespace feng3d {
          *
          * 尺寸的乘数。
          */
-        sizeMultiplier: number;
+        get sizeMultiplier(): number;
+        set sizeMultiplier(v: number);
         /**
          * Size over speed curve for the X axis.
          *
          * X轴的尺寸随生命周期变化曲线。
          */
-        x: MinMaxCurve;
+        get x(): MinMaxCurve;
+        set x(v: MinMaxCurve);
         /**
          * X axis size multiplier.
          *
          * X轴尺寸的乘数。
          */
-        xMultiplier: number;
+        get xMultiplier(): number;
+        set xMultiplier(v: number);
         /**
          * Size over speed curve for the Y axis.
          *
          * Y轴的尺寸随生命周期变化曲线。
          */
-        y: MinMaxCurve;
+        get y(): MinMaxCurve;
+        set y(v: MinMaxCurve);
         /**
          * Y axis size multiplier.
          *
          * Y轴尺寸的乘数。
          */
-        yMultiplier: number;
+        get yMultiplier(): number;
+        set yMultiplier(v: number);
         /**
          * Size over speed curve for the Z axis.
          *
          * Z轴的尺寸随生命周期变化曲线。
          */
-        z: MinMaxCurve;
+        get z(): MinMaxCurve;
+        set z(v: MinMaxCurve);
         /**
          * Z axis size multiplier.
          *
          * Z轴尺寸的乘数。
          */
-        zMultiplier: number;
+        get zMultiplier(): number;
+        set zMultiplier(v: number);
         /**
          * 初始化粒子状态
          * @param particle 粒子
@@ -2386,37 +2483,43 @@ declare namespace feng3d {
          *
          * X轴的旋转寿命曲线。
          */
-        x: MinMaxCurve;
+        get x(): MinMaxCurve;
+        set x(v: MinMaxCurve);
         /**
          * Rotation multiplier around the X axis.
          *
          * 绕X轴旋转乘法器
          */
-        xMultiplier: number;
+        get xMultiplier(): number;
+        set xMultiplier(v: number);
         /**
          * Rotation over lifetime curve for the Y axis.
          *
          * Y轴的旋转寿命曲线。
          */
-        y: MinMaxCurve;
+        get y(): MinMaxCurve;
+        set y(v: MinMaxCurve);
         /**
          * Rotation multiplier around the Y axis.
          *
          * 绕Y轴旋转乘法器
          */
-        yMultiplier: number;
+        get yMultiplier(): number;
+        set yMultiplier(v: number);
         /**
          * Rotation over lifetime curve for the Z axis.
          *
          * Z轴的旋转寿命曲线。
          */
-        z: MinMaxCurve;
+        get z(): MinMaxCurve;
+        set z(v: MinMaxCurve);
         /**
          * Rotation multiplier around the Z axis.
          *
          * 绕Z轴旋转乘法器
          */
-        zMultiplier: number;
+        get zMultiplier(): number;
+        set zMultiplier(v: number);
         /**
          * 初始化粒子状态
          * @param particle 粒子
@@ -2454,37 +2557,43 @@ declare namespace feng3d {
          *
          * X轴的旋转随速度变化曲线。
          */
-        x: MinMaxCurve;
+        get x(): MinMaxCurve;
+        set x(v: MinMaxCurve);
         /**
          * Rotation multiplier around the X axis.
          *
          * 绕X轴旋转乘法器
          */
-        xMultiplier: number;
+        get xMultiplier(): number;
+        set xMultiplier(v: number);
         /**
          * Rotation by speed curve for the Y axis.
          *
          * Y轴的旋转随速度变化曲线。
          */
-        y: MinMaxCurve;
+        get y(): MinMaxCurve;
+        set y(v: MinMaxCurve);
         /**
          * Rotation multiplier around the Y axis.
          *
          * 绕Y轴旋转乘法器
          */
-        yMultiplier: number;
+        get yMultiplier(): number;
+        set yMultiplier(v: number);
         /**
          * Rotation by speed curve for the Z axis.
          *
          * Z轴的旋转随速度变化曲线。
          */
-        z: MinMaxCurve;
+        get z(): MinMaxCurve;
+        set z(v: MinMaxCurve);
         /**
          * Rotation multiplier around the Z axis.
          *
          * 绕Z轴旋转乘法器
          */
-        zMultiplier: number;
+        get zMultiplier(): number;
+        set zMultiplier(v: number);
         /**
          * 初始化粒子状态
          * @param particle 粒子
@@ -2519,7 +2628,8 @@ declare namespace feng3d {
          *
          * 整体噪音效应有多强。
          */
-        strength: MinMaxCurve;
+        get strength(): MinMaxCurve;
+        set strength(v: MinMaxCurve);
         /**
          * How strong the overall noise effect is.
          *
@@ -2531,19 +2641,22 @@ declare namespace feng3d {
          *
          * 在使用分别控制每个轴时，在X轴上定义效果的强度。
          */
-        strengthX: MinMaxCurve;
+        get strengthX(): MinMaxCurve;
+        set strengthX(v: MinMaxCurve);
         /**
          * Define the strength of the effect on the Y axis, when using separateAxes option.
          *
          * 在使用分别控制每个轴时，在Y轴上定义效果的强度。
          */
-        strengthY: MinMaxCurve;
+        get strengthY(): MinMaxCurve;
+        set strengthY(v: MinMaxCurve);
         /**
          * Define the strength of the effect on the Z axis, when using separateAxes option.
          *
          * 在使用分别控制每个轴时，在Z轴上定义效果的强度。
          */
-        strengthZ: MinMaxCurve;
+        get strengthZ(): MinMaxCurve;
+        set strengthZ(v: MinMaxCurve);
         /**
          * Low values create soft, smooth noise, and high values create rapidly changing noise.
          *
@@ -2597,7 +2710,8 @@ declare namespace feng3d {
          *
          * 定义如何重新映射噪声值。
          */
-        remap: MinMaxCurve;
+        get remap(): MinMaxCurve;
+        set remap(v: MinMaxCurve);
         /**
          * Define how the noise values are remapped.
          *
@@ -2609,19 +2723,22 @@ declare namespace feng3d {
          *
          * 在使用分别控制每个轴时，如何在X轴上重新映射噪声值。
          */
-        remapX: MinMaxCurve;
+        get remapX(): MinMaxCurve;
+        set remapX(v: MinMaxCurve);
         /**
          * Define how the noise values are remapped on the Y axis, when using the ParticleSystem.NoiseModule.separateAxes option.
          *
          * 在使用分别控制每个轴时，如何在Y轴上重新映射噪声值。
          */
-        remapY: MinMaxCurve;
+        get remapY(): MinMaxCurve;
+        set remapY(v: MinMaxCurve);
         /**
          * Define how the noise values are remapped on the Z axis, when using the ParticleSystem.NoiseModule.separateAxes option.
          *
          * 在使用分别控制每个轴时，如何在Z轴上重新映射噪声值。
          */
-        remapZ: MinMaxCurve;
+        get remapZ(): MinMaxCurve;
+        set remapZ(v: MinMaxCurve);
         /**
          * 初始化粒子状态
          * @param particle 粒子
@@ -2677,7 +2794,7 @@ declare namespace feng3d {
         /**
          * The total number of sub-emitters.
          */
-        readonly subEmittersCount: number;
+        get subEmittersCount(): number;
         private subEmitters;
         /**
          * Add a new sub-emitter.
@@ -2779,7 +2896,8 @@ declare namespace feng3d {
          *
          * 当useRandomRow设置为false时，显式选择使用纹理表的哪一行。
          */
-        rowIndex: number;
+        get rowIndex(): number;
+        set rowIndex(v: number);
         private _rowIndex;
         /**
          * Define a random starting frame for the texture sheet animation.
@@ -2812,37 +2930,43 @@ declare namespace feng3d {
          *
          * 在粒子上翻转U坐标，使它们呈现水平镜像。
          */
-        flipU: number;
+        get flipU(): number;
+        set flipU(v: number);
         /**
          * Flip the V coordinate on particles, causing them to appear mirrored vertically.
          *
          * 在粒子上翻转V坐标，使它们垂直镜像。
          */
-        flipV: number;
+        get flipV(): number;
+        set flipV(v: number);
         /**
          * Frame over time mutiplier.
          *
          * 帧随时间变化的乘数。
          */
-        frameOverTimeMultiplier: number;
+        get frameOverTimeMultiplier(): number;
+        set frameOverTimeMultiplier(v: number);
         /**
          * Defines the tiling of the texture in the X axis.
          *
          * 定义纹理在X轴上的平铺。
          */
-        numTilesX: number;
+        get numTilesX(): number;
+        set numTilesX(v: number);
         /**
          * Defines the tiling of the texture in the Y axis.
          *
          * 定义纹理在Y轴上的平铺。
          */
-        numTilesY: number;
+        get numTilesY(): number;
+        set numTilesY(v: number);
         /**
          * Starting frame multiplier.
          *
          * 起始帧乘数。
          */
-        startFrameMultiplier: number;
+        get startFrameMultiplier(): number;
+        set startFrameMultiplier(v: number);
         /**
          * 初始化粒子状态
          * @param particle 粒子
