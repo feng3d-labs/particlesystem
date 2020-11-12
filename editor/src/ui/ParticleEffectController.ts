@@ -77,11 +77,8 @@ namespace editor
         {
             if (this.saveParent) return;
             this.saveParent = this.parent;
-            feng3d.ticker.nextframe(() =>
-            {
-                this.parent.removeChild(this);
-            });
             feng3d.globalDispatcher.on("editor.selectedObjectsChanged", this.onDataChange, this);
+            this.onDataChange();
         }
 
         private updateView()
@@ -113,4 +110,9 @@ namespace editor
             else this.parent && this.parent.removeChild(this);
         }
     }
+
+    feng3d.globalDispatcher.once("editor.selectedObjectsChanged", () =>
+    {
+        feng3d.globalDispatcher.dispatch("editor.addSceneToolView", new ParticleEffectController());
+    });
 }

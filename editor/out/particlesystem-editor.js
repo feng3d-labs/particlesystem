@@ -80,14 +80,11 @@ var editor;
             }
         };
         ParticleEffectController.prototype.initView = function () {
-            var _this = this;
             if (this.saveParent)
                 return;
             this.saveParent = this.parent;
-            feng3d.ticker.nextframe(function () {
-                _this.parent.removeChild(_this);
-            });
             feng3d.globalDispatcher.on("editor.selectedObjectsChanged", this.onDataChange, this);
+            this.onDataChange();
         };
         ParticleEffectController.prototype.updateView = function () {
             if (!this.particleSystems)
@@ -121,6 +118,9 @@ var editor;
         return ParticleEffectController;
     }(eui.Component));
     editor.ParticleEffectController = ParticleEffectController;
+    feng3d.globalDispatcher.once("editor.selectedObjectsChanged", function () {
+        feng3d.globalDispatcher.dispatch("editor.addSceneToolView", new ParticleEffectController());
+    });
 })(editor || (editor = {}));
 var editor;
 (function (editor) {
