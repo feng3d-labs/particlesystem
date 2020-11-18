@@ -1,5 +1,3 @@
-/// <reference path="ParticleModule.ts" />
-
 namespace feng3d
 {
     /**
