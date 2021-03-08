@@ -1,11 +1,73 @@
 {
-  "files": [],
-  "references": [
-    {
-      "path": "runtime"
+    "compilerOptions": {
+        "target": "ES5",
+        "noImplicitAny": false,
+        "sourceMap": true,
+        "declarationMap": true,
+        "declaration": true,
+        "composite": true,
+        "experimentalDecorators": true,
+        "lib": [
+            "ES2017",
+            "DOM"
+        ],
+        "outFile": "./dist/index.js",
+        "types": [
+            "feng3d"
+        ]
     },
-    {
-      "path": "editor"
-    },
-  ]
+    "files": [
+        //粒子系统
+        "src/Particle.ts",
+        "src/ParticlesAdditive.shader.ts",
+        "src/ParticlesAlphaBlendedPremultiply.shader.ts",
+        "src/ParticleSystem.ts",
+        //
+        "src/others/ParticleEmissionBurst.ts",
+        //
+        "src/enums/ParticleSystemShapeMultiModeValue.ts",
+        "src/enums/ParticleSystemShapeConeEmitFrom.ts",
+        "src/enums/ParticleSystemAnimationType.ts",
+        "src/enums/UVChannelFlags.ts",
+        "src/enums/ParticleSystemSimulationSpace.ts",
+        "src/enums/ParticleSystemScalingMode.ts",
+        "src/enums/ParticleSystemShapeType.ts",
+        "src/enums/ParticleSystemShapeType1.ts",
+        "src/enums/ParticleSystemMeshShapeType.ts",
+        "src/enums/ParticleSystemInheritVelocityMode.ts",
+        "src/enums/ParticleSystemNoiseQuality.ts",
+        "src/enums/ParticleSystemSubEmitterType.ts",
+        "src/enums/ParticleSystemSubEmitterProperties.ts",
+        "src/enums/ParticleSystemRenderMode.ts",
+        "src/enums/ParticleSystemRenderSpace.ts",
+        "src/enums/SpriteMaskInteraction.ts",
+        "src/enums/ParticleSystemSortMode.ts",
+        //
+        "src/shapes/ParticleSystemShape.ts",
+        "src/shapes/ParticleSystemShapeSphere.ts",
+        "src/shapes/ParticleSystemShapeHemisphere.ts",
+        "src/shapes/ParticleSystemShapeCone.ts",
+        "src/shapes/ParticleSystemShapeBox.ts",
+        "src/shapes/ParticleSystemShapeCircle.ts",
+        "src/shapes/ParticleSystemShapeEdge.ts",
+        //
+        "src/modules/ParticleModule.ts",
+        "src/modules/ParticleMainModule.ts",
+        "src/modules/ParticleEmissionModule.ts",
+        "src/modules/ParticleShapeModule.ts",
+        "src/modules/ParticleVelocityOverLifetimeModule.ts",
+        "src/modules/ParticleLimitVelocityOverLifetimeModule.ts",
+        "src/modules/ParticleInheritVelocityModule.ts",
+        "src/modules/ParticleForceOverLifetimeModule.ts",
+        "src/modules/ParticleColorBySpeedModule.ts",
+        "src/modules/ParticleColorOverLifetimeModule.ts",
+        "src/modules/ParticleSizeOverLifetimeModule.ts",
+        "src/modules/ParticleSizeBySpeedModule.ts",
+        "src/modules/ParticleRotationOverLifetimeModule.ts",
+        "src/modules/ParticleRotationBySpeedModule.ts",
+        "src/modules/ParticleNoiseModule.ts",
+        "src/modules/ParticleSubEmittersModule.ts",
+        "src/modules/ParticleTextureSheetAnimationModule.ts",
+        "src/modules/ParticleSystemRenderer.ts",
+    ]
 }
