@@ -9,6 +9,6 @@
   "author": "feng",
   "license": "ISC",
   "devDependencies": {
-    "feng3d": "0.0.1"
+    "feng3d": "0.1.3"
   }
 }
