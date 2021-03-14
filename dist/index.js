@@ -520,7 +520,7 @@ var feng3d;
             emitInfo.currentTime = this.time - emitInfo.startDelay;
             emitInfo.preWorldPos.copy(emitInfo.currentWorldPos);
             // 粒子系统位置
-            emitInfo.currentWorldPos.copy(this.transform.worldPosition);
+            emitInfo.currentWorldPos.copy(this.node3d.worldPosition);
             // 粒子系统位移
             emitInfo.moveVec.copy(emitInfo.currentWorldPos).sub(emitInfo.preWorldPos);
             // 粒子系统速度
@@ -535,7 +535,7 @@ var feng3d;
                 this.emission.bursts.forEach(function (element) {
                     element.calculateProbability();
                 });
-                this.dispatch("particleCycled", this);
+                this.emit("particleCycled", this);
             }
             // 发射粒子
             if (!this._isSubParticleSystem) // 子粒子系统自身不会自动发射粒子
@@ -549,7 +549,7 @@ var feng3d;
             // 判断非循环的效果是否播放结束
             if (!this.main.loop && this._activeParticles.length == 0 && emitInfo.currentTime > this.main.duration) {
                 this.stop();
-                this.dispatch("particleCompleted", this);
+                this.emit("particleCompleted", this);
             }
         };
         /**
@@ -623,12 +623,12 @@ var feng3d;
             var isbillboard = !this.shape.alignToDirection && this.geometry == feng3d.Geometry.getDefault("Billboard-Geometry");
             var billboardMatrix = new feng3d.Matrix3x3();
             if (isbillboard) {
-                var cameraMatrix = camera.transform.localToWorldMatrix.clone();
+                var cameraMatrix = camera.node3d.localToWorldMatrix.clone();
                 var localCameraForward = cameraMatrix.getAxisZ();
                 var localCameraUp = cameraMatrix.getAxisY();
                 if (this.main.simulationSpace == feng3d.ParticleSystemSimulationSpace.Local) {
-                    localCameraForward = this.gameObject.transform.worldToLocalRotationMatrix.transformPoint3(localCameraForward);
-                    localCameraUp = this.gameObject.transform.worldToLocalRotationMatrix.transformPoint3(localCameraUp);
+                    localCameraForward = this.node3d.worldToLocalRotationMatrix.transformPoint3(localCameraForward);
+                    localCameraUp = this.node3d.worldToLocalRotationMatrix.transformPoint3(localCameraUp);
                 }
                 var matrix4x4 = new feng3d.Matrix4x4();
                 matrix4x4.lookAt(localCameraForward, localCameraUp);
@@ -870,12 +870,12 @@ var feng3d;
             particle.updateState(particle.curTime + deltaTime);
         };
         ParticleSystem.prototype._simulationSpaceChanged = function () {
-            if (!this.transform)
+            if (!this.node3d)
                 return;
             if (this._activeParticles.length == 0)
                 return;
             if (this._main.simulationSpace == feng3d.ParticleSystemSimulationSpace.Local) {
-                var worldToLocalMatrix = this.transform.worldToLocalMatrix;
+                var worldToLocalMatrix = this.node3d.worldToLocalMatrix;
                 this._activeParticles.forEach(function (p) {
                     worldToLocalMatrix.transformPoint3(p.position, p.position);
                     worldToLocalMatrix.transformVector3(p.velocity, p.velocity);
@@ -883,7 +883,7 @@ var feng3d;
                 });
             }
             else {
-                var localToWorldMatrix = this.transform.localToWorldMatrix;
+                var localToWorldMatrix = this.node3d.localToWorldMatrix;
                 this._activeParticles.forEach(function (p) {
                     localToWorldMatrix.transformPoint3(p.position, p.position);
                     localToWorldMatrix.transformVector3(p.velocity, p.velocity);
@@ -906,10 +906,10 @@ var feng3d;
             }
             if (space != this.main.simulationSpace) {
                 if (space == feng3d.ParticleSystemSimulationSpace.World) {
-                    this.transform.worldToLocalMatrix.transformPoint3(position, position);
+                    this.node3d.worldToLocalMatrix.transformPoint3(position, position);
                 }
                 else {
-                    this.transform.localToWorldMatrix.transformPoint3(position, position);
+                    this.node3d.localToWorldMatrix.transformPoint3(position, position);
                 }
             }
             //
@@ -929,10 +929,10 @@ var feng3d;
                 var value = obj.value;
                 if (space != this.main.simulationSpace) {
                     if (space == feng3d.ParticleSystemSimulationSpace.World) {
-                        this.transform.worldToLocalMatrix.transformPoint3(value, value);
+                        this.node3d.worldToLocalMatrix.transformPoint3(value, value);
                     }
                     else {
-                        this.transform.localToWorldMatrix.transformPoint3(value, value);
+                        this.node3d.localToWorldMatrix.transformPoint3(value, value);
                     }
                 }
                 //
@@ -954,10 +954,10 @@ var feng3d;
             }
             if (space != this.main.simulationSpace) {
                 if (space == feng3d.ParticleSystemSimulationSpace.World) {
-                    this.transform.worldToLocalMatrix.transformVector3(velocity, velocity);
+                    this.node3d.worldToLocalMatrix.transformVector3(velocity, velocity);
                 }
                 else {
-                    this.transform.localToWorldMatrix.transformVector3(velocity, velocity);
+                    this.node3d.localToWorldMatrix.transformVector3(velocity, velocity);
                 }
             }
             //
@@ -977,10 +977,10 @@ var feng3d;
                 var value = obj.value;
                 if (space != this.main.simulationSpace) {
                     if (space == feng3d.ParticleSystemSimulationSpace.World) {
-                        this.transform.worldToLocalMatrix.transformVector3(value, value);
+                        this.node3d.worldToLocalMatrix.transformVector3(value, value);
                     }
                     else {
-                        this.transform.localToWorldMatrix.transformVector3(value, value);
+                        this.node3d.localToWorldMatrix.transformVector3(value, value);
                     }
                 }
                 //
@@ -1002,10 +1002,10 @@ var feng3d;
             }
             if (space != this.main.simulationSpace) {
                 if (space == feng3d.ParticleSystemSimulationSpace.World) {
-                    this.transform.worldToLocalMatrix.transformVector3(acceleration, acceleration);
+                    this.node3d.worldToLocalMatrix.transformVector3(acceleration, acceleration);
                 }
                 else {
-                    this.transform.localToWorldMatrix.transformVector3(acceleration, acceleration);
+                    this.node3d.localToWorldMatrix.transformVector3(acceleration, acceleration);
                 }
             }
             //
@@ -1025,10 +1025,10 @@ var feng3d;
                 var value = obj.value;
                 if (space != this.main.simulationSpace) {
                     if (space == feng3d.ParticleSystemSimulationSpace.World) {
-                        this.transform.worldToLocalMatrix.transformVector3(value, value);
+                        this.node3d.worldToLocalMatrix.transformVector3(value, value);
                     }
                     else {
-                        this.transform.localToWorldMatrix.transformVector3(value, value);
+                        this.node3d.localToWorldMatrix.transformVector3(value, value);
                     }
                 }
                 //
@@ -1059,9 +1059,9 @@ var feng3d;
                 if (Math.random() > probability)
                     return;
                 // 粒子所在世界坐标
-                var particleWoldPos = _this.transform.localToWorldMatrix.transformPoint3(particle.position);
+                var particleWoldPos = _this.node3d.localToWorldMatrix.transformPoint3(particle.position);
                 // 粒子在子粒子系统的坐标
-                var subEmitPos = subEmitter.transform.worldToLocalMatrix.transformPoint3(particleWoldPos);
+                var subEmitPos = subEmitter.node3d.worldToLocalMatrix.transformPoint3(particleWoldPos);
                 if (!particle.subEmitInfo) {
                     var startDelay = _this.main.startDelay.getValue(Math.random());
                     particle.subEmitInfo = {
@@ -1179,9 +1179,9 @@ var feng3d;
     }(feng3d.Renderable));
     feng3d.ParticleSystem = ParticleSystem;
     feng3d.Geometry.setDefault("Billboard-Geometry", new feng3d.QuadGeometry());
-    feng3d.GameObject.registerPrimitive("Particle System", function (g) {
-        g.addComponent("ParticleSystem");
-        g.getComponent("Transform").rx = -90;
+    feng3d.Entity.registerPrimitive("Particle System", function (g) {
+        g.addComponent(ParticleSystem);
+        g.getComponent(feng3d.Node3D).rx = -90;
     });
 })(feng3d || (feng3d = {}));
 var feng3d;
@@ -2636,7 +2636,7 @@ var feng3d;
             feng3d.serialize
         ], ParticleModule.prototype, "enabled", void 0);
         return ParticleModule;
-    }(feng3d.EventDispatcher));
+    }(feng3d.EventEmitter));
     feng3d.ParticleModule = ParticleModule;
 })(feng3d || (feng3d = {}));
 var feng3d;
@@ -3524,7 +3524,7 @@ var feng3d;
             }
             dir.scaleNumber(startSpeed);
             if (this.particleSystem.main.simulationSpace == feng3d.ParticleSystemSimulationSpace.World) {
-                var localToWorldMatrix = this.particleSystem.transform.localToWorldMatrix;
+                var localToWorldMatrix = this.particleSystem.node3d.localToWorldMatrix;
                 localToWorldMatrix.transformPoint3(position, position);
                 localToWorldMatrix.transformVector3(dir, dir);
             }
@@ -3642,7 +3642,7 @@ var feng3d;
                     break;
             }
             feng3d.serialization.setValue(this.activeShape, preValue);
-            this.dispatch("refreshView");
+            this.emit("refreshView");
         };
         ParticleShapeModule.prototype._onShapeChanged = function () {
             switch (this.shape) {
@@ -4100,10 +4100,10 @@ var feng3d;
             //
             if (this.space != this.particleSystem.main.simulationSpace) {
                 if (this.space == feng3d.ParticleSystemSimulationSpace.World) {
-                    mat.copy(this.particleSystem.transform.localToWorldMatrix);
+                    mat.copy(this.particleSystem.node3d.localToWorldMatrix);
                 }
                 else {
-                    mat.copy(this.particleSystem.transform.worldToLocalMatrix);
+                    mat.copy(this.particleSystem.node3d.worldToLocalMatrix);
                 }
             }
             // 变换到现在空间进行限速

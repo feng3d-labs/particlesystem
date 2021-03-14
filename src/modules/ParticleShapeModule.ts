@@ -290,7 +290,7 @@ namespace feng3d
             dir.scaleNumber(startSpeed);
             if (this.particleSystem.main.simulationSpace == ParticleSystemSimulationSpace.World)
             {
-                var localToWorldMatrix = this.particleSystem.transform.localToWorldMatrix;
+                var localToWorldMatrix = this.particleSystem.node3d.localToWorldMatrix;
 
                 localToWorldMatrix.transformPoint3(position, position);
                 localToWorldMatrix.transformVector3(dir, dir);
@@ -420,7 +420,7 @@ namespace feng3d
                     break;
             }
             serialization.setValue(this.activeShape, preValue);
-            this.dispatch("refreshView");
+            this.emit("refreshView");
         }
 
         private _onShapeChanged()

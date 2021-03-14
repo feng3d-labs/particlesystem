@@ -107,7 +107,7 @@ declare namespace feng3d {
         /**
          * 粒子贴图
          */
-        _MainTex: Texture2D;
+        _MainTex: Texture2D<Texture2DEventMap>;
         /**
          * 粒子贴图使用的UV变换
          */
@@ -130,7 +130,7 @@ declare namespace feng3d {
         /**
          * 粒子贴图
          */
-        _MainTex: Texture2D;
+        _MainTex: Texture2D<Texture2DEventMap>;
         /**
          * 粒子贴图使用的UV变换
          */
@@ -145,7 +145,7 @@ declare namespace feng3d {
     interface ComponentMap {
         ParticleSystem: ParticleSystem;
     }
-    interface GameObjectEventMap {
+    interface Component3DEventMap {
         /**
          * 粒子系统播放完一个周期
          */
@@ -463,8 +463,8 @@ declare namespace feng3d {
     interface DefaultGeometry {
         "Billboard-Geometry": QuadGeometry;
     }
-    interface PrimitiveGameObject {
-        "Particle System": GameObject;
+    interface PrimitiveEntity {
+        "Particle System": Entity;
     }
 }
 declare namespace feng3d {
@@ -1359,7 +1359,7 @@ declare namespace feng3d {
     /**
      * 粒子模块
      */
-    class ParticleModule extends EventDispatcher {
+    class ParticleModule extends EventEmitter {
         /**
          * 是否开启
          */

@@ -2,7 +2,7 @@ namespace feng3d
 {
     export interface ComponentMap { ParticleSystem: ParticleSystem }
 
-    export interface GameObjectEventMap
+    export interface Component3DEventMap
     {
         /**
          * 粒子系统播放完一个周期
@@ -333,7 +333,7 @@ namespace feng3d
             emitInfo.preWorldPos.copy(emitInfo.currentWorldPos);
 
             // 粒子系统位置
-            emitInfo.currentWorldPos.copy(this.transform.worldPosition);
+            emitInfo.currentWorldPos.copy(this.node3d.worldPosition);
 
             // 粒子系统位移
             emitInfo.moveVec.copy(emitInfo.currentWorldPos).sub(emitInfo.preWorldPos);
@@ -355,7 +355,7 @@ namespace feng3d
                 {
                     element.calculateProbability();
                 });
-                this.dispatch("particleCycled", this);
+                this.emit("particleCycled", this);
             }
 
             // 发射粒子
@@ -374,7 +374,7 @@ namespace feng3d
             if (!this.main.loop && this._activeParticles.length == 0 && emitInfo.currentTime > this.main.duration)
             {
                 this.stop();
-                this.dispatch("particleCompleted", this);
+                this.emit("particleCompleted", this);
             }
         }
 
@@ -472,13 +472,13 @@ namespace feng3d
             var billboardMatrix = new Matrix3x3();
             if (isbillboard)
             {
-                var cameraMatrix = camera.transform.localToWorldMatrix.clone();
+                var cameraMatrix = camera.node3d.localToWorldMatrix.clone();
                 var localCameraForward = cameraMatrix.getAxisZ();
                 var localCameraUp = cameraMatrix.getAxisY();
                 if (this.main.simulationSpace == ParticleSystemSimulationSpace.Local)
                 {
-                    localCameraForward = this.gameObject.transform.worldToLocalRotationMatrix.transformPoint3(localCameraForward);
-                    localCameraUp = this.gameObject.transform.worldToLocalRotationMatrix.transformPoint3(localCameraUp);
+                    localCameraForward = this.node3d.worldToLocalRotationMatrix.transformPoint3(localCameraForward);
+                    localCameraUp = this.node3d.worldToLocalRotationMatrix.transformPoint3(localCameraUp);
                 }
                 var matrix4x4 = new Matrix4x4();
                 matrix4x4.lookAt(localCameraForward, localCameraUp);
@@ -797,12 +797,12 @@ namespace feng3d
 
         private _simulationSpaceChanged()
         {
-            if (!this.transform) return;
+            if (!this.node3d) return;
             if (this._activeParticles.length == 0) return;
 
             if (this._main.simulationSpace == ParticleSystemSimulationSpace.Local)
             {
-                var worldToLocalMatrix = this.transform.worldToLocalMatrix;
+                var worldToLocalMatrix = this.node3d.worldToLocalMatrix;
                 this._activeParticles.forEach(p =>
                 {
                     worldToLocalMatrix.transformPoint3(p.position, p.position);
@@ -811,7 +811,7 @@ namespace feng3d
                 });
             } else
             {
-                var localToWorldMatrix = this.transform.localToWorldMatrix;
+                var localToWorldMatrix = this.node3d.localToWorldMatrix;
                 this._activeParticles.forEach(p =>
                 {
                     localToWorldMatrix.transformPoint3(p.position, p.position);
@@ -841,10 +841,10 @@ namespace feng3d
             {
                 if (space == ParticleSystemSimulationSpace.World)
                 {
-                    this.transform.worldToLocalMatrix.transformPoint3(position, position);
+                    this.node3d.worldToLocalMatrix.transformPoint3(position, position);
                 } else
                 {
-                    this.transform.localToWorldMatrix.transformPoint3(position, position);
+                    this.node3d.localToWorldMatrix.transformPoint3(position, position);
                 }
             }
             //
@@ -870,10 +870,10 @@ namespace feng3d
                 {
                     if (space == ParticleSystemSimulationSpace.World)
                     {
-                        this.transform.worldToLocalMatrix.transformPoint3(value, value);
+                        this.node3d.worldToLocalMatrix.transformPoint3(value, value);
                     } else
                     {
-                        this.transform.localToWorldMatrix.transformPoint3(value, value);
+                        this.node3d.localToWorldMatrix.transformPoint3(value, value);
                     }
                 }
                 //
@@ -901,10 +901,10 @@ namespace feng3d
             {
                 if (space == ParticleSystemSimulationSpace.World)
                 {
-                    this.transform.worldToLocalMatrix.transformVector3(velocity, velocity);
+                    this.node3d.worldToLocalMatrix.transformVector3(velocity, velocity);
                 } else
                 {
-                    this.transform.localToWorldMatrix.transformVector3(velocity, velocity);
+                    this.node3d.localToWorldMatrix.transformVector3(velocity, velocity);
                 }
             }
             //
@@ -930,10 +930,10 @@ namespace feng3d
                 {
                     if (space == ParticleSystemSimulationSpace.World)
                     {
-                        this.transform.worldToLocalMatrix.transformVector3(value, value);
+                        this.node3d.worldToLocalMatrix.transformVector3(value, value);
                     } else
                     {
-                        this.transform.localToWorldMatrix.transformVector3(value, value);
+                        this.node3d.localToWorldMatrix.transformVector3(value, value);
                     }
                 }
                 //
@@ -961,10 +961,10 @@ namespace feng3d
             {
                 if (space == ParticleSystemSimulationSpace.World)
                 {
-                    this.transform.worldToLocalMatrix.transformVector3(acceleration, acceleration);
+                    this.node3d.worldToLocalMatrix.transformVector3(acceleration, acceleration);
                 } else
                 {
-                    this.transform.localToWorldMatrix.transformVector3(acceleration, acceleration);
+                    this.node3d.localToWorldMatrix.transformVector3(acceleration, acceleration);
                 }
             }
             //
@@ -990,10 +990,10 @@ namespace feng3d
                 {
                     if (space == ParticleSystemSimulationSpace.World)
                     {
-                        this.transform.worldToLocalMatrix.transformVector3(value, value);
+                        this.node3d.worldToLocalMatrix.transformVector3(value, value);
                     } else
                     {
-                        this.transform.localToWorldMatrix.transformVector3(value, value);
+                        this.node3d.localToWorldMatrix.transformVector3(value, value);
                     }
                 }
                 //
@@ -1033,9 +1033,9 @@ namespace feng3d
                 if (Math.random() > probability) return;
 
                 // 粒子所在世界坐标
-                var particleWoldPos = this.transform.localToWorldMatrix.transformPoint3(particle.position);
+                var particleWoldPos = this.node3d.localToWorldMatrix.transformPoint3(particle.position);
                 // 粒子在子粒子系统的坐标
-                var subEmitPos = subEmitter.transform.worldToLocalMatrix.transformPoint3(particleWoldPos);
+                var subEmitPos = subEmitter.node3d.worldToLocalMatrix.transformPoint3(particleWoldPos);
                 if (!particle.subEmitInfo)
                 {
                     var startDelay = this.main.startDelay.getValue(Math.random());
@@ -1151,14 +1151,14 @@ namespace feng3d
     }
     Geometry.setDefault("Billboard-Geometry", new QuadGeometry());
 
-    GameObject.registerPrimitive("Particle System", (g) =>
+    Entity.registerPrimitive("Particle System", (g) =>
     {
-        g.addComponent("ParticleSystem");
-        g.getComponent("Transform").rx = -90;
+        g.addComponent(ParticleSystem);
+        g.getComponent(Node3D).rx = -90;
     });
 
-    export interface PrimitiveGameObject
+    export interface PrimitiveEntity
     {
-        "Particle System": GameObject;
+        "Particle System": Entity;
     }
 }
