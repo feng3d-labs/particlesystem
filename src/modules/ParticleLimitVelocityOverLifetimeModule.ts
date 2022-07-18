@@ -194,10 +194,10 @@ namespace feng3d
             {
                 if (this.space == ParticleSystemSimulationSpace.World)
                 {
-                    mat.copy(this.particleSystem.node3d.localToWorldMatrix);
+                    mat.copy(this.particleSystem.transform.localToWorldMatrix);
                 } else
                 {
-                    mat.copy(this.particleSystem.node3d.worldToLocalMatrix);
+                    mat.copy(this.particleSystem.transform.worldToLocalMatrix);
                 }
             }
             // 变换到现在空间进行限速

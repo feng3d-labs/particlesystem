@@ -2,7 +2,7 @@ namespace feng3d
 {
     export interface ComponentMap { ParticleSystem: ParticleSystem }
 
-    export interface Component3DEventMap
+    export interface GameObjectEventMap
     {
         /**
          * 粒子系统播放完一个周期
@@ -81,7 +81,7 @@ namespace feng3d
             {
                 watcher.unwatch(this._main, "simulationSpace", this._simulationSpaceChanged, this);
             }
-            Array.replace(this._modules, this._main, v);
+            ArrayUtils.replace(this._modules, this._main, v);
             v.particleSystem = this;
             this._main = v;
             watcher.watch(this._main, "simulationSpace", this._simulationSpaceChanged, this);
@@ -93,7 +93,7 @@ namespace feng3d
         get emission() { return this._emission; }
         set emission(v)
         {
-            Array.replace(this._modules, this._emission, v);
+            ArrayUtils.replace(this._modules, this._emission, v);
             v.particleSystem = this;
             this._emission = v;
         }
@@ -104,7 +104,7 @@ namespace feng3d
         get shape() { return this._shape; }
         set shape(v)
         {
-            Array.replace(this._modules, this._shape, v);
+            ArrayUtils.replace(this._modules, this._shape, v);
             v.particleSystem = this;
             this._shape = v;
         }
@@ -115,7 +115,7 @@ namespace feng3d
         get velocityOverLifetime() { return this._velocityOverLifetime; }
         set velocityOverLifetime(v)
         {
-            Array.replace(this._modules, this._velocityOverLifetime, v);
+            ArrayUtils.replace(this._modules, this._velocityOverLifetime, v);
             v.particleSystem = this;
             this._velocityOverLifetime = v;
         }
@@ -127,7 +127,7 @@ namespace feng3d
         get limitVelocityOverLifetime() { return this._limitVelocityOverLifetime; }
         set limitVelocityOverLifetime(v)
         {
-            Array.replace(this._modules, this._limitVelocityOverLifetime, v);
+            ArrayUtils.replace(this._modules, this._limitVelocityOverLifetime, v);
             v.particleSystem = this;
             this._limitVelocityOverLifetime = v;
         }
@@ -143,7 +143,7 @@ namespace feng3d
         get inheritVelocity() { return this._inheritVelocity; }
         set inheritVelocity(v)
         {
-            Array.replace(this._modules, this._inheritVelocity, v);
+            ArrayUtils.replace(this._modules, this._inheritVelocity, v);
             v.particleSystem = this;
             this._inheritVelocity = v;
         }
@@ -154,7 +154,7 @@ namespace feng3d
         get forceOverLifetime() { return this._forceOverLifetime; }
         set forceOverLifetime(v)
         {
-            Array.replace(this._modules, this._forceOverLifetime, v);
+            ArrayUtils.replace(this._modules, this._forceOverLifetime, v);
             v.particleSystem = this;
             this._forceOverLifetime = v;
         }
@@ -165,7 +165,7 @@ namespace feng3d
         get colorOverLifetime() { return this._colorOverLifetime; }
         set colorOverLifetime(v)
         {
-            Array.replace(this._modules, this._colorOverLifetime, v);
+            ArrayUtils.replace(this._modules, this._colorOverLifetime, v);
             v.particleSystem = this;
             this._colorOverLifetime = v;
         }
@@ -179,7 +179,7 @@ namespace feng3d
         get colorBySpeed() { return this._colorBySpeed; }
         set colorBySpeed(v)
         {
-            Array.replace(this._modules, this._colorBySpeed, v);
+            ArrayUtils.replace(this._modules, this._colorBySpeed, v);
             v.particleSystem = this;
             this._colorBySpeed = v;
         }
@@ -190,7 +190,7 @@ namespace feng3d
         get sizeOverLifetime() { return this._sizeOverLifetime; }
         set sizeOverLifetime(v)
         {
-            Array.replace(this._modules, this._sizeOverLifetime, v);
+            ArrayUtils.replace(this._modules, this._sizeOverLifetime, v);
             v.particleSystem = this;
             this._sizeOverLifetime = v;
         }
@@ -204,7 +204,7 @@ namespace feng3d
         get sizeBySpeed() { return this._sizeBySpeed; }
         set sizeBySpeed(v)
         {
-            Array.replace(this._modules, this._sizeBySpeed, v);
+            ArrayUtils.replace(this._modules, this._sizeBySpeed, v);
             v.particleSystem = this;
             this._sizeBySpeed = v;
         }
@@ -215,7 +215,7 @@ namespace feng3d
         get rotationOverLifetime() { return this._rotationOverLifetime; }
         set rotationOverLifetime(v)
         {
-            Array.replace(this._modules, this._rotationOverLifetime, v);
+            ArrayUtils.replace(this._modules, this._rotationOverLifetime, v);
             v.particleSystem = this;
             this._rotationOverLifetime = v;
         }
@@ -229,7 +229,7 @@ namespace feng3d
         get rotationBySpeed() { return this._rotationBySpeed; }
         set rotationBySpeed(v)
         {
-            Array.replace(this._modules, this._rotationBySpeed, v);
+            ArrayUtils.replace(this._modules, this._rotationBySpeed, v);
             v.particleSystem = this;
             this._rotationBySpeed = v;
         }
@@ -243,7 +243,7 @@ namespace feng3d
         get noise() { return this._noise; }
         set noise(v)
         {
-            Array.replace(this._modules, this._noise, v);
+            ArrayUtils.replace(this._modules, this._noise, v);
             v.particleSystem = this;
             this._noise = v;
         }
@@ -257,7 +257,7 @@ namespace feng3d
         get subEmitters() { return this._subEmitters; }
         set subEmitters(v)
         {
-            Array.replace(this._modules, this._subEmitters, v);
+            ArrayUtils.replace(this._modules, this._subEmitters, v);
             v.particleSystem = this;
             this._subEmitters = v;
         }
@@ -271,7 +271,7 @@ namespace feng3d
         get textureSheetAnimation() { return this._textureSheetAnimation; }
         set textureSheetAnimation(v)
         {
-            Array.replace(this._modules, this._textureSheetAnimation, v);
+            ArrayUtils.replace(this._modules, this._textureSheetAnimation, v);
             v.particleSystem = this;
             this._textureSheetAnimation = v;
         }
@@ -333,7 +333,7 @@ namespace feng3d
             emitInfo.preWorldPos.copy(emitInfo.currentWorldPos);
 
             // 粒子系统位置
-            emitInfo.currentWorldPos.copy(this.node3d.worldPosition);
+            emitInfo.currentWorldPos.copy(this.transform.worldPosition);
 
             // 粒子系统位移
             emitInfo.moveVec.copy(emitInfo.currentWorldPos).sub(emitInfo.preWorldPos);
@@ -472,13 +472,13 @@ namespace feng3d
             var billboardMatrix = new Matrix3x3();
             if (isbillboard)
             {
-                var cameraMatrix = camera.node3d.localToWorldMatrix.clone();
+                var cameraMatrix = camera.transform.localToWorldMatrix.clone();
                 var localCameraForward = cameraMatrix.getAxisZ();
                 var localCameraUp = cameraMatrix.getAxisY();
                 if (this.main.simulationSpace == ParticleSystemSimulationSpace.Local)
                 {
-                    localCameraForward = this.node3d.worldToLocalRotationMatrix.transformPoint3(localCameraForward);
-                    localCameraUp = this.node3d.worldToLocalRotationMatrix.transformPoint3(localCameraUp);
+                    localCameraForward = this.gameObject.transform.worldToLocalRotationMatrix.transformPoint3(localCameraForward);
+                    localCameraUp = this.gameObject.transform.worldToLocalRotationMatrix.transformPoint3(localCameraUp);
                 }
                 var matrix4x4 = new Matrix4x4();
                 matrix4x4.lookAt(localCameraForward, localCameraUp);
@@ -549,12 +549,12 @@ namespace feng3d
          * 属性数据列表
          */
         private _attributes = {
-            a_particle_position: new Attribute("a_particle_position", [], 3, 1),
-            a_particle_scale: new Attribute("a_particle_scale", [], 3, 1),
-            a_particle_rotation: new Attribute("a_particle_rotation", [], 3, 1),
-            a_particle_color: new Attribute("a_particle_color", [], 4, 1),
-            a_particle_tilingOffset: new Attribute("a_particle_tilingOffset", [], 4, 1),
-            a_particle_flipUV: new Attribute("a_particle_flipUV", [], 2, 1),
+            a_particle_position: new Attribute({ name: "a_particle_position", data: [], size: 3, divisor: 1 }),
+            a_particle_scale: new Attribute({ name: "a_particle_scale", data: [], size: 3, divisor: 1 }),
+            a_particle_rotation: new Attribute({ name: "a_particle_rotation", data: [], size: 3, divisor: 1 }),
+            a_particle_color: new Attribute({ name: "a_particle_color", data: [], size: 4, divisor: 1 }),
+            a_particle_tilingOffset: new Attribute({ name: "a_particle_tilingOffset", data: [], size: 4, divisor: 1 }),
+            a_particle_flipUV: new Attribute({ name: "a_particle_flipUV", data: [], size: 2, divisor: 1 }),
         };
 
         private readonly _modules: ParticleModule[] = [];
@@ -797,12 +797,12 @@ namespace feng3d
 
         private _simulationSpaceChanged()
         {
-            if (!this.node3d) return;
+            if (!this.transform) return;
             if (this._activeParticles.length == 0) return;
 
             if (this._main.simulationSpace == ParticleSystemSimulationSpace.Local)
             {
-                var worldToLocalMatrix = this.node3d.worldToLocalMatrix;
+                var worldToLocalMatrix = this.transform.worldToLocalMatrix;
                 this._activeParticles.forEach(p =>
                 {
                     worldToLocalMatrix.transformPoint3(p.position, p.position);
@@ -811,7 +811,7 @@ namespace feng3d
                 });
             } else
             {
-                var localToWorldMatrix = this.node3d.localToWorldMatrix;
+                var localToWorldMatrix = this.transform.localToWorldMatrix;
                 this._activeParticles.forEach(p =>
                 {
                     localToWorldMatrix.transformPoint3(p.position, p.position);
@@ -841,10 +841,10 @@ namespace feng3d
             {
                 if (space == ParticleSystemSimulationSpace.World)
                 {
-                    this.node3d.worldToLocalMatrix.transformPoint3(position, position);
+                    this.transform.worldToLocalMatrix.transformPoint3(position, position);
                 } else
                 {
-                    this.node3d.localToWorldMatrix.transformPoint3(position, position);
+                    this.transform.localToWorldMatrix.transformPoint3(position, position);
                 }
             }
             //
@@ -870,10 +870,10 @@ namespace feng3d
                 {
                     if (space == ParticleSystemSimulationSpace.World)
                     {
-                        this.node3d.worldToLocalMatrix.transformPoint3(value, value);
+                        this.transform.worldToLocalMatrix.transformPoint3(value, value);
                     } else
                     {
-                        this.node3d.localToWorldMatrix.transformPoint3(value, value);
+                        this.transform.localToWorldMatrix.transformPoint3(value, value);
                     }
                 }
                 //
@@ -901,10 +901,10 @@ namespace feng3d
             {
                 if (space == ParticleSystemSimulationSpace.World)
                 {
-                    this.node3d.worldToLocalMatrix.transformVector3(velocity, velocity);
+                    this.transform.worldToLocalMatrix.transformVector3(velocity, velocity);
                 } else
                 {
-                    this.node3d.localToWorldMatrix.transformVector3(velocity, velocity);
+                    this.transform.localToWorldMatrix.transformVector3(velocity, velocity);
                 }
             }
             //
@@ -930,10 +930,10 @@ namespace feng3d
                 {
                     if (space == ParticleSystemSimulationSpace.World)
                     {
-                        this.node3d.worldToLocalMatrix.transformVector3(value, value);
+                        this.transform.worldToLocalMatrix.transformVector3(value, value);
                     } else
                     {
-                        this.node3d.localToWorldMatrix.transformVector3(value, value);
+                        this.transform.localToWorldMatrix.transformVector3(value, value);
                     }
                 }
                 //
@@ -961,10 +961,10 @@ namespace feng3d
             {
                 if (space == ParticleSystemSimulationSpace.World)
                 {
-                    this.node3d.worldToLocalMatrix.transformVector3(acceleration, acceleration);
+                    this.transform.worldToLocalMatrix.transformVector3(acceleration, acceleration);
                 } else
                 {
-                    this.node3d.localToWorldMatrix.transformVector3(acceleration, acceleration);
+                    this.transform.localToWorldMatrix.transformVector3(acceleration, acceleration);
                 }
             }
             //
@@ -990,10 +990,10 @@ namespace feng3d
                 {
                     if (space == ParticleSystemSimulationSpace.World)
                     {
-                        this.node3d.worldToLocalMatrix.transformVector3(value, value);
+                        this.transform.worldToLocalMatrix.transformVector3(value, value);
                     } else
                     {
-                        this.node3d.localToWorldMatrix.transformVector3(value, value);
+                        this.transform.localToWorldMatrix.transformVector3(value, value);
                     }
                 }
                 //
@@ -1033,9 +1033,9 @@ namespace feng3d
                 if (Math.random() > probability) return;
 
                 // 粒子所在世界坐标
-                var particleWoldPos = this.node3d.localToWorldMatrix.transformPoint3(particle.position);
+                var particleWoldPos = this.transform.localToWorldMatrix.transformPoint3(particle.position);
                 // 粒子在子粒子系统的坐标
-                var subEmitPos = subEmitter.node3d.worldToLocalMatrix.transformPoint3(particleWoldPos);
+                var subEmitPos = subEmitter.transform.worldToLocalMatrix.transformPoint3(particleWoldPos);
                 if (!particle.subEmitInfo)
                 {
                     var startDelay = this.main.startDelay.getValue(Math.random());
@@ -1151,14 +1151,27 @@ namespace feng3d
     }
     Geometry.setDefault("Billboard-Geometry", new QuadGeometry());
 
-    Entity.registerPrimitive("Particle System", (g) =>
+    GameObject.registerPrimitive("Particle System", (g) =>
     {
         g.addComponent(ParticleSystem);
-        g.getComponent(Node3D).rx = -90;
+        g.getComponent(Transform).rx = -90;
     });
 
-    export interface PrimitiveEntity
+    export interface PrimitiveGameObject
     {
-        "Particle System": Entity;
+        "Particle System": GameObject;
     }
+
+    // 在 Hierarchy 界面新增右键菜单项
+    createNodeMenu.push(
+        {
+            path: "Effects/Particle System",
+            priority: -1,
+            click: () =>
+            {
+                return GameObject.createPrimitive("Particle System");
+            }
+        }
+    );
+
 }

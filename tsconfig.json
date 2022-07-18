@@ -12,12 +12,37 @@
             "DOM"
         ],
         "outFile": "./dist/index.js",
-        "types": [
-            "feng3d"
-        ]
     },
+    "references": [
+        {
+            "path": "../event"
+        },
+        {
+            "path": "../polyfill"
+        },
+        {
+            "path": "../objectview"
+        },
+        {
+            "path": "../watcher"
+        },
+        {
+            "path": "../serialization"
+        },
+        {
+            "path": "../math"
+        },
+        {
+            "path": "../filesystem"
+        },
+        {
+            "path": "../renderer"
+        },
+        {
+            "path": "../core"
+        },
+    ],
     "files": [
-        //粒子系统
         "src/Particle.ts",
         "src/ParticlesAdditive.shader.ts",
         "src/ParticlesAlphaBlendedPremultiply.shader.ts",

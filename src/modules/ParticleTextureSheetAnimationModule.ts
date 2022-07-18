@@ -57,7 +57,7 @@ namespace feng3d
         get rowIndex() { return this._rowIndex; }
         set rowIndex(v)
         {
-            this._rowIndex = Math.clamp(v, 0, this.tiles.y - 1);
+            this._rowIndex = mathUtil.clamp(v, 0, this.tiles.y - 1);
         }
         private _rowIndex = 0;
 
@@ -210,7 +210,7 @@ namespace feng3d
          */
         updateParticleState(particle: Particle)
         {
-            particle.tilingOffset.init(1, 1, 0, 0);
+            particle.tilingOffset.set(1, 1, 0, 0);
             particle.flipUV.set(0, 0);
             if (!this.enabled) return;
 
@@ -238,7 +238,7 @@ namespace feng3d
                 uvPos.set(frameIndex % segmentsX, rowIndex).scale(step);
             }
 
-            particle.tilingOffset.init(step.x, step.y, uvPos.x, uvPos.y);
+            particle.tilingOffset.set(step.x, step.y, uvPos.x, uvPos.y);
             particle.flipUV = this.flipUV;
         }
 
