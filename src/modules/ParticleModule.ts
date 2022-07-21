@@ -1,6 +1,6 @@
 import { oav } from '@feng3d/objectview';
 import { serialize } from '@feng3d/serialization';
-import { EventEmitter } from '../../../event/dist';
+import { EventEmitter } from '@feng3d/event';
 import { Particle } from '../Particle';
 import { ParticleSystem } from '../ParticleSystem';
 
