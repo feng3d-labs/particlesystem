@@ -1,3 +1,12 @@
+import { MinMaxCurve, MinMaxCurveMode, Vector2 } from '@feng3d/math';
+import { oav } from '@feng3d/objectview';
+import { mathUtil } from '@feng3d/polyfill';
+import { serialization, serialize } from '@feng3d/serialization';
+import { ParticleSystemAnimationType } from '../enums/ParticleSystemAnimationType';
+import { UVChannelFlags } from '../enums/UVChannelFlags';
+import { Particle } from '../Particle';
+import { ParticleModule } from './ParticleModule';
+
 /**
  * 粒子系统纹理表动画模块。
  */
@@ -196,9 +205,9 @@ export class ParticleTextureSheetAnimationModule extends ParticleModule
      */
     initParticleState(particle: Particle)
     {
-        particle[_TextureSheetAnimation_frameOverTime] = Math.random();
-        particle[_TextureSheetAnimation_startFrame] = Math.random();
-        particle[_TextureSheetAnimation_randomRow] = Math.random();
+        particle[TextureSheetAnimationFrameOverTime] = Math.random();
+        particle[TextureSheetAnimationStartFrame] = Math.random();
+        particle[TextureSheetAnimationRandomRow] = Math.random();
     }
 
     /**
@@ -215,22 +224,22 @@ export class ParticleTextureSheetAnimationModule extends ParticleModule
         const segmentsY = this.tiles.y;
         const step = this.tiles.clone().reciprocal();
         const uvPos = new Vector2();
-        const frameOverTime = this.frameOverTime.getValue(particle.rateAtLifeTime, particle[_TextureSheetAnimation_frameOverTime]);
-        let frameIndex = this.startFrame.getValue(particle.rateAtLifeTime, particle[_TextureSheetAnimation_startFrame]);
+        const frameOverTime = this.frameOverTime.getValue(particle.rateAtLifeTime, particle[TextureSheetAnimationFrameOverTime]);
+        let frameIndex = this.startFrame.getValue(particle.rateAtLifeTime, particle[TextureSheetAnimationStartFrame]);
         let rowIndex = this.rowIndex;
         const cycleCount = this.cycleCount;
 
-        if (this.animation == ParticleSystemAnimationType.WholeSheet)
+        if (this.animation === ParticleSystemAnimationType.WholeSheet)
         {
             frameIndex = Math.round(frameIndex + frameOverTime * segmentsX * segmentsY * cycleCount);
             uvPos.set(frameIndex % segmentsX, Math.floor(frameIndex / segmentsX) % segmentsY).scale(step);
         }
- else if (this.animation == ParticleSystemAnimationType.SingleRow)
+        else if (this.animation === ParticleSystemAnimationType.SingleRow)
         {
             frameIndex = Math.round(frameIndex + frameOverTime * segmentsX * cycleCount);
             if (this.useRandomRow)
             {
-                rowIndex = Math.round(segmentsY * particle[_TextureSheetAnimation_randomRow]);
+                rowIndex = Math.round(segmentsY * particle[TextureSheetAnimationRandomRow]);
             }
             uvPos.set(frameIndex % segmentsX, rowIndex).scale(step);
         }
@@ -240,6 +249,6 @@ export class ParticleTextureSheetAnimationModule extends ParticleModule
     }
 }
 
-var _TextureSheetAnimation_frameOverTime = '_TextureSheetAnimation_rateAtLifeTime';
-var _TextureSheetAnimation_startFrame = '_TextureSheetAnimation_startFrame';
-var _TextureSheetAnimation_randomRow = '_TextureSheetAnimation_randomRow';
+const TextureSheetAnimationFrameOverTime = '_TextureSheetAnimation_rateAtLifeTime';
+const TextureSheetAnimationStartFrame = '_TextureSheetAnimation_startFrame';
+const TextureSheetAnimationRandomRow = '_TextureSheetAnimation_randomRow';

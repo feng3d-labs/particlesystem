@@ -1,3 +1,7 @@
+import { Vector3 } from '@feng3d/math';
+import { ParticleShapeModule } from '../modules/ParticleShapeModule';
+import { Particle } from '../Particle';
+
 /**
  * 粒子系统 发射形状
  */
@@ -13,11 +17,11 @@ export class ParticleSystemShape
     /**
      * 计算粒子的发射位置与方向
      *
-     * @param particle
-     * @param position
-     * @param dir
+     * @param _particle
+     * @param _position
+     * @param _dir
      */
-    calcParticlePosDir(particle: Particle, position: Vector3, dir: Vector3)
+    calcParticlePosDir(_particle: Particle, _position: Vector3, _dir: Vector3)
     {
 
     }

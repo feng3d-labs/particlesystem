@@ -1,3 +1,9 @@
+import { MinMaxCurve } from '@feng3d/math';
+import { oav } from '@feng3d/objectview';
+import { serialization, serialize } from '@feng3d/serialization';
+import { ParticleEmissionBurst } from '../others/ParticleEmissionBurst';
+import { ParticleModule } from './ParticleModule';
+
 /**
  * 粒子系统发射模块。
  */
@@ -92,7 +98,7 @@ export class ParticleEmissionModule extends ParticleModule
             bursts[i] = this.bursts[i];
         }
 
-return bursts.length;
+        return bursts.length;
     }
 
     /**
@@ -104,7 +110,7 @@ return bursts.length;
      */
     setBursts(bursts: ParticleEmissionBurst[], size: number = Number.MAX_SAFE_INTEGER)
     {
-        var size = Math.min(bursts.length, size);
+        size = Math.min(bursts.length, size);
         for (let i = 0; i < size; i++)
         {
             this.bursts[i] = bursts[i];

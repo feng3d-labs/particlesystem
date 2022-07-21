@@ -1,3 +1,9 @@
+import { MinMaxCurveVector3 } from '@feng3d/math';
+import { oav } from '@feng3d/objectview';
+import { serialization, serialize } from '@feng3d/serialization';
+import { Particle } from '../Particle';
+import { ParticleModule } from './ParticleModule';
+
 /**
  * 粒子系统 缩放随时间变化模块
  */
@@ -151,7 +157,7 @@ export class ParticleSizeOverLifetimeModule extends ParticleModule
      */
     initParticleState(particle: Particle)
     {
-        particle[_SizeOverLifetime_rate] = Math.random();
+        particle[SizeOverLifetimeRate] = Math.random();
     }
 
     /**
@@ -162,7 +168,7 @@ export class ParticleSizeOverLifetimeModule extends ParticleModule
     {
         if (!this.enabled) return;
 
-        const size = this.size3D.getValue(particle.rateAtLifeTime, particle[_SizeOverLifetime_rate]);
+        const size = this.size3D.getValue(particle.rateAtLifeTime, particle[SizeOverLifetimeRate]);
         if (!this.separateAxes)
         {
             size.y = size.z = size.x;
@@ -171,4 +177,4 @@ export class ParticleSizeOverLifetimeModule extends ParticleModule
     }
 }
 
-var _SizeOverLifetime_rate = '_SizeOverLifetime_rate';
+const SizeOverLifetimeRate = '_SizeOverLifetime_rate';

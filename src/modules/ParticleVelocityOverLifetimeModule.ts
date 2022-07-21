@@ -1,3 +1,10 @@
+import { MinMaxCurveVector3 } from '@feng3d/math';
+import { oav } from '@feng3d/objectview';
+import { serialize } from '@feng3d/serialization';
+import { ParticleSystemSimulationSpace } from '../enums/ParticleSystemSimulationSpace';
+import { Particle } from '../Particle';
+import { ParticleModule } from './ParticleModule';
+
 /**
  * 粒子系统 速度随时间变化模块
  *
@@ -124,7 +131,7 @@ export class ParticleVelocityOverLifetimeModule extends ParticleModule
      */
     initParticleState(particle: Particle)
     {
-        particle[_VelocityOverLifetime_rate] = Math.random();
+        particle[VelocityOverLifetimeRate] = Math.random();
     }
 
     /**
@@ -133,13 +140,13 @@ export class ParticleVelocityOverLifetimeModule extends ParticleModule
      */
     updateParticleState(particle: Particle)
     {
-        this.particleSystem.removeParticleVelocity(particle, _VelocityOverLifetime_preVelocity);
+        this.particleSystem.removeParticleVelocity(particle, VelocityOverLifetimePreVelocity);
         if (!this.enabled) return;
 
-        const velocity = this.velocity.getValue(particle.rateAtLifeTime, particle[_VelocityOverLifetime_rate]);
-        this.particleSystem.addParticleVelocity(particle, velocity, this.space, _VelocityOverLifetime_preVelocity);
+        const velocity = this.velocity.getValue(particle.rateAtLifeTime, particle[VelocityOverLifetimeRate]);
+        this.particleSystem.addParticleVelocity(particle, velocity, this.space, VelocityOverLifetimePreVelocity);
     }
 }
 
-var _VelocityOverLifetime_rate = '_VelocityOverLifetime_rate';
-var _VelocityOverLifetime_preVelocity = '_VelocityOverLifetime_preVelocity';
+const VelocityOverLifetimeRate = '_VelocityOverLifetime_rate';
+const VelocityOverLifetimePreVelocity = '_VelocityOverLifetime_preVelocity';

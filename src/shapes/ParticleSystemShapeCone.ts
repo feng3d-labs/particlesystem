@@ -1,3 +1,11 @@
+import { Vector3 } from '@feng3d/math';
+import { oav } from '@feng3d/objectview';
+import { mathUtil } from '@feng3d/polyfill';
+import { ParticleSystemShapeConeEmitFrom } from '../enums/ParticleSystemShapeConeEmitFrom';
+import { ParticleSystemShapeMultiModeValue } from '../enums/ParticleSystemShapeMultiModeValue';
+import { Particle } from '../Particle';
+import { ParticleSystemShape } from './ParticleSystemShape';
+
 /**
  * 粒子系统发射圆锥体，用于定义基于圆锥体的粒子发射时的初始状态。
  */
@@ -130,20 +138,20 @@ export class ParticleSystemShapeCone extends ParticleSystemShape
         angle = mathUtil.clamp(angle, 0, 87);
         // 在圆心的方向
         let radiusAngle = 0;
-        if (this.arcMode == ParticleSystemShapeMultiModeValue.Random)
+        if (this.arcMode === ParticleSystemShapeMultiModeValue.Random)
         {
             radiusAngle = Math.random() * arc;
         }
- else if (this.arcMode == ParticleSystemShapeMultiModeValue.Loop)
+        else if (this.arcMode === ParticleSystemShapeMultiModeValue.Loop)
         {
-            var totalAngle = particle.birthTime * this.arcSpeed.getValue(particle.birthRateAtDuration) * 360;
+            const totalAngle = particle.birthTime * this.arcSpeed.getValue(particle.birthRateAtDuration) * 360;
             radiusAngle = totalAngle % arc;
         }
- else if (this.arcMode == ParticleSystemShapeMultiModeValue.PingPong)
+        else if (this.arcMode === ParticleSystemShapeMultiModeValue.PingPong)
         {
-            var totalAngle = particle.birthTime * this.arcSpeed.getValue(particle.birthRateAtDuration) * 360;
+            const totalAngle = particle.birthTime * this.arcSpeed.getValue(particle.birthRateAtDuration) * 360;
             radiusAngle = totalAngle % arc;
-            if (Math.floor(totalAngle / arc) % 2 == 1)
+            if (Math.floor(totalAngle / arc) % 2 === 1)
             {
                 radiusAngle = arc - radiusAngle;
             }
@@ -158,7 +166,7 @@ export class ParticleSystemShapeCone extends ParticleSystemShape
         radiusAngle = mathUtil.degToRad(radiusAngle);
         // 在圆的位置
         let radiusRate = 1;
-        if (this.emitFrom == ParticleSystemShapeConeEmitFrom.Base || this.emitFrom == ParticleSystemShapeConeEmitFrom.Volume)
+        if (this.emitFrom === ParticleSystemShapeConeEmitFrom.Base || this.emitFrom === ParticleSystemShapeConeEmitFrom.Volume)
         {
             radiusRate = Math.random();
         }
@@ -174,7 +182,7 @@ export class ParticleSystemShapeCone extends ParticleSystemShape
         dir.copy(topPos).sub(bottomPos).normalize();
         // 计算位置
         position.copy(bottomPos);
-        if (this.emitFrom == ParticleSystemShapeConeEmitFrom.Volume || this.emitFrom == ParticleSystemShapeConeEmitFrom.VolumeShell)
+        if (this.emitFrom === ParticleSystemShapeConeEmitFrom.Volume || this.emitFrom === ParticleSystemShapeConeEmitFrom.VolumeShell)
         {
             // 上下点进行插值
             position.lerpNumber(topPos, Math.random());

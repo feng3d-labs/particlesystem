@@ -1,4 +1,21 @@
-export interface UniformsTypes { Particles_Additive: ParticlesAdditiveUniforms }
+import { Texture2D, Material } from '@feng3d/core';
+import { Color4, Vector4 } from '@feng3d/math';
+import { oav } from '@feng3d/objectview';
+import { shaderConfig, BlendFactor, ColorMask, CullFace } from '@feng3d/renderer';
+import { serialize } from '@feng3d/serialization';
+
+declare global
+{
+    export interface MixinsUniformsTypes
+    {
+        Particles_Additive: ParticlesAdditiveUniforms
+    }
+
+    export interface MixinsDefaultMaterial
+    {
+        'Particle-Material': Material;
+    }
+}
 
 /**
  * UnityShader "Particles/Additive"
@@ -43,8 +60,4 @@ shaderConfig.shaders['Particles_Additive'].renderParams = {
     depthMask: false,
 };
 
-export interface DefaultMaterial
-{
-    'Particle-Material': Material;
-}
 Material.setDefault('Particle-Material', { shaderName: 'Particles_Additive' });

@@ -1,3 +1,9 @@
+import { oav } from '@feng3d/objectview';
+import { serialize } from '@feng3d/serialization';
+import { EventEmitter } from '../../../event/dist';
+import { Particle } from '../Particle';
+import { ParticleSystem } from '../ParticleSystem';
+
 /**
  * 粒子模块
  */
@@ -17,18 +23,18 @@ export class ParticleModule extends EventEmitter
 
     /**
      * 初始化粒子状态
-     * @param particle 粒子
+     * @param _particle 粒子
      */
-    initParticleState(particle: Particle)
+    initParticleState(_particle: Particle)
     {
 
     }
 
     /**
      * 更新粒子状态
-     * @param particle 粒子
+     * @param _particle 粒子
      */
-    updateParticleState(particle: Particle)
+    updateParticleState(_particle: Particle)
     {
 
     }
@@ -36,9 +42,9 @@ export class ParticleModule extends EventEmitter
     /**
      * 更新
      *
-     * @param interval
+     * @param _interval
      */
-    update(interval: number)
+    update(_interval: number)
     {
     }
 }

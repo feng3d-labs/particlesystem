@@ -1,3 +1,10 @@
+import { MinMaxCurveVector3 } from '@feng3d/math';
+import { oav } from '@feng3d/objectview';
+import { serialize } from '@feng3d/serialization';
+import { ParticleSystemSimulationSpace } from '../enums/ParticleSystemSimulationSpace';
+import { Particle } from '../Particle';
+import { ParticleModule } from './ParticleModule';
+
 /**
  * 粒子系统 作用在粒子上的力随时间变化模块
  *
@@ -131,7 +138,7 @@ export class ParticleForceOverLifetimeModule extends ParticleModule
      */
     initParticleState(particle: Particle)
     {
-        particle[_ForceOverLifetime_rate] = Math.random();
+        particle[ForceOverLifetimeRate] = Math.random();
     }
 
     /**
@@ -140,12 +147,12 @@ export class ParticleForceOverLifetimeModule extends ParticleModule
      */
     updateParticleState(particle: Particle)
     {
-        this.particleSystem.removeParticleAcceleration(particle, _ForceOverLifetime_preForce);
+        this.particleSystem.removeParticleAcceleration(particle, ForceOverLifetimePreForce);
         if (!this.enabled) return;
 
-        const force = this.force.getValue(particle.rateAtLifeTime, particle[_ForceOverLifetime_rate]);
-        this.particleSystem.addParticleAcceleration(particle, force, this.space, _ForceOverLifetime_preForce);
+        const force = this.force.getValue(particle.rateAtLifeTime, particle[ForceOverLifetimeRate]);
+        this.particleSystem.addParticleAcceleration(particle, force, this.space, ForceOverLifetimePreForce);
     }
 }
-var _ForceOverLifetime_rate = '_ForceOverLifetime_rate';
-var _ForceOverLifetime_preForce = '_ForceOverLifetime_preForce';
+const ForceOverLifetimeRate = '_ForceOverLifetime_rate';
+const ForceOverLifetimePreForce = '_ForceOverLifetime_preForce';

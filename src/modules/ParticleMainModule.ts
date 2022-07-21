@@ -1,3 +1,11 @@
+import { MinMaxCurve, MinMaxCurveVector3, MinMaxGradient, Vector3 } from '@feng3d/math';
+import { oav } from '@feng3d/objectview';
+import { serialization, serialize } from '@feng3d/serialization';
+import { ParticleSystemScalingMode } from '../enums/ParticleSystemScalingMode';
+import { ParticleSystemSimulationSpace } from '../enums/ParticleSystemSimulationSpace';
+import { Particle } from '../Particle';
+import { ParticleModule } from './ParticleModule';
+
 /**
  * 粒子主模块
  */
@@ -509,7 +517,7 @@ export class ParticleMainModule extends ParticleModule
         {
             particle.startSize.copy(this.startSize3D.getValue(birthRateAtDuration));
         }
- else
+        else
         {
             const startSize = this.startSize.getValue(birthRateAtDuration);
             particle.startSize.set(startSize, startSize, startSize);
@@ -520,7 +528,7 @@ export class ParticleMainModule extends ParticleModule
         {
             particle.rotation.copy(this.startRotation3D.getValue(birthRateAtDuration));
         }
- else
+        else
         {
             const startRotation = this.startRotation.getValue(birthRateAtDuration);
             particle.rotation.set(0, 0, startRotation);
@@ -537,8 +545,8 @@ export class ParticleMainModule extends ParticleModule
     updateParticleState(particle: Particle)
     {
         // 加速度
-        const gravity = world_gravity.scaleNumberTo(this.gravityModifier.getValue(this.particleSystem._emitInfo.rateAtDuration));
-        this.particleSystem.addParticleAcceleration(particle, gravity, ParticleSystemSimulationSpace.World, _Main_preGravity);
+        const gravity = worldGravity.scaleNumberTo(this.gravityModifier.getValue(this.particleSystem._emitInfo.rateAtDuration));
+        this.particleSystem.addParticleAcceleration(particle, gravity, ParticleSystemSimulationSpace.World, MainPreGravity);
 
         //
         particle.size.copy(particle.startSize);
@@ -546,5 +554,5 @@ export class ParticleMainModule extends ParticleModule
     }
 }
 
-var world_gravity = new Vector3(0, -9.8, 0);
-var _Main_preGravity = '_Main_preGravity';
+const worldGravity = new Vector3(0, -9.8, 0);
+const MainPreGravity = '_Main_preGravity';

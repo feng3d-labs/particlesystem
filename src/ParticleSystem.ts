@@ -1,16 +1,57 @@
-export interface ComponentMap { ParticleSystem: ParticleSystem }
+import { AddComponentMenu, Camera, createNodeMenu, GameObject, Geometry, Material, QuadGeometry, RegisterComponent, Renderable, RunEnvironment, Scene, Transform } from '@feng3d/core';
+import { Matrix3x3, Matrix4x4, Vector3 } from '@feng3d/math';
+import { oav } from '@feng3d/objectview';
+import { ArrayUtils } from '@feng3d/polyfill';
+import { Attribute, RenderAtomic } from '@feng3d/renderer';
+import { serialize } from '@feng3d/serialization';
+import { watcher } from '@feng3d/watcher';
+import { ParticleSystemSimulationSpace } from './enums/ParticleSystemSimulationSpace';
+import { ParticleColorBySpeedModule } from './modules/ParticleColorBySpeedModule';
+import { ParticleColorOverLifetimeModule } from './modules/ParticleColorOverLifetimeModule';
+import { ParticleEmissionModule } from './modules/ParticleEmissionModule';
+import { ParticleForceOverLifetimeModule } from './modules/ParticleForceOverLifetimeModule';
+import { ParticleInheritVelocityModule } from './modules/ParticleInheritVelocityModule';
+import { ParticleLimitVelocityOverLifetimeModule } from './modules/ParticleLimitVelocityOverLifetimeModule';
+import { ParticleMainModule } from './modules/ParticleMainModule';
+import { ParticleModule } from './modules/ParticleModule';
+import { ParticleNoiseModule } from './modules/ParticleNoiseModule';
+import { ParticleRotationBySpeedModule } from './modules/ParticleRotationBySpeedModule';
+import { ParticleRotationOverLifetimeModule } from './modules/ParticleRotationOverLifetimeModule';
+import { ParticleShapeModule } from './modules/ParticleShapeModule';
+import { ParticleSizeBySpeedModule } from './modules/ParticleSizeBySpeedModule';
+import { ParticleSizeOverLifetimeModule } from './modules/ParticleSizeOverLifetimeModule';
+import { ParticleSubEmittersModule } from './modules/ParticleSubEmittersModule';
+import { ParticleTextureSheetAnimationModule } from './modules/ParticleTextureSheetAnimationModule';
+import { ParticleVelocityOverLifetimeModule } from './modules/ParticleVelocityOverLifetimeModule';
+import { Particle } from './Particle';
 
-export interface GameObjectEventMap
+declare global
 {
-    /**
-     * 粒子系统播放完一个周期
-     */
-    particleCycled: ParticleSystem;
+    export interface MixinsComponentMap
+    {
+        ParticleSystem: ParticleSystem
+    }
+    export interface MixinsDefaultGeometry
+    {
+        'Billboard-Geometry': QuadGeometry;
+    }
+    export interface MixinsPrimitiveGameObject
+    {
+        'Particle System': GameObject;
+    }
 
-    /**
-     * 粒子效果播放结束
-     */
-    particleCompleted: ParticleSystem;
+    export interface MixinsGameObjectEventMap
+    {
+        /**
+         * 粒子系统播放完一个周期
+         */
+        particleCycled: ParticleSystem;
+
+        /**
+         * 粒子效果播放结束
+         */
+        particleCompleted: ParticleSystem;
+    }
 }
 
 /**
@@ -40,7 +81,7 @@ export class ParticleSystem extends Renderable
      */
     get isStopped()
     {
-        return !this._isPlaying && this.time == 0;
+        return !this._isPlaying && this.time === 0;
     }
 
     /**
@@ -50,7 +91,7 @@ export class ParticleSystem extends Renderable
      */
     get isPaused()
     {
-        return !this._isPlaying && this.time != 0;
+        return !this._isPlaying && this.time !== 0;
     }
 
     /**
@@ -369,7 +410,7 @@ export class ParticleSystem extends Renderable
         }
 
         // 判断非循环的效果是否播放结束
-        if (!this.main.loop && this._activeParticles.length == 0 && emitInfo.currentTime > this.main.duration)
+        if (!this.main.loop && this._activeParticles.length === 0 && emitInfo.currentTime > this.main.duration)
         {
             this.stop();
             this.emit('particleCompleted', this);
@@ -402,7 +443,7 @@ export class ParticleSystem extends Renderable
         const startDelay = this.main.startDelay.getValue(Math.random());
 
         this._emitInfo
-        = {
+            = {
             preTime: -startDelay,
             currentTime: -startDelay,
             preWorldPos: new Vector3(),
@@ -436,11 +477,11 @@ export class ParticleSystem extends Renderable
      */
     continue()
     {
-        if (this.time == 0)
+        if (this.time === 0)
         {
             this.play();
         }
- else
+        else
         {
             this._isPlaying = true;
             this._emitInfo.preTime = Math.max(0, this._emitInfo.currentTime);
@@ -467,14 +508,14 @@ export class ParticleSystem extends Renderable
         renderAtomic.shaderMacro.ENABLED_PARTICLE_SYSTEM_textureSheetAnimation = this.textureSheetAnimation.enabled;
 
         // 计算公告牌矩阵
-        const isbillboard = !this.shape.alignToDirection && this.geometry == Geometry.getDefault('Billboard-Geometry');
+        const isbillboard = !this.shape.alignToDirection && this.geometry === Geometry.getDefault('Billboard-Geometry');
         const billboardMatrix = new Matrix3x3();
         if (isbillboard)
         {
             const cameraMatrix = camera.transform.localToWorldMatrix.clone();
             let localCameraForward = cameraMatrix.getAxisZ();
             let localCameraUp = cameraMatrix.getAxisY();
-            if (this.main.simulationSpace == ParticleSystemSimulationSpace.Local)
+            if (this.main.simulationSpace === ParticleSystemSimulationSpace.Local)
             {
                 localCameraForward = this.gameObject.transform.worldToLocalRotationMatrix.transformPoint3(localCameraForward);
                 localCameraUp = this.gameObject.transform.worldToLocalRotationMatrix.transformPoint3(localCameraUp);
@@ -490,7 +531,7 @@ export class ParticleSystem extends Renderable
         const colors: number[] = [];
         const tilingOffsets: number[] = [];
         const flipUVs: number[] = [];
-        for (var i = 0, n = this._activeParticles.length; i < n; i++)
+        for (let i = 0, n = this._activeParticles.length; i < n; i++)
         {
             const particle = this._activeParticles[i];
             positions.push(particle.position.x, particle.position.y, particle.position.z);
@@ -504,7 +545,7 @@ export class ParticleSystem extends Renderable
 
         if (isbillboard)
         {
-            for (var i = 0, n = rotations.length; i < n; i += 3)
+            for (let i = 0, n = rotations.length; i < n; i += 3)
             {
                 rotations[i + 2] = -rotations[i + 2];
             }
@@ -521,7 +562,7 @@ export class ParticleSystem extends Renderable
         //
         renderAtomic.uniforms.u_particle_billboardMatrix = billboardMatrix;
 
-        if (this.main.simulationSpace == ParticleSystemSimulationSpace.World)
+        if (this.main.simulationSpace === ParticleSystemSimulationSpace.World)
         {
             renderAtomic.uniforms.u_modelMatrix = () => new Matrix4x4();
             renderAtomic.uniforms.u_ITModelMatrix = () => new Matrix4x4();
@@ -590,7 +631,7 @@ export class ParticleSystem extends Renderable
 
         // 计算此处在发射周期的位置
         let rateAtDuration = (endTime % duration) / duration;
-        if (rateAtDuration == 0 && endTime >= duration) rateAtDuration = 1;
+        if (rateAtDuration === 0 && endTime >= duration) rateAtDuration = 1;
 
         emitInfo.rateAtDuration = rateAtDuration;
 
@@ -615,7 +656,7 @@ export class ParticleSystem extends Renderable
     private _emitWithMove(emitInfo: ParticleSystemEmitInfo)
     {
         const emits: { time: number; num: number; position: Vector3; emitInfo: ParticleSystemEmitInfo; }[] = [];
-        if (this.main.simulationSpace == ParticleSystemSimulationSpace.World)
+        if (this.main.simulationSpace === ParticleSystemSimulationSpace.World)
         {
             if (emitInfo._isRateOverDistance)
             {
@@ -659,7 +700,7 @@ export class ParticleSystem extends Renderable
             emitInfo._leftRateOverDistance = 0;
         }
 
-return emits;
+        return emits;
     }
 
     /**
@@ -709,7 +750,7 @@ return emits;
             }
         }
 
-return emits;
+        return emits;
     }
 
     /**
@@ -770,7 +811,7 @@ return emits;
                 this._particlePool.push(particle);
                 particle.subEmitInfo = null;
             }
- else
+            else
             {
                 this._updateParticleState(particle, deltaTime);
             }
@@ -800,9 +841,9 @@ return emits;
     private _simulationSpaceChanged()
     {
         if (!this.transform) return;
-        if (this._activeParticles.length == 0) return;
+        if (this._activeParticles.length === 0) return;
 
-        if (this._main.simulationSpace == ParticleSystemSimulationSpace.Local)
+        if (this._main.simulationSpace === ParticleSystemSimulationSpace.Local)
         {
             const worldToLocalMatrix = this.transform.worldToLocalMatrix;
             this._activeParticles.forEach((p) =>
@@ -812,7 +853,7 @@ return emits;
                 worldToLocalMatrix.transformVector3(p.acceleration, p.acceleration);
             });
         }
- else
+        else
         {
             const localToWorldMatrix = this.transform.localToWorldMatrix;
             this._activeParticles.forEach((p) =>
@@ -834,19 +875,19 @@ return emits;
      */
     addParticlePosition(particle: Particle, position: Vector3, space: ParticleSystemSimulationSpace, name?: string)
     {
-        if (name != undefined)
+        if (name !== undefined)
         {
             this.removeParticleVelocity(particle, name);
             particle.cache[name] = { value: position.clone(), space };
         }
 
-        if (space != this.main.simulationSpace)
+        if (space !== this.main.simulationSpace)
         {
-            if (space == ParticleSystemSimulationSpace.World)
+            if (space === ParticleSystemSimulationSpace.World)
             {
                 this.transform.worldToLocalMatrix.transformPoint3(position, position);
             }
- else
+            else
             {
                 this.transform.localToWorldMatrix.transformPoint3(position, position);
             }
@@ -870,13 +911,13 @@ return emits;
 
             const space = obj.space;
             const value = obj.value;
-            if (space != this.main.simulationSpace)
+            if (space !== this.main.simulationSpace)
             {
-                if (space == ParticleSystemSimulationSpace.World)
+                if (space === ParticleSystemSimulationSpace.World)
                 {
                     this.transform.worldToLocalMatrix.transformPoint3(value, value);
                 }
- else
+                else
                 {
                     this.transform.localToWorldMatrix.transformPoint3(value, value);
                 }
@@ -896,19 +937,19 @@ return emits;
      */
     addParticleVelocity(particle: Particle, velocity: Vector3, space: ParticleSystemSimulationSpace, name?: string)
     {
-        if (name != undefined)
+        if (name !== undefined)
         {
             this.removeParticleVelocity(particle, name);
             particle.cache[name] = { value: velocity.clone(), space };
         }
 
-        if (space != this.main.simulationSpace)
+        if (space !== this.main.simulationSpace)
         {
-            if (space == ParticleSystemSimulationSpace.World)
+            if (space === ParticleSystemSimulationSpace.World)
             {
                 this.transform.worldToLocalMatrix.transformVector3(velocity, velocity);
             }
- else
+            else
             {
                 this.transform.localToWorldMatrix.transformVector3(velocity, velocity);
             }
@@ -932,13 +973,13 @@ return emits;
 
             const space = obj.space;
             const value = obj.value;
-            if (space != this.main.simulationSpace)
+            if (space !== this.main.simulationSpace)
             {
-                if (space == ParticleSystemSimulationSpace.World)
+                if (space === ParticleSystemSimulationSpace.World)
                 {
                     this.transform.worldToLocalMatrix.transformVector3(value, value);
                 }
- else
+                else
                 {
                     this.transform.localToWorldMatrix.transformVector3(value, value);
                 }
@@ -958,19 +999,19 @@ return emits;
      */
     addParticleAcceleration(particle: Particle, acceleration: Vector3, space: ParticleSystemSimulationSpace, name?: string)
     {
-        if (name != undefined)
+        if (name !== undefined)
         {
             this.removeParticleAcceleration(particle, name);
             particle.cache[name] = { value: acceleration.clone(), space };
         }
 
-        if (space != this.main.simulationSpace)
+        if (space !== this.main.simulationSpace)
         {
-            if (space == ParticleSystemSimulationSpace.World)
+            if (space === ParticleSystemSimulationSpace.World)
             {
                 this.transform.worldToLocalMatrix.transformVector3(acceleration, acceleration);
             }
- else
+            else
             {
                 this.transform.localToWorldMatrix.transformVector3(acceleration, acceleration);
             }
@@ -994,13 +1035,13 @@ return emits;
 
             const space = obj.space;
             const value = obj.value;
-            if (space != this.main.simulationSpace)
+            if (space !== this.main.simulationSpace)
             {
-                if (space == ParticleSystemSimulationSpace.World)
+                if (space === ParticleSystemSimulationSpace.World)
                 {
                     this.transform.worldToLocalMatrix.transformVector3(value, value);
                 }
- else
+                else
                 {
                     this.transform.localToWorldMatrix.transformVector3(value, value);
                 }
@@ -1062,7 +1103,7 @@ return emits;
                     position: subEmitPos,
                 };
             }
- else
+            else
             {
                 particle.subEmitInfo.preTime = particle.preTime - particle.birthTime - particle.subEmitInfo.startDelay;
                 particle.subEmitInfo.currentTime = particle.curTime - particle.birthTime - particle.subEmitInfo.startDelay;
@@ -1155,10 +1196,6 @@ export interface ParticleSystemEmitInfo
     _isRateOverDistance: boolean;
 }
 
-export interface DefaultGeometry
-{
-    'Billboard-Geometry': QuadGeometry;
-}
 Geometry.setDefault('Billboard-Geometry', new QuadGeometry());
 
 GameObject.registerPrimitive('Particle System', (g) =>
@@ -1167,18 +1204,13 @@ GameObject.registerPrimitive('Particle System', (g) =>
     g.getComponent(Transform).rx = -90;
 });
 
-export interface PrimitiveGameObject
-{
-    'Particle System': GameObject;
-}
-
 // 在 Hierarchy 界面新增右键菜单项
 createNodeMenu.push(
     {
         path: 'Effects/Particle System',
         priority: -1,
         click: () =>
-        GameObject.createPrimitive('Particle System')
+            GameObject.createPrimitive('Particle System')
     }
 );
 

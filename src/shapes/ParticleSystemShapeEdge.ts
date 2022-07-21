@@ -1,3 +1,9 @@
+import { Vector3 } from '@feng3d/math';
+import { oav } from '@feng3d/objectview';
+import { ParticleSystemShapeMultiModeValue } from '../enums/ParticleSystemShapeMultiModeValue';
+import { Particle } from '../Particle';
+import { ParticleSystemShape } from './ParticleSystemShape';
+
 /**
  * 粒子系统 发射边
  */
@@ -77,20 +83,20 @@ export class ParticleSystemShapeEdge extends ParticleSystemShape
         const arc = 360 * this.radius;
         // 在圆心的方向
         let radiusAngle = 0;
-        if (this.radiusMode == ParticleSystemShapeMultiModeValue.Random)
+        if (this.radiusMode === ParticleSystemShapeMultiModeValue.Random)
         {
             radiusAngle = Math.random() * arc;
         }
- else if (this.radiusMode == ParticleSystemShapeMultiModeValue.Loop)
+        else if (this.radiusMode === ParticleSystemShapeMultiModeValue.Loop)
         {
-            var totalAngle = particle.birthTime * this.radiusSpeed.getValue(particle.birthRateAtDuration) * 360;
+            const totalAngle = particle.birthTime * this.radiusSpeed.getValue(particle.birthRateAtDuration) * 360;
             radiusAngle = totalAngle % arc;
         }
- else if (this.radiusMode == ParticleSystemShapeMultiModeValue.PingPong)
+        else if (this.radiusMode === ParticleSystemShapeMultiModeValue.PingPong)
         {
-            var totalAngle = particle.birthTime * this.radiusSpeed.getValue(particle.birthRateAtDuration) * 360;
+            const totalAngle = particle.birthTime * this.radiusSpeed.getValue(particle.birthRateAtDuration) * 360;
             radiusAngle = totalAngle % arc;
-            if (Math.floor(totalAngle / arc) % 2 == 1)
+            if (Math.floor(totalAngle / arc) % 2 === 1)
             {
                 radiusAngle = arc - radiusAngle;
             }

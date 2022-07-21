@@ -1,3 +1,10 @@
+import { MinMaxCurveVector3, Vector2, Vector3 } from '@feng3d/math';
+import { oav } from '@feng3d/objectview';
+import { mathUtil } from '@feng3d/polyfill';
+import { serialization, serialize } from '@feng3d/serialization';
+import { Particle } from '../Particle';
+import { ParticleModule } from './ParticleModule';
+
 /**
  * 粒子系统 旋转角度随速度变化模块
  */
@@ -124,8 +131,8 @@ export class ParticleRotationBySpeedModule extends ParticleModule
      */
     initParticleState(particle: Particle)
     {
-        particle[_RotationBySpeed_rate] = Math.random();
-        particle[_RotationBySpeed_preAngularVelocity] = new Vector3();
+        particle[RotationBySpeedRate] = Math.random();
+        particle[RotationBySpeedPreAngularVelocity] = new Vector3();
     }
 
     /**
@@ -134,7 +141,7 @@ export class ParticleRotationBySpeedModule extends ParticleModule
      */
     updateParticleState(particle: Particle)
     {
-        const preAngularVelocity: Vector3 = particle[_RotationBySpeed_preAngularVelocity];
+        const preAngularVelocity: Vector3 = particle[RotationBySpeedPreAngularVelocity];
         particle.angularVelocity.sub(preAngularVelocity);
         preAngularVelocity.set(0, 0, 0);
         if (!this.enabled) return;
@@ -142,7 +149,7 @@ export class ParticleRotationBySpeedModule extends ParticleModule
         const velocity = particle.velocity.length;
         const rate = mathUtil.clamp((velocity - this.range.x) / (this.range.y - this.range.x), 0, 1);
 
-        const v = this.angularVelocity.getValue(rate, particle[_RotationBySpeed_rate]);
+        const v = this.angularVelocity.getValue(rate, particle[RotationBySpeedRate]);
         if (!this.separateAxes)
         {
             v.x = v.y = 0;
@@ -151,5 +158,5 @@ export class ParticleRotationBySpeedModule extends ParticleModule
         preAngularVelocity.copy(v);
     }
 }
-var _RotationBySpeed_rate = '_RotationBySpeed_rate';
-var _RotationBySpeed_preAngularVelocity = '_RotationBySpeed_preAngularVelocity';
+const RotationBySpeedRate = '_RotationBySpeed_rate';
+const RotationBySpeedPreAngularVelocity = '_RotationBySpeed_preAngularVelocity';

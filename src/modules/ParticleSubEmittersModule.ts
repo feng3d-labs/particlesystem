@@ -1,3 +1,9 @@
+import { ParticleSystemSubEmitterProperties } from '../enums/ParticleSystemSubEmitterProperties';
+import { ParticleSystemSubEmitterType } from '../enums/ParticleSystemSubEmitterType';
+import { Particle } from '../Particle';
+import { ParticleSystem } from '../ParticleSystem';
+import { ParticleModule } from './ParticleModule';
+
 /**
  * Script interface for the SubEmittersModule.
  *
@@ -140,7 +146,7 @@ return this.subEmitters[index].type;
         for (let i = 0, n = this.subEmittersCount; i < n; i++)
         {
             const emitterType = this.GetSubEmitterType(i);
-            if (emitterType == ParticleSystemSubEmitterType.Birth)
+            if (emitterType === ParticleSystemSubEmitterType.Birth)
             {
                 this.particleSystem.TriggerSubEmitter(i, [particle]);
             }

@@ -1,3 +1,24 @@
+import { Matrix4x4, MinMaxCurve, Vector3 } from '@feng3d/math';
+import { oav } from '@feng3d/objectview';
+import { serialization, serialize } from '@feng3d/serialization';
+import { Geometry } from '../../../core/dist';
+import { watch } from '../../../watcher/dist';
+import { ParticleSystemMeshShapeType } from '../enums/ParticleSystemMeshShapeType';
+import { ParticleSystemShapeConeEmitFrom } from '../enums/ParticleSystemShapeConeEmitFrom';
+import { ParticleSystemShapeMultiModeValue } from '../enums/ParticleSystemShapeMultiModeValue';
+import { ParticleSystemShapeType } from '../enums/ParticleSystemShapeType';
+import { ParticleSystemShapeType1 } from '../enums/ParticleSystemShapeType1';
+import { ParticleSystemSimulationSpace } from '../enums/ParticleSystemSimulationSpace';
+import { Particle } from '../Particle';
+import { ParticleSystemShape } from '../shapes/ParticleSystemShape';
+import { ParticleSystemShapeBox, ParticleSystemShapeBoxEmitFrom } from '../shapes/ParticleSystemShapeBox';
+import { ParticleSystemShapeCircle } from '../shapes/ParticleSystemShapeCircle';
+import { ParticleSystemShapeCone } from '../shapes/ParticleSystemShapeCone';
+import { ParticleSystemShapeEdge } from '../shapes/ParticleSystemShapeEdge';
+import { ParticleSystemShapeHemisphere } from '../shapes/ParticleSystemShapeHemisphere';
+import { ParticleSystemShapeSphere } from '../shapes/ParticleSystemShapeSphere';
+import { ParticleModule } from './ParticleModule';
+
 /**
  * Shape of the emitter volume, which controls where particles are emitted and their initial direction.
  * 发射体体积的形状，它控制粒子发射的位置和初始方向。
@@ -277,8 +298,8 @@ export class ParticleShapeModule extends ParticleModule
     {
         const startSpeed = this.particleSystem.main.startSpeed.getValue(particle.birthRateAtDuration);
         //
-        const position = _temp_position.set(0, 0, 0);
-        const dir = _temp_dir.set(0, 0, 1);
+        const position = tempPosition.set(0, 0, 0);
+        const dir = tempDir.set(0, 0, 1);
         //
         if (this.enabled)
         {
@@ -286,7 +307,7 @@ export class ParticleShapeModule extends ParticleModule
         }
 
         dir.scaleNumber(startSpeed);
-        if (this.particleSystem.main.simulationSpace == ParticleSystemSimulationSpace.World)
+        if (this.particleSystem.main.simulationSpace === ParticleSystemSimulationSpace.World)
         {
             const localToWorldMatrix = this.particleSystem.transform.localToWorldMatrix;
 
@@ -297,7 +318,7 @@ export class ParticleShapeModule extends ParticleModule
         particle.velocity.add(dir);
 
         if (!this.enabled)
-            { return; }
+        { return; }
 
         //
         if (this.alignToDirection)
@@ -313,12 +334,12 @@ export class ParticleShapeModule extends ParticleModule
         const length = particle.velocity.length;
         if (this.randomDirectionAmount > 0)
         {
-            var velocity = Vector3.random().scaleNumber(2).subNumber(1).normalize(length);
+            const velocity = Vector3.random().scaleNumber(2).subNumber(1).normalize(length);
             particle.velocity.lerpNumber(velocity, this.randomDirectionAmount).normalize(length);
         }
         if (this.sphericalDirectionAmount > 0)
         {
-            var velocity = particle.position.clone().normalize(length);
+            const velocity = particle.position.clone().normalize(length);
             particle.velocity.lerpNumber(velocity, this.sphericalDirectionAmount).normalize(length);
         }
     }
@@ -489,5 +510,5 @@ export class ParticleShapeModule extends ParticleModule
     }
 }
 
-var _temp_position = new Vector3(0, 0, 0);
-var _temp_dir = new Vector3(0, 0, 1);
+const tempPosition = new Vector3(0, 0, 0);
+const tempDir = new Vector3(0, 0, 1);

@@ -1,3 +1,9 @@
+import { Texture2D } from '@feng3d/core';
+import { Vector4 } from '@feng3d/math';
+import { oav } from '@feng3d/objectview';
+import { shaderConfig, BlendFactor, ColorMask, CullFace } from '@feng3d/renderer';
+import { serialize } from '@feng3d/serialization';
+
 /**
  * UnityShader "Particles/Alpha Blended Premultiply"
  */

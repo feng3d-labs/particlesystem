@@ -1,3 +1,11 @@
+import { MinMaxCurve } from '@feng3d/math';
+import { oav } from '@feng3d/objectview';
+import { serialization, serialize } from '@feng3d/serialization';
+import { ParticleSystemInheritVelocityMode } from '../enums/ParticleSystemInheritVelocityMode';
+import { ParticleSystemSimulationSpace } from '../enums/ParticleSystemSimulationSpace';
+import { Particle } from '../Particle';
+import { ParticleModule } from './ParticleModule';
+
 /**
  * The Inherit Velocity Module controls how the velocity of the emitter is transferred to the particles as they are emitted.
  *
@@ -61,13 +69,13 @@ export class ParticleInheritVelocityModule extends ParticleModule
      */
     initParticleState(particle: Particle)
     {
-        particle[_InheritVelocity_rate] = Math.random();
+        particle[InheritVelocityRate] = Math.random();
 
         if (!this.enabled) return;
-        if (this.particleSystem.main.simulationSpace == ParticleSystemSimulationSpace.Local) return;
-        if (this.mode != ParticleSystemInheritVelocityMode.Initial) return;
+        if (this.particleSystem.main.simulationSpace === ParticleSystemSimulationSpace.Local) return;
+        if (this.mode !== ParticleSystemInheritVelocityMode.Initial) return;
 
-        const multiplier = this.multiplier.getValue(particle.rateAtLifeTime, particle[_InheritVelocity_rate]);
+        const multiplier = this.multiplier.getValue(particle.rateAtLifeTime, particle[InheritVelocityRate]);
         particle.velocity.addScaledVector(multiplier, this.particleSystem._emitInfo.speed);
     }
 
@@ -78,11 +86,11 @@ export class ParticleInheritVelocityModule extends ParticleModule
     updateParticleState(particle: Particle)
     {
         if (!this.enabled) return;
-        if (this.particleSystem.main.simulationSpace == ParticleSystemSimulationSpace.Local) return;
-        if (this.mode != ParticleSystemInheritVelocityMode.Current) return;
+        if (this.particleSystem.main.simulationSpace === ParticleSystemSimulationSpace.Local) return;
+        if (this.mode !== ParticleSystemInheritVelocityMode.Current) return;
 
-        const multiplier = this.multiplier.getValue(particle.rateAtLifeTime, particle[_InheritVelocity_rate]);
+        const multiplier = this.multiplier.getValue(particle.rateAtLifeTime, particle[InheritVelocityRate]);
         particle.position.addScaledVector(multiplier, this.particleSystem._emitInfo.moveVec);
     }
 }
-var _InheritVelocity_rate = '_InheritVelocity_rate';
+const InheritVelocityRate = '_InheritVelocity_rate';

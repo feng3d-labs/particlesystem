@@ -1,3 +1,10 @@
+import { MinMaxCurve, MinMaxCurveMode, MinMaxCurveVector3, noise, Vector3 } from '@feng3d/math';
+import { oav } from '@feng3d/objectview';
+import { serialization, serialize } from '@feng3d/serialization';
+import { ParticleSystemNoiseQuality } from '../enums/ParticleSystemNoiseQuality';
+import { Particle } from '../Particle';
+import { ParticleModule } from './ParticleModule';
+
 /**
  * Script interface for the Noise Module.
  *
@@ -240,8 +247,8 @@ export class ParticleNoiseModule extends ParticleModule
      */
     initParticleState(particle: Particle)
     {
-        particle[_Noise_strength_rate] = Math.random();
-        particle[_Noise_particle_rate] = Math.random();
+        particle[NoiseStrengthRate] = Math.random();
+        particle[NoiseParticleRate] = Math.random();
     }
 
     /**
@@ -250,7 +257,7 @@ export class ParticleNoiseModule extends ParticleModule
      */
     updateParticleState(particle: Particle)
     {
-        this.particleSystem.removeParticlePosition(particle, _Noise_preOffset);
+        this.particleSystem.removeParticlePosition(particle, NoisePreOffset);
         if (!this.enabled) return;
 
         let strengthX = 1;
@@ -258,14 +265,14 @@ export class ParticleNoiseModule extends ParticleModule
         let strengthZ = 1;
         if (this.separateAxes)
         {
-            const strength3D = this.strength3D.getValue(particle.rateAtLifeTime, particle[_Noise_strength_rate]);
+            const strength3D = this.strength3D.getValue(particle.rateAtLifeTime, particle[NoiseStrengthRate]);
             strengthX = strength3D.x;
             strengthY = strength3D.y;
             strengthZ = strength3D.z;
         }
- else
+        else
         {
-            strengthX = strengthY = strengthZ = this.strength.getValue(particle.rateAtLifeTime, particle[_Noise_strength_rate]);
+            strengthX = strengthY = strengthZ = this.strength.getValue(particle.rateAtLifeTime, particle[NoiseStrengthRate]);
         }
         //
         const frequency = ParticleNoiseModule._frequencyScale * this.frequency;
@@ -279,12 +286,12 @@ export class ParticleNoiseModule extends ParticleModule
         }
         const time = particle.rateAtLifeTime * ParticleNoiseModule._timeScale % 1;
         //
-        offsetPos.x *= this._getNoiseValue((1 / 3 * 0 + time) * frequency, particle[_Noise_particle_rate] * frequency);
-        offsetPos.y *= this._getNoiseValue((1 / 3 * 1 + time) * frequency, particle[_Noise_particle_rate] * frequency);
-        offsetPos.z *= this._getNoiseValue((1 / 3 * 2 + time) * frequency, particle[_Noise_particle_rate] * frequency);
+        offsetPos.x *= this._getNoiseValue((1 / 3 * 0 + time) * frequency, particle[NoiseParticleRate] * frequency);
+        offsetPos.y *= this._getNoiseValue((1 / 3 * 1 + time) * frequency, particle[NoiseParticleRate] * frequency);
+        offsetPos.z *= this._getNoiseValue((1 / 3 * 2 + time) * frequency, particle[NoiseParticleRate] * frequency);
         //
 
-        this.particleSystem.addParticlePosition(particle, offsetPos, this.particleSystem.main.simulationSpace, _Noise_preOffset);
+        this.particleSystem.addParticlePosition(particle, offsetPos, this.particleSystem.main.simulationSpace, NoisePreOffset);
     }
 
     // 以下两个值用于与Unity中数据接近
@@ -340,11 +347,11 @@ export class ParticleNoiseModule extends ParticleModule
                 // if (max < value) max = value;
 
                 if (xv < 1 / 3)
-                    { value = (value * strengthX + 1) / 2 * 256; }
+                { value = (value * strengthX + 1) / 2 * 256; }
                 else if (xv < 2 / 3)
-                    { value = (value * strengthY + 1) / 2 * 256; }
+                { value = (value * strengthY + 1) / 2 * 256; }
                 else
-                    { value = (value * strengthZ + 1) / 2 * 256; }
+                { value = (value * strengthZ + 1) / 2 * 256; }
 
                 const cell = (x + y * imageWidth) * 4;
                 data[cell] = data[cell + 1] = data[cell + 2] = Math.floor(value);
@@ -361,36 +368,63 @@ export class ParticleNoiseModule extends ParticleModule
         let strengthZ = 1;
         if (this.separateAxes)
         {
-            if (this.strengthX.mode == MinMaxCurveMode.Curve || this.strengthX.mode == MinMaxCurveMode.TwoCurves)
-                { strengthX = this.strengthX.curveMultiplier; }
-            else if (this.strengthX.mode == MinMaxCurveMode.Constant)
-                { strengthX = this.strengthX.constant; }
-            else if (this.strengthX.mode == MinMaxCurveMode.TwoConstants)
-                { strengthX = this.strengthX.constantMax; }
+            if (this.strengthX.mode === MinMaxCurveMode.Curve || this.strengthX.mode === MinMaxCurveMode.TwoCurves)
+            {
+                strengthX = this.strengthX.curveMultiplier;
+            }
+            else if (this.strengthX.mode === MinMaxCurveMode.Constant)
+            {
+                strengthX = this.strengthX.constant;
+            }
+            else if (this.strengthX.mode === MinMaxCurveMode.TwoConstants)
+            {
+                strengthX = this.strengthX.constantMax;
+            }
 
-            if (this.strengthY.mode == MinMaxCurveMode.Curve || this.strengthY.mode == MinMaxCurveMode.TwoCurves)
-                { strengthY = this.strengthY.curveMultiplier; }
-            else if (this.strengthY.mode == MinMaxCurveMode.Constant)
-                { strengthY = this.strengthY.constant; }
-            else if (this.strengthY.mode == MinMaxCurveMode.TwoConstants)
-                { strengthY = this.strengthY.constantMax; }
+            if (this.strengthY.mode === MinMaxCurveMode.Curve || this.strengthY.mode === MinMaxCurveMode.TwoCurves)
+            {
+                strengthY = this.strengthY.curveMultiplier;
+            }
+            else if (this.strengthY.mode === MinMaxCurveMode.Constant)
+            {
+                strengthY = this.strengthY.constant;
+            }
+            else if (this.strengthY.mode === MinMaxCurveMode.TwoConstants)
+            {
+                strengthY = this.strengthY.constantMax;
+            }
 
-            if (this.strengthZ.mode == MinMaxCurveMode.Curve || this.strengthZ.mode == MinMaxCurveMode.TwoCurves)
-                { strengthZ = this.strengthZ.curveMultiplier; }
-            else if (this.strengthZ.mode == MinMaxCurveMode.Constant)
-                { strengthZ = this.strengthZ.constant; }
-            else if (this.strengthZ.mode == MinMaxCurveMode.TwoConstants)
-                { strengthZ = this.strengthZ.constantMax; }
+            if (this.strengthZ.mode === MinMaxCurveMode.Curve || this.strengthZ.mode === MinMaxCurveMode.TwoCurves)
+            {
+                strengthZ = this.strengthZ.curveMultiplier;
+            }
+            else if (this.strengthZ.mode === MinMaxCurveMode.Constant)
+            {
+                strengthZ = this.strengthZ.constant;
+            }
+            else if (this.strengthZ.mode === MinMaxCurveMode.TwoConstants)
+            {
+                strengthZ = this.strengthZ.constantMax;
+            }
         }
- else
-        if (this.strength.mode == MinMaxCurveMode.Curve || this.strength.mode == MinMaxCurveMode.TwoCurves)
-                { strengthX = strengthY = strengthZ = this.strength.curveMultiplier; }
-            else if (this.strength.mode == MinMaxCurveMode.Constant)
-                { strengthX = strengthY = strengthZ = this.strength.constant; }
-            else if (this.strength.mode == MinMaxCurveMode.TwoConstants)
-                { strengthX = strengthY = strengthZ = this.strength.constantMax; }
+        else
+        {
+            // eslint-disable-next-line no-lonely-if
+            if (this.strength.mode === MinMaxCurveMode.Curve || this.strength.mode === MinMaxCurveMode.TwoCurves)
+            {
+                strengthX = strengthY = strengthZ = this.strength.curveMultiplier;
+            }
+            else if (this.strength.mode === MinMaxCurveMode.Constant)
+            {
+                strengthX = strengthY = strengthZ = this.strength.constant;
+            }
+            else if (this.strength.mode === MinMaxCurveMode.TwoConstants)
+            {
+                strengthX = strengthY = strengthZ = this.strength.constantMax;
+            }
+        }
 
-return { x: strengthX, y: strengthY, z: strengthZ };
+        return { x: strengthX, y: strengthY, z: strengthZ };
     }
 
     /**
@@ -408,7 +442,7 @@ return { x: strengthX, y: strengthY, z: strengthZ };
             value += (value0 - value) * this.octaveMultiplier;
         }
 
-return value;
+        return value;
     }
 
     /**
@@ -420,15 +454,16 @@ return value;
     private _getNoiseValueBase(x: number, y: number)
     {
         const scrollValue = this._scrollValue;
-        if (this.quality == ParticleSystemNoiseQuality.Low)
+        if (this.quality === ParticleSystemNoiseQuality.Low)
         {
             return noise.perlin1(x + scrollValue);
         }
-        if (this.quality == ParticleSystemNoiseQuality.Medium)
+        if (this.quality === ParticleSystemNoiseQuality.Medium)
         {
             return noise.perlin2(x, y + scrollValue);
         }
         // if (this.quality == ParticleSystemNoiseQuality.High)
+
         return noise.perlin3(x, y, scrollValue);
     }
 
@@ -443,6 +478,6 @@ return value;
     }
     private _scrollValue = 0;
 }
-var _Noise_strength_rate = '_Noise_strength_rate';
-var _Noise_particle_rate = '_Noise_particle_rate';
-var _Noise_preOffset = '_Noise_preOffset';
+const NoiseStrengthRate = '_Noise_strength_rate';
+const NoiseParticleRate = '_Noise_particle_rate';
+const NoisePreOffset = '_Noise_preOffset';

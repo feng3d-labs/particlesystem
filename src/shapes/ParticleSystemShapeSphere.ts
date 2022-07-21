@@ -1,3 +1,8 @@
+import { Vector3 } from '@feng3d/math';
+import { oav } from '@feng3d/objectview';
+import { Particle } from '../Particle';
+import { ParticleSystemShape } from './ParticleSystemShape';
+
 /**
  * 从球体的体积中发射。
  */
@@ -26,11 +31,11 @@ export class ParticleSystemShapeSphere extends ParticleSystemShape
     /**
      * 计算粒子的发射位置与方向
      *
-     * @param particle
+     * @param _particle
      * @param position
      * @param dir
      */
-    calcParticlePosDir(particle: Particle, position: Vector3, dir: Vector3)
+    calcParticlePosDir(_particle: Particle, position: Vector3, dir: Vector3)
     {
         // 计算位置
         dir.copy(Vector3.random()).scaleNumber(2).subNumber(1).normalize();

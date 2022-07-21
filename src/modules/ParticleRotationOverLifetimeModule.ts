@@ -1,3 +1,9 @@
+import { MinMaxCurveVector3, Vector3 } from '@feng3d/math';
+import { oav } from '@feng3d/objectview';
+import { serialization, serialize } from '@feng3d/serialization';
+import { Particle } from '../Particle';
+import { ParticleModule } from './ParticleModule';
+
 /**
  * 粒子系统 旋转角度随时间变化模块
  */
@@ -115,8 +121,8 @@ export class ParticleRotationOverLifetimeModule extends ParticleModule
      */
     initParticleState(particle: Particle)
     {
-        particle[_RotationOverLifetime_rate] = Math.random();
-        particle[_RotationOverLifetime_preAngularVelocity] = new Vector3();
+        particle[RotationOverLifetimeRate] = Math.random();
+        particle[RotationOverLifetimePreAngularVelocity] = new Vector3();
     }
 
     /**
@@ -125,12 +131,12 @@ export class ParticleRotationOverLifetimeModule extends ParticleModule
      */
     updateParticleState(particle: Particle)
     {
-        const preAngularVelocity: Vector3 = particle[_RotationOverLifetime_preAngularVelocity];
+        const preAngularVelocity: Vector3 = particle[RotationOverLifetimePreAngularVelocity];
         particle.angularVelocity.sub(preAngularVelocity);
         preAngularVelocity.set(0, 0, 0);
         if (!this.enabled) return;
 
-        const v = this.angularVelocity.getValue(particle.rateAtLifeTime, particle[_RotationOverLifetime_rate]);
+        const v = this.angularVelocity.getValue(particle.rateAtLifeTime, particle[RotationOverLifetimeRate]);
         if (!this.separateAxes)
         {
             v.x = v.y = 0;
@@ -139,5 +145,5 @@ export class ParticleRotationOverLifetimeModule extends ParticleModule
         preAngularVelocity.copy(v);
     }
 }
-var _RotationOverLifetime_rate = '_RotationOverLifetime_rate';
-var _RotationOverLifetime_preAngularVelocity = '_RotationOverLifetime_preAngularVelocity';
+const RotationOverLifetimeRate = '_RotationOverLifetime_rate';
+const RotationOverLifetimePreAngularVelocity = '_RotationOverLifetime_preAngularVelocity';

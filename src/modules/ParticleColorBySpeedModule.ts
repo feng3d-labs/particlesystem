@@ -1,3 +1,10 @@
+import { MinMaxGradient, Vector2 } from '@feng3d/math';
+import { oav } from '@feng3d/objectview';
+import { mathUtil } from '@feng3d/polyfill';
+import { serialize } from '@feng3d/serialization';
+import { Particle } from '../Particle';
+import { ParticleModule } from './ParticleModule';
+
 /**
  * the Color By Speed module.
  *
@@ -29,7 +36,7 @@ export class ParticleColorBySpeedModule extends ParticleModule
      */
     initParticleState(particle: Particle)
     {
-        particle[_ColorBySpeed_rate] = Math.random();
+        particle[ColorBySpeedRate] = Math.random();
     }
 
     /**
@@ -42,8 +49,8 @@ export class ParticleColorBySpeedModule extends ParticleModule
 
         const velocity = particle.velocity.length;
         const rate = mathUtil.clamp((velocity - this.range.x) / (this.range.y - this.range.x), 0, 1);
-        const color = this.color.getValue(rate, particle[_ColorBySpeed_rate]);
+        const color = this.color.getValue(rate, particle[ColorBySpeedRate]);
         particle.color.multiply(color);
     }
 }
-var _ColorBySpeed_rate = '_ColorBySpeed_rate';
+const ColorBySpeedRate = '_ColorBySpeed_rate';

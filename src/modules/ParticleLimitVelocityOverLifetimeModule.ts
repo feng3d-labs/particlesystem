@@ -1,3 +1,10 @@
+import { Matrix4x4, MinMaxCurve, MinMaxCurveVector3 } from '@feng3d/math';
+import { oav } from '@feng3d/objectview';
+import { serialization, serialize } from '@feng3d/serialization';
+import { ParticleSystemSimulationSpace } from '../enums/ParticleSystemSimulationSpace';
+import { Particle } from '../Particle';
+import { ParticleModule } from './ParticleModule';
+
 /**
  * Limit Velocity Over Lifetime module.
  *
@@ -169,7 +176,7 @@ export class ParticleLimitVelocityOverLifetimeModule extends ParticleModule
      */
     initParticleState(particle: Particle)
     {
-        particle[_LimitVelocityOverLifetime_rate] = Math.random();
+        particle[LimitVelocityOverLifetimeRate] = Math.random();
     }
 
     /**
@@ -181,20 +188,20 @@ export class ParticleLimitVelocityOverLifetimeModule extends ParticleModule
     {
         if (!this.enabled) return;
 
-        const limit3D = this.limit3D.getValue(particle.rateAtLifeTime, particle[_LimitVelocityOverLifetime_rate]);
-        const limit = this.limit.getValue(particle.rateAtLifeTime, particle[_LimitVelocityOverLifetime_rate]);
+        const limit3D = this.limit3D.getValue(particle.rateAtLifeTime, particle[LimitVelocityOverLifetimeRate]);
+        const limit = this.limit.getValue(particle.rateAtLifeTime, particle[LimitVelocityOverLifetimeRate]);
         const pVelocity = particle.velocity.clone();
 
         // 计算变换矩阵
         const mat = new Matrix4x4();
         //
-        if (this.space != this.particleSystem.main.simulationSpace)
+        if (this.space !== this.particleSystem.main.simulationSpace)
         {
-            if (this.space == ParticleSystemSimulationSpace.World)
+            if (this.space === ParticleSystemSimulationSpace.World)
             {
                 mat.copy(this.particleSystem.transform.localToWorldMatrix);
             }
- else
+            else
             {
                 mat.copy(this.particleSystem.transform.worldToLocalMatrix);
             }
@@ -205,9 +212,9 @@ export class ParticleLimitVelocityOverLifetimeModule extends ParticleModule
         {
             pVelocity.clamp(limit3D.negateTo(), limit3D);
         }
- else
-        if (pVelocity.lengthSquared > limit * limit)
-                { pVelocity.normalize(limit); }
+        else
+            if (pVelocity.lengthSquared > limit * limit)
+            { pVelocity.normalize(limit); }
         mat.invert();
         // 还原到原空间
         mat.transformVector3(pVelocity, pVelocity);
@@ -216,4 +223,4 @@ export class ParticleLimitVelocityOverLifetimeModule extends ParticleModule
     }
 }
 
-var _LimitVelocityOverLifetime_rate = '_LimitVelocityOverLifetime_rate';
+const LimitVelocityOverLifetimeRate = '_LimitVelocityOverLifetime_rate';

@@ -1,3 +1,7 @@
+import { MinMaxCurve } from '@feng3d/math';
+import { oav } from '@feng3d/objectview';
+import { serialization, serialize } from '@feng3d/serialization';
+
 export class ParticleEmissionBurst
 {
     __class__: 'feng3d.ParticleEmissionBurst';

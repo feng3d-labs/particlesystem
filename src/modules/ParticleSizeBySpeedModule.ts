@@ -1,3 +1,10 @@
+import { MinMaxCurveVector3, Vector2 } from '@feng3d/math';
+import { oav } from '@feng3d/objectview';
+import { mathUtil } from '@feng3d/polyfill';
+import { serialization, serialize } from '@feng3d/serialization';
+import { Particle } from '../Particle';
+import { ParticleModule } from './ParticleModule';
+
 /**
  * Script interface for the Size By Speed module.
  *
@@ -162,7 +169,7 @@ export class ParticleSizeBySpeedModule extends ParticleModule
      */
     initParticleState(particle: Particle)
     {
-        particle[_SizeBySpeed_rate] = Math.random();
+        particle[SizeBySpeedRate] = Math.random();
     }
 
     /**
@@ -175,7 +182,7 @@ export class ParticleSizeBySpeedModule extends ParticleModule
 
         const velocity = particle.velocity.length;
         const rate = mathUtil.clamp((velocity - this.range.x) / (this.range.y - this.range.x), 0, 1);
-        const size = this.size3D.getValue(rate, particle[_SizeBySpeed_rate]);
+        const size = this.size3D.getValue(rate, particle[SizeBySpeedRate]);
         if (!this.separateAxes)
         {
             size.y = size.z = size.x;
@@ -184,4 +191,4 @@ export class ParticleSizeBySpeedModule extends ParticleModule
     }
 }
 
-var _SizeBySpeed_rate = '_SizeBySpeed_rate';
+const SizeBySpeedRate = '_SizeBySpeed_rate';

@@ -1,3 +1,8 @@
+import { Vector3 } from '@feng3d/math';
+import { oav } from '@feng3d/objectview';
+import { Particle } from '../Particle';
+import { ParticleSystemShape } from './ParticleSystemShape';
+
 export enum ParticleSystemShapeBoxEmitFrom
 {
     /**
@@ -79,36 +84,36 @@ export class ParticleSystemShapeBox extends ParticleSystemShape
         // 计算位置
         position.copy(Vector3.random().scaleNumber(2).subNumber(1));
 
-        if (this.emitFrom == ParticleSystemShapeBoxEmitFrom.Shell)
+        if (this.emitFrom === ParticleSystemShapeBoxEmitFrom.Shell)
         {
             const max = Math.max(Math.abs(position.x), Math.abs(position.y), Math.abs(position.z));
-            if (Math.abs(position.x) == max)
+            if (Math.abs(position.x) === max)
             {
                 position.x = position.x < 0 ? -1 : 1;
             }
- else if (Math.abs(position.y) == max)
+            else if (Math.abs(position.y) === max)
             {
                 position.y = position.y < 0 ? -1 : 1;
             }
- else if (Math.abs(position.z) == max)
+            else if (Math.abs(position.z) === max)
             {
                 position.z = position.z < 0 ? -1 : 1;
             }
         }
- else if (this.emitFrom == ParticleSystemShapeBoxEmitFrom.Edge)
+        else if (this.emitFrom === ParticleSystemShapeBoxEmitFrom.Edge)
         {
             const min = Math.min(Math.abs(position.x), Math.abs(position.y), Math.abs(position.z));
-            if (Math.abs(position.x) == min)
+            if (Math.abs(position.x) === min)
             {
                 position.y = position.y < 0 ? -1 : 1;
                 position.z = position.z < 0 ? -1 : 1;
             }
- else if (Math.abs(position.y) == min)
+            else if (Math.abs(position.y) === min)
             {
                 position.x = position.x < 0 ? -1 : 1;
                 position.z = position.z < 0 ? -1 : 1;
             }
- else if (Math.abs(position.z) == min)
+            else if (Math.abs(position.z) === min)
             {
                 position.x = position.x < 0 ? -1 : 1;
                 position.y = position.y < 0 ? -1 : 1;

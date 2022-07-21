@@ -1,3 +1,11 @@
+import { GeometryLike, Material } from '@feng3d/core';
+import { Vector3 } from '@feng3d/math';
+import { ParticleSystemRenderMode } from '../enums/ParticleSystemRenderMode';
+import { ParticleSystemRenderSpace } from '../enums/ParticleSystemRenderSpace';
+import { ParticleSystemSortMode } from '../enums/ParticleSystemSortMode';
+import { SpriteMaskInteraction } from '../enums/SpriteMaskInteraction';
+import { ParticleModule } from './ParticleModule';
+
 /**
  * Use this class to render particles on to the screen.
  */
