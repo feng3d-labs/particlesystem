@@ -1,31 +1,28 @@
-namespace feng3d
+/**
+ * The mesh emission type.
+ * 
+ * 网格发射类型。
+ */
+export enum ParticleSystemMeshShapeType
 {
     /**
-     * The mesh emission type.
+     * Emit from the vertices of the mesh.
      * 
-     * 网格发射类型。
+     * 从网格的顶点发出。
      */
-    export enum ParticleSystemMeshShapeType
-    {
-        /**
-         * Emit from the vertices of the mesh.
-         * 
-         * 从网格的顶点发出。
-         */
-        Vertex,
+    Vertex,
 
-        /**
-         * Emit from the edges of the mesh.
-         * 
-         * 从网格的边缘发出。
-         */
-        Edge,
+    /**
+     * Emit from the edges of the mesh.
+     * 
+     * 从网格的边缘发出。
+     */
+    Edge,
 
-        /**
-         * Emit from the surface of the mesh.
-         * 
-         * 从网格表面发出。
-         */
-        Triangle,
-    }
+    /**
+     * Emit from the surface of the mesh.
+     * 
+     * 从网格表面发出。
+     */
+    Triangle,
 }

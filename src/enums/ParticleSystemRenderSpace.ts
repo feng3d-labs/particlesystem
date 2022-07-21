@@ -1,34 +1,31 @@
-namespace feng3d
+/**
+ * How particles are aligned when rendered.
+ */
+export enum ParticleSystemRenderSpace
 {
     /**
-     * How particles are aligned when rendered.
+     * Particles face the camera plane.
      */
-    export enum ParticleSystemRenderSpace
-    {
-        /**
-         * Particles face the camera plane.
-         */
-        View,
+    View,
 
-        /**
-         * Particles align with the world.
-         */
-        World,
+    /**
+     * Particles align with the world.
+     */
+    World,
 
-        /**
-         * Particles align with their local transform.
-         */
-        Local,
+    /**
+     * Particles align with their local transform.
+     */
+    Local,
 
-        /**
-         * Particles face the eye position.
-         */
-        Facing,
+    /**
+     * Particles face the eye position.
+     */
+    Facing,
 
-        /**
-         * Particles are aligned to their direction of travel.
-         */
-        Velocity,
+    /**
+     * Particles are aligned to their direction of travel.
+     */
+    Velocity,
 
-    }
 }

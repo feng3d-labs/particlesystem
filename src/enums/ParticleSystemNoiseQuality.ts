@@ -1,31 +1,28 @@
-namespace feng3d
+/**
+ * The quality of the generated noise.
+ * 
+ * 产生的噪音的质量。
+ */
+export enum ParticleSystemNoiseQuality
 {
     /**
-     * The quality of the generated noise.
+     * Low quality 1D noise.
      * 
-     * 产生的噪音的质量。
+     * 低质量的一维噪声。
      */
-    export enum ParticleSystemNoiseQuality
-    {
-        /**
-         * Low quality 1D noise.
-         * 
-         * 低质量的一维噪声。
-         */
-        Low,
+    Low,
 
-        /**
-         * Medium quality 2D noise.
-         * 
-         * 中等质量2D噪音。
-         */
-        Medium,
+    /**
+     * Medium quality 2D noise.
+     * 
+     * 中等质量2D噪音。
+     */
+    Medium,
 
-        /**
-         * High quality 3D noise.
-         * 
-         * 高品质3D噪音。
-         */
-        High,
-    }
+    /**
+     * High quality 3D noise.
+     * 
+     * 高品质3D噪音。
+     */
+    High,
 }
