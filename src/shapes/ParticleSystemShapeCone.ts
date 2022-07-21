@@ -1,4 +1,3 @@
-
 /**
  * 粒子系统发射圆锥体，用于定义基于圆锥体的粒子发射时的初始状态。
  */
@@ -9,7 +8,7 @@ export class ParticleSystemShapeCone extends ParticleSystemShape
      * 圆锥的角度。
      */
     // @oav({ tooltip: "Angle of the cone." })
-    @oav({ tooltip: "圆锥的角度。" })
+    @oav({ tooltip: '圆锥的角度。' })
     get angle()
     {
         return this._module.angle;
@@ -23,7 +22,7 @@ export class ParticleSystemShapeCone extends ParticleSystemShape
     /**
      * 圆锥体底部半径。
      */
-    @oav({ tooltip: "圆锥体底部半径。" })
+    @oav({ tooltip: '圆锥体底部半径。' })
     get radius()
     {
         return this._module.radius;
@@ -36,11 +35,11 @@ export class ParticleSystemShapeCone extends ParticleSystemShape
 
     /**
      * Length of the cone.
-     * 
+     *
      * 圆锥的长度（高度）。
      */
     // @oav({ tooltip: "Length of the cone." })
-    @oav({ tooltip: "圆锥的长度（高度）。" })
+    @oav({ tooltip: '圆锥的长度（高度）。' })
     get length()
     {
         return this._module.length;
@@ -54,7 +53,7 @@ export class ParticleSystemShapeCone extends ParticleSystemShape
     /**
      * Circle arc angle.
      */
-    @oav({ tooltip: "圆弧角。" })
+    @oav({ tooltip: '圆弧角。' })
     get arc()
     {
         return this._module.arc;
@@ -69,7 +68,7 @@ export class ParticleSystemShapeCone extends ParticleSystemShape
      * The mode used for generating particles around the arc.
      * 在弧线周围产生粒子的模式。
      */
-    @oav({ tooltip: "在弧线周围产生粒子的模式。", component: "OAVEnum", componentParam: { enumClass: ParticleSystemShapeMultiModeValue } })
+    @oav({ tooltip: '在弧线周围产生粒子的模式。', component: 'OAVEnum', componentParam: { enumClass: ParticleSystemShapeMultiModeValue } })
     get arcMode()
     {
         return this._module.arcMode;
@@ -84,7 +83,7 @@ export class ParticleSystemShapeCone extends ParticleSystemShape
      * Control the gap between emission points around the arc.
      * 控制弧线周围发射点之间的间隙。
      */
-    @oav({ tooltip: "控制弧线周围发射点之间的间隙。" })
+    @oav({ tooltip: '控制弧线周围发射点之间的间隙。' })
     get arcSpread()
     {
         return this._module.arcSpread;
@@ -99,7 +98,7 @@ export class ParticleSystemShapeCone extends ParticleSystemShape
      * When using one of the animated modes, how quickly to move the emission position around the arc.
      * 当使用一个动画模式时，如何快速移动发射位置周围的弧。
      */
-    @oav({ tooltip: "当使用一个动画模式时，如何快速移动发射位置周围的弧。" })
+    @oav({ tooltip: '当使用一个动画模式时，如何快速移动发射位置周围的弧。' })
     get arcSpeed()
     {
         return this._module.arcSpeed;
@@ -113,32 +112,34 @@ export class ParticleSystemShapeCone extends ParticleSystemShape
     /**
      * 粒子系统圆锥体发射类型。
      */
-    @oav({ tooltip: "粒子系统圆锥体发射类型。", component: "OAVEnum", componentParam: { enumClass: ParticleSystemShapeConeEmitFrom } })
+    @oav({ tooltip: '粒子系统圆锥体发射类型。', component: 'OAVEnum', componentParam: { enumClass: ParticleSystemShapeConeEmitFrom } })
     emitFrom = ParticleSystemShapeConeEmitFrom.Base;
 
     /**
      * 计算粒子的发射位置与方向
-     * 
-     * @param particle 
-     * @param position 
-     * @param dir 
+     *
+     * @param particle
+     * @param position
+     * @param dir
      */
     calcParticlePosDir(particle: Particle, position: Vector3, dir: Vector3)
     {
-        var radius = this.radius;
-        var angle = this.angle;
-        var arc = this.arc;
+        const radius = this.radius;
+        let angle = this.angle;
+        const arc = this.arc;
         angle = mathUtil.clamp(angle, 0, 87);
         // 在圆心的方向
-        var radiusAngle = 0;
+        let radiusAngle = 0;
         if (this.arcMode == ParticleSystemShapeMultiModeValue.Random)
         {
             radiusAngle = Math.random() * arc;
-        } else if (this.arcMode == ParticleSystemShapeMultiModeValue.Loop)
+        }
+ else if (this.arcMode == ParticleSystemShapeMultiModeValue.Loop)
         {
             var totalAngle = particle.birthTime * this.arcSpeed.getValue(particle.birthRateAtDuration) * 360;
             radiusAngle = totalAngle % arc;
-        } else if (this.arcMode == ParticleSystemShapeMultiModeValue.PingPong)
+        }
+ else if (this.arcMode == ParticleSystemShapeMultiModeValue.PingPong)
         {
             var totalAngle = particle.birthTime * this.arcSpeed.getValue(particle.birthRateAtDuration) * 360;
             radiusAngle = totalAngle % arc;
@@ -156,17 +157,17 @@ export class ParticleSystemShapeCone extends ParticleSystemShape
         }
         radiusAngle = mathUtil.degToRad(radiusAngle);
         // 在圆的位置
-        var radiusRate = 1;
+        let radiusRate = 1;
         if (this.emitFrom == ParticleSystemShapeConeEmitFrom.Base || this.emitFrom == ParticleSystemShapeConeEmitFrom.Volume)
         {
             radiusRate = Math.random();
         }
         // 在圆的位置
-        var basePos = new Vector3(Math.cos(radiusAngle), Math.sin(radiusAngle), 0);
+        const basePos = new Vector3(Math.cos(radiusAngle), Math.sin(radiusAngle), 0);
         // 底面位置
-        var bottomPos = basePos.scaleNumberTo(radius).scaleNumber(radiusRate);
+        const bottomPos = basePos.scaleNumberTo(radius).scaleNumber(radiusRate);
         // 顶面位置
-        var topPos = basePos.scaleNumberTo(radius + this.length * Math.tan(mathUtil.degToRad(angle))).scaleNumber(radiusRate);
+        const topPos = basePos.scaleNumberTo(radius + this.length * Math.tan(mathUtil.degToRad(angle))).scaleNumber(radiusRate);
         topPos.z = this.length;
 
         // 计算方向

@@ -1,4 +1,3 @@
-
 /**
  * 粒子系统 颜色随时间变化模块
  */
@@ -10,7 +9,7 @@ export class ParticleColorOverLifetimeModule extends ParticleModule
      */
     @serialize
     // @oav({ tooltip: "The gradient controlling the particle colors." })
-    @oav({ tooltip: "控制粒子颜色的梯度。" })
+    @oav({ tooltip: '控制粒子颜色的梯度。' })
     color = new MinMaxGradient();
 
     /**
@@ -34,5 +33,5 @@ export class ParticleColorOverLifetimeModule extends ParticleModule
     }
 }
 
-var _ColorOverLifetime_rate = "_ColorOverLifetime_rate";
+var _ColorOverLifetime_rate = '_ColorOverLifetime_rate';
 

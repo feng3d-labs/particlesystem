@@ -1,4 +1,3 @@
-
 /**
  * 粒子
  */
@@ -114,11 +113,11 @@ export class Particle
 	 */
 	updateState(time: number)
 	{
-		var preTime = Math.max(this.curTime, this.birthTime);
+		const preTime = Math.max(this.curTime, this.birthTime);
 		time = Math.max(this.birthTime, time);
 
 		//
-		var deltaTime = time - preTime;
+		const deltaTime = time - preTime;
 
 		// 计算速度
 		this.velocity.add(this.acceleration.scaleNumberTo(deltaTime));

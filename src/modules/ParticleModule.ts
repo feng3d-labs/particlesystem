@@ -1,4 +1,3 @@
-
 /**
  * 粒子模块
  */
@@ -7,7 +6,7 @@ export class ParticleModule extends EventEmitter
     /**
      * 是否开启
      */
-    @oav({ tooltip: "是否开启" })
+    @oav({ tooltip: '是否开启' })
     @serialize
     enabled = false;
 
@@ -36,8 +35,8 @@ export class ParticleModule extends EventEmitter
 
     /**
      * 更新
-     * 
-     * @param interval 
+     *
+     * @param interval
      */
     update(interval: number)
     {

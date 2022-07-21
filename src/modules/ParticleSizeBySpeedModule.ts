@@ -1,29 +1,27 @@
-
 /**
  * Script interface for the Size By Speed module.
- * 
+ *
  * 粒子系统 缩放随速度变化模块
  */
 export class ParticleSizeBySpeedModule extends ParticleModule
 {
-
     /**
      * Set the size over speed on each axis separately.
-     * 
+     *
      * 在每个轴上分别设置生命周期内的大小。
      */
     @serialize
     // @oav({ tooltip: "Set the size over speed on each axis separately." })
-    @oav({ tooltip: "在每个轴上分别设置生命周期内的大小。" })
+    @oav({ tooltip: '在每个轴上分别设置生命周期内的大小。' })
     separateAxes = false;
 
     /**
      * Curve to control particle size based on speed.
-     * 
+     *
      * 基于速度的粒度控制曲线。
      */
     // @oav({ tooltip: "Curve to control particle size based on speed." })
-    @oav({ tooltip: "基于速度的粒度控制曲线。" })
+    @oav({ tooltip: '基于速度的粒度控制曲线。' })
     get size()
     {
         return this.size3D.xCurve;
@@ -36,26 +34,26 @@ export class ParticleSizeBySpeedModule extends ParticleModule
 
     /**
      * Curve to control particle size based on speed.
-     * 
+     *
      * 基于寿命的粒度控制曲线。
      */
     @serialize
     // @oav({ tooltip: "Curve to control particle size based on speed." })
-    @oav({ tooltip: "基于寿命的粒度控制曲线。" })
+    @oav({ tooltip: '基于寿命的粒度控制曲线。' })
     size3D = serialization.setValue(new MinMaxCurveVector3(), { xCurve: { between0And1: true, constant: 1, constantMin: 1, constantMax: 1, curveMultiplier: 1 }, yCurve: { between0And1: true, constant: 1, constantMin: 1, constantMax: 1, curveMultiplier: 1 }, zCurve: { between0And1: true, constant: 1, constantMin: 1, constantMax: 1, curveMultiplier: 1 } });
 
     /**
      * Apply the size curve between these minimum and maximum speeds.
-     * 
+     *
      * 在这些最小和最大速度之间应用尺寸变化。
      */
     @serialize
-    @oav({ tooltip: "在这些最小和最大速度之间应用颜色渐变。" })
+    @oav({ tooltip: '在这些最小和最大速度之间应用颜色渐变。' })
     range = new Vector2(0, 1);
 
     /**
      * Size multiplier.
-     * 
+     *
      * 尺寸的乘数。
      */
     get sizeMultiplier()
@@ -70,7 +68,7 @@ export class ParticleSizeBySpeedModule extends ParticleModule
 
     /**
      * Size over speed curve for the X axis.
-     * 
+     *
      * X轴的尺寸随生命周期变化曲线。
      */
     get x()
@@ -85,7 +83,7 @@ export class ParticleSizeBySpeedModule extends ParticleModule
 
     /**
      * X axis size multiplier.
-     * 
+     *
      * X轴尺寸的乘数。
      */
     get xMultiplier()
@@ -100,7 +98,7 @@ export class ParticleSizeBySpeedModule extends ParticleModule
 
     /**
      * Size over speed curve for the Y axis.
-     * 
+     *
      * Y轴的尺寸随生命周期变化曲线。
      */
     get y()
@@ -115,7 +113,7 @@ export class ParticleSizeBySpeedModule extends ParticleModule
 
     /**
      * Y axis size multiplier.
-     * 
+     *
      * Y轴尺寸的乘数。
      */
     get yMultiplier()
@@ -130,7 +128,7 @@ export class ParticleSizeBySpeedModule extends ParticleModule
 
     /**
      * Size over speed curve for the Z axis.
-     * 
+     *
      * Z轴的尺寸随生命周期变化曲线。
      */
     get z()
@@ -145,7 +143,7 @@ export class ParticleSizeBySpeedModule extends ParticleModule
 
     /**
      * Z axis size multiplier.
-     * 
+     *
      * Z轴尺寸的乘数。
      */
     get zMultiplier()
@@ -175,9 +173,9 @@ export class ParticleSizeBySpeedModule extends ParticleModule
     {
         if (!this.enabled) return;
 
-        var velocity = particle.velocity.length;
-        var rate = mathUtil.clamp((velocity - this.range.x) / (this.range.y - this.range.x), 0, 1);
-        var size = this.size3D.getValue(rate, particle[_SizeBySpeed_rate]);
+        const velocity = particle.velocity.length;
+        const rate = mathUtil.clamp((velocity - this.range.x) / (this.range.y - this.range.x), 0, 1);
+        const size = this.size3D.getValue(rate, particle[_SizeBySpeed_rate]);
         if (!this.separateAxes)
         {
             size.y = size.z = size.x;
@@ -186,4 +184,4 @@ export class ParticleSizeBySpeedModule extends ParticleModule
     }
 }
 
-var _SizeBySpeed_rate = "_SizeBySpeed_rate";
+var _SizeBySpeed_rate = '_SizeBySpeed_rate';

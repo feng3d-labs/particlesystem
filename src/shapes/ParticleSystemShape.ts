@@ -1,4 +1,3 @@
-
 /**
  * 粒子系统 发射形状
  */
@@ -13,10 +12,10 @@ export class ParticleSystemShape
 
     /**
      * 计算粒子的发射位置与方向
-     * 
-     * @param particle 
-     * @param position 
-     * @param dir 
+     *
+     * @param particle
+     * @param position
+     * @param dir
      */
     calcParticlePosDir(particle: Particle, position: Vector3, dir: Vector3)
     {

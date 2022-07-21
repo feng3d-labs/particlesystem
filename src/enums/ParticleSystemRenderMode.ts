@@ -17,7 +17,7 @@ export enum ParticleSystemRenderMode
 
     /**
      * Render particles as billboards always facing the player, but not pitching along the x-Axis.
-    
+
      */
     VerticalBillboard = 3,
 

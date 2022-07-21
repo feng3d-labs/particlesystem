@@ -1,4 +1,3 @@
-
 /**
  * 粒子系统 旋转角度随速度变化模块
  */
@@ -10,28 +9,28 @@ export class ParticleRotationBySpeedModule extends ParticleModule
      */
     @serialize
     // @oav({ tooltip: "Set the rotation by speed on each axis separately." })
-    @oav({ tooltip: "在每个轴上分别设置随速度变化的旋转。" })
+    @oav({ tooltip: '在每个轴上分别设置随速度变化的旋转。' })
     separateAxes = false;
 
     /**
      * 角速度，随速度变化的旋转。
      */
     @serialize
-    @oav({ tooltip: "角速度，随速度变化的旋转。" })
+    @oav({ tooltip: '角速度，随速度变化的旋转。' })
     angularVelocity = serialization.setValue(new MinMaxCurveVector3(), { xCurve: { constant: 45, constantMin: 45, constantMax: 45, curveMultiplier: 45 }, yCurve: { constant: 45, constantMin: 45, constantMax: 45, curveMultiplier: 45 }, zCurve: { constant: 45, constantMin: 45, constantMax: 45, curveMultiplier: 45 } });
 
     /**
      * Apply the rotation curve between these minimum and maximum speeds.
-     * 
+     *
      * 在这些最小和最大速度之间应用旋转曲线。
      */
     @serialize
-    @oav({ tooltip: "在这些最小和最大速度之间应用旋转曲线。" })
+    @oav({ tooltip: '在这些最小和最大速度之间应用旋转曲线。' })
     range = new Vector2(0, 1);
 
     /**
      * Rotation by speed curve for the X axis.
-     * 
+     *
      * X轴的旋转随速度变化曲线。
      */
     get x()
@@ -46,7 +45,7 @@ export class ParticleRotationBySpeedModule extends ParticleModule
 
     /**
      * Rotation multiplier around the X axis.
-     * 
+     *
      * 绕X轴旋转乘法器
      */
     get xMultiplier()
@@ -61,7 +60,7 @@ export class ParticleRotationBySpeedModule extends ParticleModule
 
     /**
      * Rotation by speed curve for the Y axis.
-     * 
+     *
      * Y轴的旋转随速度变化曲线。
      */
     get y()
@@ -76,7 +75,7 @@ export class ParticleRotationBySpeedModule extends ParticleModule
 
     /**
      * Rotation multiplier around the Y axis.
-     * 
+     *
      * 绕Y轴旋转乘法器
      */
     get yMultiplier()
@@ -91,7 +90,7 @@ export class ParticleRotationBySpeedModule extends ParticleModule
 
     /**
      * Rotation by speed curve for the Z axis.
-     * 
+     *
      * Z轴的旋转随速度变化曲线。
      */
     get z()
@@ -106,7 +105,7 @@ export class ParticleRotationBySpeedModule extends ParticleModule
 
     /**
      * Rotation multiplier around the Z axis.
-     * 
+     *
      * 绕Z轴旋转乘法器
      */
     get zMultiplier()
@@ -135,15 +134,15 @@ export class ParticleRotationBySpeedModule extends ParticleModule
      */
     updateParticleState(particle: Particle)
     {
-        var preAngularVelocity: Vector3 = particle[_RotationBySpeed_preAngularVelocity];
+        const preAngularVelocity: Vector3 = particle[_RotationBySpeed_preAngularVelocity];
         particle.angularVelocity.sub(preAngularVelocity);
         preAngularVelocity.set(0, 0, 0);
         if (!this.enabled) return;
 
-        var velocity = particle.velocity.length;
-        var rate = mathUtil.clamp((velocity - this.range.x) / (this.range.y - this.range.x), 0, 1);
+        const velocity = particle.velocity.length;
+        const rate = mathUtil.clamp((velocity - this.range.x) / (this.range.y - this.range.x), 0, 1);
 
-        var v = this.angularVelocity.getValue(rate, particle[_RotationBySpeed_rate]);
+        const v = this.angularVelocity.getValue(rate, particle[_RotationBySpeed_rate]);
         if (!this.separateAxes)
         {
             v.x = v.y = 0;
@@ -152,5 +151,5 @@ export class ParticleRotationBySpeedModule extends ParticleModule
         preAngularVelocity.copy(v);
     }
 }
-var _RotationBySpeed_rate = "_RotationBySpeed_rate";
-var _RotationBySpeed_preAngularVelocity = "_RotationBySpeed_preAngularVelocity";
+var _RotationBySpeed_rate = '_RotationBySpeed_rate';
+var _RotationBySpeed_preAngularVelocity = '_RotationBySpeed_preAngularVelocity';

@@ -1,4 +1,3 @@
-
 /**
  * The properties of sub-emitter particles.
  */

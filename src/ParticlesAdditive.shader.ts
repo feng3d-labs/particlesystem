@@ -1,4 +1,3 @@
-
 export interface UniformsTypes { Particles_Additive: ParticlesAdditiveUniforms }
 
 /**
@@ -6,7 +5,7 @@ export interface UniformsTypes { Particles_Additive: ParticlesAdditiveUniforms }
  */
 export class ParticlesAdditiveUniforms
 {
-    __class__: "feng3d.ParticlesAdditiveUniforms";
+    __class__: 'feng3d.ParticlesAdditiveUniforms';
 
     @serialize
     @oav()
@@ -16,14 +15,14 @@ export class ParticlesAdditiveUniforms
      * 粒子贴图
      */
     @serialize
-    @oav({ tooltip: "粒子贴图" })
+    @oav({ tooltip: '粒子贴图' })
     _MainTex = Texture2D.defaultParticle;
 
     /**
      * 粒子贴图使用的UV变换
      */
     @serialize
-    @oav({ tooltip: "粒子贴图使用的UV变换" })
+    @oav({ tooltip: '粒子贴图使用的UV变换' })
     _MainTex_ST = new Vector4(1, 1, 0, 0);
 
     /**
@@ -34,8 +33,8 @@ export class ParticlesAdditiveUniforms
     _InvFade = 1.0;
 }
 
-shaderConfig.shaders["Particles_Additive"].cls = ParticlesAdditiveUniforms;
-shaderConfig.shaders["Particles_Additive"].renderParams = {
+shaderConfig.shaders['Particles_Additive'].cls = ParticlesAdditiveUniforms;
+shaderConfig.shaders['Particles_Additive'].renderParams = {
     enableBlend: true,
     sfactor: BlendFactor.SRC_ALPHA,
     dfactor: BlendFactor.ONE,
@@ -46,6 +45,6 @@ shaderConfig.shaders["Particles_Additive"].renderParams = {
 
 export interface DefaultMaterial
 {
-    "Particle-Material": Material;
+    'Particle-Material': Material;
 }
-Material.setDefault("Particle-Material", { shaderName: "Particles_Additive" });
+Material.setDefault('Particle-Material', { shaderName: 'Particles_Additive' });

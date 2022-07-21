@@ -1,7 +1,6 @@
-
 export class ParticleEmissionBurst
 {
-    __class__: "feng3d.ParticleEmissionBurst";
+    __class__: 'feng3d.ParticleEmissionBurst';
 
     /**
      * The time that each burst occurs.
@@ -9,7 +8,7 @@ export class ParticleEmissionBurst
      */
     @serialize
     // @oav({ tooltip: "The time that each burst occurs." })
-    @oav({ tooltip: "每次爆炸发生的时间。" })
+    @oav({ tooltip: '每次爆炸发生的时间。' })
     time = 0;
 
     /**
@@ -17,7 +16,7 @@ export class ParticleEmissionBurst
      */
     @serialize
     // @oav({ tooltip: "Number of particles to be emitted." })
-    @oav({ tooltip: "要发射的粒子数。" })
+    @oav({ tooltip: '要发射的粒子数。' })
     count = serialization.setValue(new MinMaxCurve(), { constant: 30, constantMin: 30, constantMax: 30 });
 
     /**
@@ -36,7 +35,7 @@ export class ParticleEmissionBurst
 
     /**
      * Maximum number of bursts to be emitted.
-     * 
+     *
      * 要发射的最大爆发数量。
      */
     get maxCount()
@@ -54,7 +53,7 @@ export class ParticleEmissionBurst
      */
     @serialize
     // @oav({ tooltip: "The chance that the burst will trigger." })
-    @oav({ tooltip: "喷发被触发的几率。取值在0与1之间，默认1。" })
+    @oav({ tooltip: '喷发被触发的几率。取值在0与1之间，默认1。' })
     probability = 1.0;
 
     /**
@@ -73,6 +72,7 @@ export class ParticleEmissionBurst
     calculateProbability()
     {
         this._isProbability = this.probability >= Math.random();
-        return this._isProbability;
+
+return this._isProbability;
     }
 }

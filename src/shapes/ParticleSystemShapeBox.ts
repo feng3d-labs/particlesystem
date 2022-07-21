@@ -1,4 +1,3 @@
-
 export enum ParticleSystemShapeBoxEmitFrom
 {
     /**
@@ -23,7 +22,7 @@ export class ParticleSystemShapeBox extends ParticleSystemShape
     /**
      * 盒子X方向缩放。
      */
-    @oav({ tooltip: "盒子X方向缩放。" })
+    @oav({ tooltip: '盒子X方向缩放。' })
     get boxX()
     {
         return this._module.box.x;
@@ -37,7 +36,7 @@ export class ParticleSystemShapeBox extends ParticleSystemShape
     /**
      * 盒子Y方向缩放。
      */
-    @oav({ tooltip: "盒子Y方向缩放。" })
+    @oav({ tooltip: '盒子Y方向缩放。' })
     get boxY()
     {
         return this._module.box.y;
@@ -51,7 +50,7 @@ export class ParticleSystemShapeBox extends ParticleSystemShape
     /**
      * 盒子Z方向缩放。
      */
-    @oav({ tooltip: "盒子Z方向缩放。" })
+    @oav({ tooltip: '盒子Z方向缩放。' })
     get boxZ()
     {
         return this._module.box.z;
@@ -65,15 +64,15 @@ export class ParticleSystemShapeBox extends ParticleSystemShape
     /**
      * 粒子系统盒子发射类型。
      */
-    @oav({ tooltip: "粒子系统盒子发射类型。", component: "OAVEnum", componentParam: { enumClass: ParticleSystemShapeBoxEmitFrom } })
+    @oav({ tooltip: '粒子系统盒子发射类型。', component: 'OAVEnum', componentParam: { enumClass: ParticleSystemShapeBoxEmitFrom } })
     emitFrom = ParticleSystemShapeBoxEmitFrom.Volume;
 
     /**
      * 计算粒子的发射位置与方向
-     * 
-     * @param particle 
-     * @param position 
-     * @param dir 
+     *
+     * @param particle
+     * @param position
+     * @param dir
      */
     calcParticlePosDir(particle: Particle, position: Vector3, dir: Vector3)
     {
@@ -82,29 +81,34 @@ export class ParticleSystemShapeBox extends ParticleSystemShape
 
         if (this.emitFrom == ParticleSystemShapeBoxEmitFrom.Shell)
         {
-            var max = Math.max(Math.abs(position.x), Math.abs(position.y), Math.abs(position.z));
+            const max = Math.max(Math.abs(position.x), Math.abs(position.y), Math.abs(position.z));
             if (Math.abs(position.x) == max)
             {
                 position.x = position.x < 0 ? -1 : 1;
-            } else if (Math.abs(position.y) == max)
+            }
+ else if (Math.abs(position.y) == max)
             {
                 position.y = position.y < 0 ? -1 : 1;
-            } else if (Math.abs(position.z) == max)
+            }
+ else if (Math.abs(position.z) == max)
             {
                 position.z = position.z < 0 ? -1 : 1;
             }
-        } else if (this.emitFrom == ParticleSystemShapeBoxEmitFrom.Edge)
+        }
+ else if (this.emitFrom == ParticleSystemShapeBoxEmitFrom.Edge)
         {
-            var min = Math.min(Math.abs(position.x), Math.abs(position.y), Math.abs(position.z));
+            const min = Math.min(Math.abs(position.x), Math.abs(position.y), Math.abs(position.z));
             if (Math.abs(position.x) == min)
             {
                 position.y = position.y < 0 ? -1 : 1;
                 position.z = position.z < 0 ? -1 : 1;
-            } else if (Math.abs(position.y) == min)
+            }
+ else if (Math.abs(position.y) == min)
             {
                 position.x = position.x < 0 ? -1 : 1;
                 position.z = position.z < 0 ? -1 : 1;
-            } else if (Math.abs(position.z) == min)
+            }
+ else if (Math.abs(position.z) == min)
             {
                 position.x = position.x < 0 ? -1 : 1;
                 position.y = position.y < 0 ? -1 : 1;
@@ -112,7 +116,7 @@ export class ParticleSystemShapeBox extends ParticleSystemShape
         }
         position.scale(new Vector3(this.boxX, this.boxY, this.boxZ)).scaleNumber(0.5);
 
-        // 
+        //
         dir.set(0, 0, 1);
     }
 }

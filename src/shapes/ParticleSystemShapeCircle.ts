@@ -1,10 +1,9 @@
-
 /**
  * 粒子系统 发射圆盘
  */
 export class ParticleSystemShapeCircle extends ParticleSystemShape
 {
-    @oav({ tooltip: "半径" })
+    @oav({ tooltip: '半径' })
     get radius()
     {
         return this._module.radius;
@@ -15,7 +14,7 @@ export class ParticleSystemShapeCircle extends ParticleSystemShape
         this._module.radius = v;
     }
 
-    @oav({ tooltip: "弧度" })
+    @oav({ tooltip: '弧度' })
     get arc()
     {
         return this._module.arc;
@@ -28,11 +27,11 @@ export class ParticleSystemShapeCircle extends ParticleSystemShape
 
     /**
      * The mode used for generating particles around the arc.
-     * 
+     *
      * 在弧线周围产生粒子的模式。
      */
     // @oav({ tooltip: "The mode used for generating particles around the arc.", component: "OAVEnum", componentParam: { enumClass: ParticleSystemShapeMultiModeValue } })
-    @oav({ tooltip: "在弧线周围产生粒子的模式。", component: "OAVEnum", componentParam: { enumClass: ParticleSystemShapeMultiModeValue } })
+    @oav({ tooltip: '在弧线周围产生粒子的模式。', component: 'OAVEnum', componentParam: { enumClass: ParticleSystemShapeMultiModeValue } })
     get arcMode()
     {
         return this._module.arcMode;
@@ -45,10 +44,10 @@ export class ParticleSystemShapeCircle extends ParticleSystemShape
 
     /**
      * Control the gap between emission points around the arc.
-     * 
+     *
      * 控制弧线周围发射点之间的间隙。
      */
-    @oav({ tooltip: "控制弧线周围发射点之间的间隙。" })
+    @oav({ tooltip: '控制弧线周围发射点之间的间隙。' })
     get arcSpread()
     {
         return this._module.arcSpread;
@@ -63,7 +62,7 @@ export class ParticleSystemShapeCircle extends ParticleSystemShape
      * When using one of the animated modes, how quickly to move the emission position around the arc.
      * 当使用一个动画模式时，如何快速移动发射位置周围的弧。
      */
-    @oav({ tooltip: "当使用一个动画模式时，如何快速移动发射位置周围的弧。" })
+    @oav({ tooltip: '当使用一个动画模式时，如何快速移动发射位置周围的弧。' })
     get arcSpeed()
     {
         return this._module.arcSpeed;
@@ -77,30 +76,32 @@ export class ParticleSystemShapeCircle extends ParticleSystemShape
     /**
      * 是否从圆形边缘发射。
      */
-    @oav({ tooltip: "是否从圆形边缘发射。" })
+    @oav({ tooltip: '是否从圆形边缘发射。' })
     emitFromEdge = false;
 
     /**
      * 计算粒子的发射位置与方向
-     * 
-     * @param particle 
-     * @param position 
-     * @param dir 
+     *
+     * @param particle
+     * @param position
+     * @param dir
      */
     calcParticlePosDir(particle: Particle, position: Vector3, dir: Vector3)
     {
-        var radius = this.radius;
-        var arc = this.arc;
+        const radius = this.radius;
+        const arc = this.arc;
         // 在圆心的方向
-        var radiusAngle = 0;
+        let radiusAngle = 0;
         if (this.arcMode == ParticleSystemShapeMultiModeValue.Random)
         {
             radiusAngle = Math.random() * arc;
-        } else if (this.arcMode == ParticleSystemShapeMultiModeValue.Loop)
+        }
+ else if (this.arcMode == ParticleSystemShapeMultiModeValue.Loop)
         {
             var totalAngle = particle.birthTime * this.arcSpeed.getValue(particle.birthRateAtDuration) * 360;
             radiusAngle = totalAngle % arc;
-        } else if (this.arcMode == ParticleSystemShapeMultiModeValue.PingPong)
+        }
+ else if (this.arcMode == ParticleSystemShapeMultiModeValue.PingPong)
         {
             var totalAngle = particle.birthTime * this.arcSpeed.getValue(particle.birthRateAtDuration) * 360;
             radiusAngle = totalAngle % arc;

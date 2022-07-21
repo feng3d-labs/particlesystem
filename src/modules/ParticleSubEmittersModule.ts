@@ -1,9 +1,8 @@
-
 /**
  * Script interface for the SubEmittersModule.
- * 
+ *
  * The sub-emitters module allows you to spawn particles in child emitters from the positions of particles in the parent system.
- * 
+ *
  * This module triggers child particle emission on events such as the birth, death, and collision of particles in the parent system.
  */
 export class ParticleSubEmittersModule extends ParticleModule
@@ -25,56 +24,60 @@ export class ParticleSubEmittersModule extends ParticleModule
     {
         subEmitter._isSubParticleSystem = true;
 
-        this.subEmitters.push({ subEmitter: subEmitter, type: type, properties: properties, emitProbability: emitProbability });
+        this.subEmitters.push({ subEmitter, type, properties, emitProbability });
     }
 
     /**
      * Gets the probability that the sub-emitter emits particles.
-     * 
+     *
      * @param index The index of the sub-emitter.
      */
     GetSubEmitterEmitProbability(index: number)
     {
         if (!this.subEmitters[index]) return 0;
-        return this.subEmitters[index].emitProbability;
+
+return this.subEmitters[index].emitProbability;
     }
 
     /**
      * Gets the properties of the sub - emitter at the given index.
-     * 
+     *
      * @param index The index of the sub-emitter.
      */
     GetSubEmitterProperties(index: number)
     {
         if (!this.subEmitters[index]) return null;
-        return this.subEmitters[index].properties;
+
+return this.subEmitters[index].properties;
     }
 
     /**
      * Gets the sub - emitter Particle System at the given index.
-     * 
+     *
      * @param index The index of the desired sub-emitter.
      */
     GetSubEmitterSystem(index: number)
     {
         if (!this.subEmitters[index]) return null;
-        return this.subEmitters[index].subEmitter;
+
+return this.subEmitters[index].subEmitter;
     }
 
     /**
      * Gets the type of the sub - emitter at the given index.
-     * 
+     *
      * @param index The index of the desired sub-emitter.
      */
     GetSubEmitterType(index: number)
     {
         if (!this.subEmitters[index]) return null;
-        return this.subEmitters[index].type;
+
+return this.subEmitters[index].type;
     }
 
     /**
      * Removes a sub - emitter from the given index in the array.
-     * 
+     *
      * @param index The index of the desired sub-emitter.
      */
     RemoveSubEmitter(index: number)
@@ -85,7 +88,7 @@ export class ParticleSubEmittersModule extends ParticleModule
 
     /**
      * Sets the probability that the sub - emitter emits particles.
-     * 
+     *
      * @param index The index of the sub-emitter you want to modify.
      * @param emitProbability The probability value.
      */
@@ -97,7 +100,7 @@ export class ParticleSubEmittersModule extends ParticleModule
 
     /**
      * Sets the properties of the sub - emitter at the given index.
-     * 
+     *
      * @param index The index of the sub-emitter you want to modify.
      * @param properties The new properties to assign to this sub-emitter.
      */
@@ -118,7 +121,7 @@ export class ParticleSubEmittersModule extends ParticleModule
 
     /**
      * Sets the type of the sub - emitter at the given index.
-     * 
+     *
      * @param index The index of the sub-emitter you want to modify.
      * @param type The new spawning type to assign to this sub-emitter.
      */
@@ -136,7 +139,7 @@ export class ParticleSubEmittersModule extends ParticleModule
     {
         for (let i = 0, n = this.subEmittersCount; i < n; i++)
         {
-            var emitterType = this.GetSubEmitterType(i);
+            const emitterType = this.GetSubEmitterType(i);
             if (emitterType == ParticleSystemSubEmitterType.Birth)
             {
                 this.particleSystem.TriggerSubEmitter(i, [particle]);

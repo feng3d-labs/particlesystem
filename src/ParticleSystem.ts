@@ -1,4 +1,3 @@
-
 export interface ComponentMap { ParticleSystem: ParticleSystem }
 
 export interface GameObjectEventMap
@@ -17,15 +16,15 @@ export interface GameObjectEventMap
 /**
  * 粒子系统
  */
-@AddComponentMenu("Effects/ParticleSystem")
+@AddComponentMenu('Effects/ParticleSystem')
 @RegisterComponent()
 export class ParticleSystem extends Renderable
 {
-    __class__: "feng3d.ParticleSystem";
+    __class__: 'feng3d.ParticleSystem';
 
     /**
      * Is the particle system playing right now ?
-     * 
+     *
      * 粒子系统正在运行吗?
      */
     get isPlaying()
@@ -36,7 +35,7 @@ export class ParticleSystem extends Renderable
 
     /**
      * Is the particle system stopped right now ?
-     * 
+     *
      * 粒子系统现在停止了吗?
      */
     get isStopped()
@@ -46,7 +45,7 @@ export class ParticleSystem extends Renderable
 
     /**
      * Is the particle system paused right now ?
-     * 
+     *
      * 粒子系统现在暂停了吗?
      */
     get isPaused()
@@ -56,7 +55,7 @@ export class ParticleSystem extends Renderable
 
     /**
      * The current number of particles (Read Only).
-     * 
+     *
      * 当前粒子数(只读)。
      */
     get particleCount()
@@ -66,29 +65,29 @@ export class ParticleSystem extends Renderable
 
     /**
      * Playback position in seconds.
-     * 
+     *
      * 回放位置(秒)
      */
     time = 0;
 
     @serialize
-    @oav({ block: "Main", component: "OAVObjectView" })
+    @oav({ block: 'Main', component: 'OAVObjectView' })
     get main() { return this._main; }
     set main(v)
     {
         if (this._main)
         {
-            watcher.unwatch(this._main, "simulationSpace", this._simulationSpaceChanged, this);
+            watcher.unwatch(this._main, 'simulationSpace', this._simulationSpaceChanged, this);
         }
         ArrayUtils.replace(this._modules, this._main, v);
         v.particleSystem = this;
         this._main = v;
-        watcher.watch(this._main, "simulationSpace", this._simulationSpaceChanged, this);
+        watcher.watch(this._main, 'simulationSpace', this._simulationSpaceChanged, this);
     }
     private _main: ParticleMainModule;
 
     @serialize
-    @oav({ block: "Emission", component: "OAVObjectView" })
+    @oav({ block: 'Emission', component: 'OAVObjectView' })
     get emission() { return this._emission; }
     set emission(v)
     {
@@ -99,7 +98,7 @@ export class ParticleSystem extends Renderable
     private _emission: ParticleEmissionModule;
 
     @serialize
-    @oav({ block: "Shape", component: "OAVObjectView" })
+    @oav({ block: 'Shape', component: 'OAVObjectView' })
     get shape() { return this._shape; }
     set shape(v)
     {
@@ -110,7 +109,7 @@ export class ParticleSystem extends Renderable
     private _shape: ParticleShapeModule;
 
     @serialize
-    @oav({ block: "Velocity Over Lifetime", component: "OAVObjectView" })
+    @oav({ block: 'Velocity Over Lifetime', component: 'OAVObjectView' })
     get velocityOverLifetime() { return this._velocityOverLifetime; }
     set velocityOverLifetime(v)
     {
@@ -122,7 +121,7 @@ export class ParticleSystem extends Renderable
 
     @serialize
     // @oav({ tooltip: "limit velocity over lifetime module.", block: "limitVelocityOverLifetime", component: "OAVObjectView" })
-    @oav({ tooltip: "基于时间轴限制速度模块。", block: "Limit Velocity Over Lifetime", component: "OAVObjectView" })
+    @oav({ tooltip: '基于时间轴限制速度模块。', block: 'Limit Velocity Over Lifetime', component: 'OAVObjectView' })
     get limitVelocityOverLifetime() { return this._limitVelocityOverLifetime; }
     set limitVelocityOverLifetime(v)
     {
@@ -134,11 +133,11 @@ export class ParticleSystem extends Renderable
 
     /**
      * Script interface for the Particle System velocity inheritance module.
-     * 
+     *
      * 粒子系统速度继承模块。
      */
     @serialize
-    @oav({ tooltip: "粒子系统速度继承模块。", block: "Inherit Velocity", component: "OAVObjectView" })
+    @oav({ tooltip: '粒子系统速度继承模块。', block: 'Inherit Velocity', component: 'OAVObjectView' })
     get inheritVelocity() { return this._inheritVelocity; }
     set inheritVelocity(v)
     {
@@ -149,7 +148,7 @@ export class ParticleSystem extends Renderable
     private _inheritVelocity: ParticleInheritVelocityModule;
 
     @serialize
-    @oav({ block: "Force Over Lifetime", component: "OAVObjectView" })
+    @oav({ block: 'Force Over Lifetime', component: 'OAVObjectView' })
     get forceOverLifetime() { return this._forceOverLifetime; }
     set forceOverLifetime(v)
     {
@@ -160,7 +159,7 @@ export class ParticleSystem extends Renderable
     private _forceOverLifetime: ParticleForceOverLifetimeModule;
 
     @serialize
-    @oav({ block: "Color Over Lifetime", component: "OAVObjectView" })
+    @oav({ block: 'Color Over Lifetime', component: 'OAVObjectView' })
     get colorOverLifetime() { return this._colorOverLifetime; }
     set colorOverLifetime(v)
     {
@@ -174,7 +173,7 @@ export class ParticleSystem extends Renderable
      * 颜色随速度变化模块。
      */
     @serialize
-    @oav({ block: "Color By Speed", component: "OAVObjectView" })
+    @oav({ block: 'Color By Speed', component: 'OAVObjectView' })
     get colorBySpeed() { return this._colorBySpeed; }
     set colorBySpeed(v)
     {
@@ -185,7 +184,7 @@ export class ParticleSystem extends Renderable
     private _colorBySpeed: ParticleColorBySpeedModule;
 
     @serialize
-    @oav({ block: "sizeOverLifetime", component: "OAVObjectView" })
+    @oav({ block: 'sizeOverLifetime', component: 'OAVObjectView' })
     get sizeOverLifetime() { return this._sizeOverLifetime; }
     set sizeOverLifetime(v)
     {
@@ -199,7 +198,7 @@ export class ParticleSystem extends Renderable
      * 缩放随速度变化模块
      */
     @serialize
-    @oav({ block: "Size By Speed", component: "OAVObjectView" })
+    @oav({ block: 'Size By Speed', component: 'OAVObjectView' })
     get sizeBySpeed() { return this._sizeBySpeed; }
     set sizeBySpeed(v)
     {
@@ -210,7 +209,7 @@ export class ParticleSystem extends Renderable
     private _sizeBySpeed: ParticleSizeBySpeedModule;
 
     @serialize
-    @oav({ block: "Rotation Over Lifetime", component: "OAVObjectView" })
+    @oav({ block: 'Rotation Over Lifetime', component: 'OAVObjectView' })
     get rotationOverLifetime() { return this._rotationOverLifetime; }
     set rotationOverLifetime(v)
     {
@@ -224,7 +223,7 @@ export class ParticleSystem extends Renderable
      * 旋转角度随速度变化模块
      */
     @serialize
-    @oav({ block: "Rotation By Speed", component: "OAVObjectView" })
+    @oav({ block: 'Rotation By Speed', component: 'OAVObjectView' })
     get rotationBySpeed() { return this._rotationBySpeed; }
     set rotationBySpeed(v)
     {
@@ -238,7 +237,7 @@ export class ParticleSystem extends Renderable
      * 旋转角度随速度变化模块
      */
     @serialize
-    @oav({ block: "Noise", component: "OAVObjectView" })
+    @oav({ block: 'Noise', component: 'OAVObjectView' })
     get noise() { return this._noise; }
     set noise(v)
     {
@@ -252,7 +251,7 @@ export class ParticleSystem extends Renderable
      * 旋转角度随速度变化模块
      */
     @serialize
-    @oav({ block: "Sub Emitters", component: "OAVObjectView" })
+    @oav({ block: 'Sub Emitters', component: 'OAVObjectView' })
     get subEmitters() { return this._subEmitters; }
     set subEmitters(v)
     {
@@ -266,7 +265,7 @@ export class ParticleSystem extends Renderable
      * 粒子系统纹理表动画模块。
      */
     @serialize
-    @oav({ tooltip: "粒子系统纹理表动画模块。", block: "Texture Sheet Animation", component: "OAVObjectView" })
+    @oav({ tooltip: '粒子系统纹理表动画模块。', block: 'Texture Sheet Animation', component: 'OAVObjectView' })
     get textureSheetAnimation() { return this._textureSheetAnimation; }
     set textureSheetAnimation(v)
     {
@@ -276,17 +275,17 @@ export class ParticleSystem extends Renderable
     }
     private _textureSheetAnimation: ParticleTextureSheetAnimationModule;
 
-    @oav({ tooltip: "粒子系统渲染模块。", block: "Renderer" })
-    geometry = Geometry.getDefault("Billboard-Geometry");
+    @oav({ tooltip: '粒子系统渲染模块。', block: 'Renderer' })
+    geometry = Geometry.getDefault('Billboard-Geometry');
 
-    @oav({ block: "Renderer" })
-    material = Material.getDefault("Particle-Material");
+    @oav({ block: 'Renderer' })
+    material = Material.getDefault('Particle-Material');
 
-    @oav({ block: "Renderer" })
+    @oav({ block: 'Renderer' })
     @serialize
     castShadows = true;
 
-    @oav({ block: "Renderer" })
+    @oav({ block: 'Renderer' })
     @serialize
     receiveShadows = true;
 
@@ -322,10 +321,10 @@ export class ParticleSystem extends Renderable
     {
         if (!this.isPlaying) return;
 
-        var deltaTime = this.main.simulationSpeed * interval / 1000;
+        const deltaTime = this.main.simulationSpeed * interval / 1000;
         this.time = this.time + deltaTime;
 
-        var emitInfo = this._emitInfo;
+        const emitInfo = this._emitInfo;
 
         emitInfo.preTime = emitInfo.currentTime;
         emitInfo.currentTime = this.time - emitInfo.startDelay;
@@ -339,7 +338,7 @@ export class ParticleSystem extends Renderable
         // 粒子系统速度
         emitInfo.speed.copy(emitInfo.moveVec).divideNumber(deltaTime);
 
-        this._modules.forEach(m =>
+        this._modules.forEach((m) =>
         {
             m.update(deltaTime);
         });
@@ -350,20 +349,20 @@ export class ParticleSystem extends Renderable
         if (this.main.loop && Math.floor(emitInfo.preTime / this.main.duration) < Math.floor(emitInfo.currentTime / this.main.duration))
         {
             // 重新计算喷发概率
-            this.emission.bursts.forEach(element =>
+            this.emission.bursts.forEach((element) =>
             {
                 element.calculateProbability();
             });
-            this.emit("particleCycled", this);
+            this.emit('particleCycled', this);
         }
 
         // 发射粒子
         if (!this._isSubParticleSystem) // 子粒子系统自身不会自动发射粒子
         {
-            var emits = this._emit(emitInfo);
+            const emits = this._emit(emitInfo);
 
-            emits.sort((a, b) => { return a.time - b.time });
-            emits.forEach(v =>
+            emits.sort((a, b) => a.time - b.time);
+            emits.forEach((v) =>
             {
                 this._emitParticles(v);
             });
@@ -373,7 +372,7 @@ export class ParticleSystem extends Renderable
         if (!this.main.loop && this._activeParticles.length == 0 && emitInfo.currentTime > this.main.duration)
         {
             this.stop();
-            this.emit("particleCompleted", this);
+            this.emit('particleCompleted', this);
         }
     }
 
@@ -400,10 +399,10 @@ export class ParticleSystem extends Renderable
         this._particlePool = this._particlePool.concat(this._activeParticles);
         this._activeParticles.length = 0;
 
-        var startDelay = this.main.startDelay.getValue(Math.random());
+        const startDelay = this.main.startDelay.getValue(Math.random());
 
-        this._emitInfo =
-        {
+        this._emitInfo
+        = {
             preTime: -startDelay,
             currentTime: -startDelay,
             preWorldPos: new Vector3(),
@@ -411,14 +410,14 @@ export class ParticleSystem extends Renderable
             rateAtDuration: 0,
             _leftRateOverDistance: 0,
             _isRateOverDistance: false,
-            startDelay: startDelay,
+            startDelay,
             moveVec: new Vector3(),
             speed: new Vector3(),
             position: new Vector3(),
         };
 
         // 重新计算喷发概率
-        this.emission.bursts.forEach(element =>
+        this.emission.bursts.forEach((element) =>
         {
             element.calculateProbability();
         });
@@ -440,7 +439,8 @@ export class ParticleSystem extends Renderable
         if (this.time == 0)
         {
             this.play();
-        } else
+        }
+ else
         {
             this._isPlaying = true;
             this._emitInfo.preTime = Math.max(0, this._emitInfo.currentTime);
@@ -467,32 +467,32 @@ export class ParticleSystem extends Renderable
         renderAtomic.shaderMacro.ENABLED_PARTICLE_SYSTEM_textureSheetAnimation = this.textureSheetAnimation.enabled;
 
         // 计算公告牌矩阵
-        var isbillboard = !this.shape.alignToDirection && this.geometry == Geometry.getDefault("Billboard-Geometry");
-        var billboardMatrix = new Matrix3x3();
+        const isbillboard = !this.shape.alignToDirection && this.geometry == Geometry.getDefault('Billboard-Geometry');
+        const billboardMatrix = new Matrix3x3();
         if (isbillboard)
         {
-            var cameraMatrix = camera.transform.localToWorldMatrix.clone();
-            var localCameraForward = cameraMatrix.getAxisZ();
-            var localCameraUp = cameraMatrix.getAxisY();
+            const cameraMatrix = camera.transform.localToWorldMatrix.clone();
+            let localCameraForward = cameraMatrix.getAxisZ();
+            let localCameraUp = cameraMatrix.getAxisY();
             if (this.main.simulationSpace == ParticleSystemSimulationSpace.Local)
             {
                 localCameraForward = this.gameObject.transform.worldToLocalRotationMatrix.transformPoint3(localCameraForward);
                 localCameraUp = this.gameObject.transform.worldToLocalRotationMatrix.transformPoint3(localCameraUp);
             }
-            var matrix4x4 = new Matrix4x4();
+            const matrix4x4 = new Matrix4x4();
             matrix4x4.lookAt(localCameraForward, localCameraUp);
             billboardMatrix.formMatrix4x4(matrix4x4);
         }
 
-        var positions: number[] = [];
-        var scales: number[] = [];
-        var rotations: number[] = [];
-        var colors: number[] = [];
-        var tilingOffsets: number[] = [];
-        var flipUVs: number[] = [];
+        const positions: number[] = [];
+        const scales: number[] = [];
+        const rotations: number[] = [];
+        const colors: number[] = [];
+        const tilingOffsets: number[] = [];
+        const flipUVs: number[] = [];
         for (var i = 0, n = this._activeParticles.length; i < n; i++)
         {
-            var particle = this._activeParticles[i];
+            const particle = this._activeParticles[i];
             positions.push(particle.position.x, particle.position.y, particle.position.z);
             scales.push(particle.size.x, particle.size.y, particle.size.z);
 
@@ -548,19 +548,19 @@ export class ParticleSystem extends Renderable
      * 属性数据列表
      */
     private _attributes = {
-        a_particle_position: new Attribute({ name: "a_particle_position", data: [], size: 3, divisor: 1 }),
-        a_particle_scale: new Attribute({ name: "a_particle_scale", data: [], size: 3, divisor: 1 }),
-        a_particle_rotation: new Attribute({ name: "a_particle_rotation", data: [], size: 3, divisor: 1 }),
-        a_particle_color: new Attribute({ name: "a_particle_color", data: [], size: 4, divisor: 1 }),
-        a_particle_tilingOffset: new Attribute({ name: "a_particle_tilingOffset", data: [], size: 4, divisor: 1 }),
-        a_particle_flipUV: new Attribute({ name: "a_particle_flipUV", data: [], size: 2, divisor: 1 }),
+        a_particle_position: new Attribute({ name: 'a_particle_position', data: [], size: 3, divisor: 1 }),
+        a_particle_scale: new Attribute({ name: 'a_particle_scale', data: [], size: 3, divisor: 1 }),
+        a_particle_rotation: new Attribute({ name: 'a_particle_rotation', data: [], size: 3, divisor: 1 }),
+        a_particle_color: new Attribute({ name: 'a_particle_color', data: [], size: 4, divisor: 1 }),
+        a_particle_tilingOffset: new Attribute({ name: 'a_particle_tilingOffset', data: [], size: 4, divisor: 1 }),
+        a_particle_flipUV: new Attribute({ name: 'a_particle_flipUV', data: [], size: 2, divisor: 1 }),
     };
 
     private readonly _modules: ParticleModule[] = [];
 
     /**
      * 发射粒子
-     * 
+     *
      * @param startTime 发射起始时间
      * @param endTime 发射终止时间
      * @param startPos 发射起始位置
@@ -568,19 +568,19 @@ export class ParticleSystem extends Renderable
      */
     private _emit(emitInfo: ParticleSystemEmitInfo)
     {
-        // 
-        var emits: { time: number, num: number, position: Vector3, emitInfo: ParticleSystemEmitInfo }[] = [];
+        //
+        let emits: { time: number, num: number, position: Vector3, emitInfo: ParticleSystemEmitInfo }[] = [];
 
-        var startTime = emitInfo.preTime;
-        var endTime = emitInfo.currentTime;
+        const startTime = emitInfo.preTime;
+        let endTime = emitInfo.currentTime;
 
         if (!this.emission.enabled) return emits;
 
         // 判断是否开始发射
         if (endTime <= 0) return emits;
 
-        var loop = this.main.loop;
-        var duration = this.main.duration;
+        const loop = this.main.loop;
+        const duration = this.main.duration;
 
         // 判断是否结束发射
         if (!loop && startTime >= duration) return emits;
@@ -589,17 +589,17 @@ export class ParticleSystem extends Renderable
         if (!loop) endTime = Math.min(endTime, duration);
 
         // 计算此处在发射周期的位置
-        var rateAtDuration = (endTime % duration) / duration;
+        let rateAtDuration = (endTime % duration) / duration;
         if (rateAtDuration == 0 && endTime >= duration) rateAtDuration = 1;
 
         emitInfo.rateAtDuration = rateAtDuration;
 
         // 处理移动发射粒子
-        var moveEmits = this._emitWithMove(emitInfo);
+        const moveEmits = this._emitWithMove(emitInfo);
         emits = emits.concat(moveEmits);
 
         // 单粒子发射周期
-        var timeEmits = this._emitWithTime(emitInfo, duration);
+        const timeEmits = this._emitWithTime(emitInfo, duration);
         emits = emits.concat(timeEmits);
 
         return emits;
@@ -607,36 +607,36 @@ export class ParticleSystem extends Renderable
 
     /**
      * 计算在指定移动的位移线段中发射的粒子列表。
-     * 
-     * @param rateAtDuration 
-     * @param prePos 
-     * @param currentPos 
+     *
+     * @param rateAtDuration
+     * @param prePos
+     * @param currentPos
      */
     private _emitWithMove(emitInfo: ParticleSystemEmitInfo)
     {
-        var emits: { time: number; num: number; position: Vector3; emitInfo: ParticleSystemEmitInfo; }[] = [];
+        const emits: { time: number; num: number; position: Vector3; emitInfo: ParticleSystemEmitInfo; }[] = [];
         if (this.main.simulationSpace == ParticleSystemSimulationSpace.World)
         {
             if (emitInfo._isRateOverDistance)
             {
-                var moveVec = emitInfo.currentWorldPos.subTo(emitInfo.preWorldPos);
-                var moveDistance = moveVec.length;
-                var worldPos = emitInfo.currentWorldPos;
+                const moveVec = emitInfo.currentWorldPos.subTo(emitInfo.preWorldPos);
+                const moveDistance = moveVec.length;
+                const worldPos = emitInfo.currentWorldPos;
                 // 本次移动距离
                 if (moveDistance > 0)
                 {
                     // 移动方向
-                    var moveDir = moveVec.clone().normalize();
+                    const moveDir = moveVec.clone().normalize();
                     // 剩余移动量
-                    var leftRateOverDistance = emitInfo._leftRateOverDistance + moveDistance;
+                    let leftRateOverDistance = emitInfo._leftRateOverDistance + moveDistance;
                     // 发射频率
-                    var rateOverDistance = this.emission.rateOverDistance.getValue(emitInfo.rateAtDuration);
+                    const rateOverDistance = this.emission.rateOverDistance.getValue(emitInfo.rateAtDuration);
                     // 发射间隔距离
-                    var invRateOverDistance = 1 / rateOverDistance;
+                    const invRateOverDistance = 1 / rateOverDistance;
                     // 发射间隔位移
-                    var invRateOverDistanceVec = moveDir.scaleNumberTo(1 / rateOverDistance);
+                    const invRateOverDistanceVec = moveDir.scaleNumberTo(1 / rateOverDistance);
                     // 上次发射位置
-                    var lastRateOverDistance = emitInfo.preWorldPos.addTo(moveDir.negateTo().scaleNumber(emitInfo._leftRateOverDistance));
+                    const lastRateOverDistance = emitInfo.preWorldPos.addTo(moveDir.negateTo().scaleNumber(emitInfo._leftRateOverDistance));
 
                     while (invRateOverDistance < leftRateOverDistance)
                     {
@@ -644,7 +644,7 @@ export class ParticleSystem extends Renderable
                             position: lastRateOverDistance.add(invRateOverDistanceVec).clone().sub(worldPos),
                             time: emitInfo.preTime + (emitInfo.currentTime - emitInfo.preTime) * (1 - leftRateOverDistance / moveDistance),
                             num: 1,
-                            emitInfo: emitInfo
+                            emitInfo
                         });
                         leftRateOverDistance -= invRateOverDistance;
                     }
@@ -658,56 +658,58 @@ export class ParticleSystem extends Renderable
             emitInfo._isRateOverDistance = false;
             emitInfo._leftRateOverDistance = 0;
         }
-        return emits;
+
+return emits;
     }
 
     /**
      * 计算在指定时间段内发射的粒子列表
-     * 
-     * @param rateAtDuration 
-     * @param preRealTime 
-     * @param duration 
-     * @param realEmitTime 
+     *
+     * @param rateAtDuration
+     * @param preRealTime
+     * @param duration
+     * @param realEmitTime
      */
     private _emitWithTime(emitInfo: ParticleSystemEmitInfo, duration: number)
     {
-        var rateAtDuration = emitInfo.rateAtDuration;
-        var preTime = emitInfo.preTime;
-        var currentTime = emitInfo.currentTime;
+        const rateAtDuration = emitInfo.rateAtDuration;
+        const preTime = emitInfo.preTime;
+        const currentTime = emitInfo.currentTime;
 
-        var emits: { time: number; num: number; position: Vector3; emitInfo: ParticleSystemEmitInfo }[] = [];
+        const emits: { time: number; num: number; position: Vector3; emitInfo: ParticleSystemEmitInfo }[] = [];
 
-        var step = 1 / this.emission.rateOverTime.getValue(rateAtDuration);
-        var bursts = this.emission.bursts;
+        const step = 1 / this.emission.rateOverTime.getValue(rateAtDuration);
+        const bursts = this.emission.bursts;
         // 遍历所有发射周期
-        var cycleStartIndex = Math.floor(preTime / duration);
-        var cycleEndIndex = Math.ceil(currentTime / duration);
+        const cycleStartIndex = Math.floor(preTime / duration);
+        const cycleEndIndex = Math.ceil(currentTime / duration);
         for (let k = cycleStartIndex; k < cycleEndIndex; k++)
         {
-            var cycleStartTime = k * duration;
-            var cycleEndTime = (k + 1) * duration;
+            const cycleStartTime = k * duration;
+            const cycleEndTime = (k + 1) * duration;
             // 单个周期内的起始与结束时间
-            var startTime = Math.max(preTime, cycleStartTime);
-            var endTime = Math.min(currentTime, cycleEndTime);
+            const startTime = Math.max(preTime, cycleStartTime);
+            const endTime = Math.min(currentTime, cycleEndTime);
             // 处理稳定发射
-            var singleStart = Math.ceil(startTime / step) * step;
-            for (var i = singleStart; i < endTime; i += step)
+            const singleStart = Math.ceil(startTime / step) * step;
+            for (let i = singleStart; i < endTime; i += step)
             {
-                emits.push({ time: i, num: 1, emitInfo: emitInfo, position: emitInfo.position.clone() });
+                emits.push({ time: i, num: 1, emitInfo, position: emitInfo.position.clone() });
             }
             // 处理喷发
-            var inCycleStart = startTime - cycleStartTime;
-            var inCycleEnd = endTime - cycleStartTime;
+            const inCycleStart = startTime - cycleStartTime;
+            const inCycleEnd = endTime - cycleStartTime;
             for (let i = 0; i < bursts.length; i++)
             {
                 const burst = bursts[i];
                 if (burst.isProbability && inCycleStart <= burst.time && burst.time < inCycleEnd)
                 {
-                    emits.push({ time: cycleStartTime + burst.time, num: burst.count.getValue(rateAtDuration), emitInfo: emitInfo, position: emitInfo.position.clone() });
+                    emits.push({ time: cycleStartTime + burst.time, num: burst.count.getValue(rateAtDuration), emitInfo, position: emitInfo.position.clone() });
                 }
             }
         }
-        return emits;
+
+return emits;
     }
 
     /**
@@ -717,20 +719,20 @@ export class ParticleSystem extends Renderable
      */
     private _emitParticles(v: { time: number; num: number; position: Vector3; emitInfo: ParticleSystemEmitInfo })
     {
-        var num = v.num;
-        var birthTime = v.time;
-        var position = v.position;
-        var emitInfo = v.emitInfo;
+        const num = v.num;
+        const birthTime = v.time;
+        const position = v.position;
+        const emitInfo = v.emitInfo;
         for (let i = 0; i < num; i++)
         {
             if (this._activeParticles.length >= this.main.maxParticles) return;
-            var lifetime = this.main.startLifetime.getValue(emitInfo.rateAtDuration);
-            var birthRateAtDuration = (birthTime - emitInfo.startDelay) / this.main.duration;
-            var rateAtLifeTime = (emitInfo.currentTime - birthTime) / lifetime;
+            const lifetime = this.main.startLifetime.getValue(emitInfo.rateAtDuration);
+            const birthRateAtDuration = (birthTime - emitInfo.startDelay) / this.main.duration;
+            const rateAtLifeTime = (emitInfo.currentTime - birthTime) / lifetime;
 
             if (rateAtLifeTime < 1)
             {
-                var particle = this._particlePool.pop() || new Particle();
+                const particle = this._particlePool.pop() || new Particle();
                 particle.cache = {};
                 particle.position.copy(position);
                 particle.birthTime = birthTime;
@@ -759,7 +761,7 @@ export class ParticleSystem extends Renderable
     {
         for (let i = this._activeParticles.length - 1; i >= 0; i--)
         {
-            var particle = this._activeParticles[i];
+            const particle = this._activeParticles[i];
 
             particle.rateAtLifeTime = (particle.curTime + deltaTime - particle.birthTime) / particle.lifetime;
             if (particle.rateAtLifeTime < 0 || particle.rateAtLifeTime > 1)
@@ -767,7 +769,8 @@ export class ParticleSystem extends Renderable
                 this._activeParticles.splice(i, 1);
                 this._particlePool.push(particle);
                 particle.subEmitInfo = null;
-            } else
+            }
+ else
             {
                 this._updateParticleState(particle, deltaTime);
             }
@@ -780,7 +783,7 @@ export class ParticleSystem extends Renderable
      */
     private _initParticleState(particle: Particle)
     {
-        this._modules.forEach(v => { v.initParticleState(particle) });
+        this._modules.forEach((v) => { v.initParticleState(particle); });
     }
 
     /**
@@ -790,7 +793,7 @@ export class ParticleSystem extends Renderable
     private _updateParticleState(particle: Particle, deltaTime: number)
     {
         //
-        this._modules.forEach(v => { v.updateParticleState(particle) });
+        this._modules.forEach((v) => { v.updateParticleState(particle); });
         particle.updateState(particle.curTime + deltaTime);
     }
 
@@ -801,17 +804,18 @@ export class ParticleSystem extends Renderable
 
         if (this._main.simulationSpace == ParticleSystemSimulationSpace.Local)
         {
-            var worldToLocalMatrix = this.transform.worldToLocalMatrix;
-            this._activeParticles.forEach(p =>
+            const worldToLocalMatrix = this.transform.worldToLocalMatrix;
+            this._activeParticles.forEach((p) =>
             {
                 worldToLocalMatrix.transformPoint3(p.position, p.position);
                 worldToLocalMatrix.transformVector3(p.velocity, p.velocity);
                 worldToLocalMatrix.transformVector3(p.acceleration, p.acceleration);
             });
-        } else
+        }
+ else
         {
-            var localToWorldMatrix = this.transform.localToWorldMatrix;
-            this._activeParticles.forEach(p =>
+            const localToWorldMatrix = this.transform.localToWorldMatrix;
+            this._activeParticles.forEach((p) =>
             {
                 localToWorldMatrix.transformPoint3(p.position, p.position);
                 localToWorldMatrix.transformVector3(p.velocity, p.velocity);
@@ -822,7 +826,7 @@ export class ParticleSystem extends Renderable
 
     /**
      * 给指定粒子添加指定空间的位移。
-     * 
+     *
      * @param particle 粒子。
      * @param position 速度。
      * @param space 速度所在空间。
@@ -833,7 +837,7 @@ export class ParticleSystem extends Renderable
         if (name != undefined)
         {
             this.removeParticleVelocity(particle, name);
-            particle.cache[name] = { value: position.clone(), space: space };
+            particle.cache[name] = { value: position.clone(), space };
         }
 
         if (space != this.main.simulationSpace)
@@ -841,7 +845,8 @@ export class ParticleSystem extends Renderable
             if (space == ParticleSystemSimulationSpace.World)
             {
                 this.transform.worldToLocalMatrix.transformPoint3(position, position);
-            } else
+            }
+ else
             {
                 this.transform.localToWorldMatrix.transformPoint3(position, position);
             }
@@ -852,25 +857,26 @@ export class ParticleSystem extends Renderable
 
     /**
      * 移除指定粒子上的位移
-     * 
+     *
      * @param particle 粒子。
      * @param name 位移名称。
      */
     removeParticlePosition(particle: Particle, name: string)
     {
-        var obj: { value: Vector3, space: ParticleSystemSimulationSpace } = particle.cache[name];
+        const obj: { value: Vector3, space: ParticleSystemSimulationSpace } = particle.cache[name];
         if (obj)
         {
             delete particle.cache[name];
 
-            var space = obj.space;
-            var value = obj.value;
+            const space = obj.space;
+            const value = obj.value;
             if (space != this.main.simulationSpace)
             {
                 if (space == ParticleSystemSimulationSpace.World)
                 {
                     this.transform.worldToLocalMatrix.transformPoint3(value, value);
-                } else
+                }
+ else
                 {
                     this.transform.localToWorldMatrix.transformPoint3(value, value);
                 }
@@ -882,7 +888,7 @@ export class ParticleSystem extends Renderable
 
     /**
      * 给指定粒子添加指定空间的速度。
-     * 
+     *
      * @param particle 粒子。
      * @param velocity 速度。
      * @param space 速度所在空间。
@@ -893,7 +899,7 @@ export class ParticleSystem extends Renderable
         if (name != undefined)
         {
             this.removeParticleVelocity(particle, name);
-            particle.cache[name] = { value: velocity.clone(), space: space };
+            particle.cache[name] = { value: velocity.clone(), space };
         }
 
         if (space != this.main.simulationSpace)
@@ -901,7 +907,8 @@ export class ParticleSystem extends Renderable
             if (space == ParticleSystemSimulationSpace.World)
             {
                 this.transform.worldToLocalMatrix.transformVector3(velocity, velocity);
-            } else
+            }
+ else
             {
                 this.transform.localToWorldMatrix.transformVector3(velocity, velocity);
             }
@@ -912,25 +919,26 @@ export class ParticleSystem extends Renderable
 
     /**
      * 移除指定粒子上的速度
-     * 
+     *
      * @param particle 粒子。
      * @param name 速度名称。
      */
     removeParticleVelocity(particle: Particle, name: string)
     {
-        var obj: { value: Vector3, space: ParticleSystemSimulationSpace } = particle.cache[name];
+        const obj: { value: Vector3, space: ParticleSystemSimulationSpace } = particle.cache[name];
         if (obj)
         {
             delete particle.cache[name];
 
-            var space = obj.space;
-            var value = obj.value;
+            const space = obj.space;
+            const value = obj.value;
             if (space != this.main.simulationSpace)
             {
                 if (space == ParticleSystemSimulationSpace.World)
                 {
                     this.transform.worldToLocalMatrix.transformVector3(value, value);
-                } else
+                }
+ else
                 {
                     this.transform.localToWorldMatrix.transformVector3(value, value);
                 }
@@ -942,7 +950,7 @@ export class ParticleSystem extends Renderable
 
     /**
      * 给指定粒子添加指定空间的速度。
-     * 
+     *
      * @param particle 粒子。
      * @param acceleration 加速度。
      * @param space 加速度所在空间。
@@ -953,7 +961,7 @@ export class ParticleSystem extends Renderable
         if (name != undefined)
         {
             this.removeParticleAcceleration(particle, name);
-            particle.cache[name] = { value: acceleration.clone(), space: space };
+            particle.cache[name] = { value: acceleration.clone(), space };
         }
 
         if (space != this.main.simulationSpace)
@@ -961,7 +969,8 @@ export class ParticleSystem extends Renderable
             if (space == ParticleSystemSimulationSpace.World)
             {
                 this.transform.worldToLocalMatrix.transformVector3(acceleration, acceleration);
-            } else
+            }
+ else
             {
                 this.transform.localToWorldMatrix.transformVector3(acceleration, acceleration);
             }
@@ -972,25 +981,26 @@ export class ParticleSystem extends Renderable
 
     /**
      * 移除指定粒子上的加速度
-     * 
+     *
      * @param particle 粒子。
      * @param name 加速度名称。
      */
     removeParticleAcceleration(particle: Particle, name: string)
     {
-        var obj: { value: Vector3, space: ParticleSystemSimulationSpace } = particle.cache[name];
+        const obj: { value: Vector3, space: ParticleSystemSimulationSpace } = particle.cache[name];
         if (obj)
         {
             delete particle.cache[name];
 
-            var space = obj.space;
-            var value = obj.value;
+            const space = obj.space;
+            const value = obj.value;
             if (space != this.main.simulationSpace)
             {
                 if (space == ParticleSystemSimulationSpace.World)
                 {
                     this.transform.worldToLocalMatrix.transformVector3(value, value);
-                } else
+                }
+ else
                 {
                     this.transform.localToWorldMatrix.transformVector3(value, value);
                 }
@@ -1002,42 +1012,42 @@ export class ParticleSystem extends Renderable
 
     /**
      * 触发子发射器
-     * 
+     *
      * @param subEmitterIndex 子发射器索引
      */
     TriggerSubEmitter(subEmitterIndex: number, particles: Particle[] = null)
     {
         if (!this.subEmitters.enabled) return;
 
-        var subEmitter = this.subEmitters.GetSubEmitterSystem(subEmitterIndex);
+        const subEmitter = this.subEmitters.GetSubEmitterSystem(subEmitterIndex);
         if (!subEmitter) return;
 
         if (!subEmitter.enabled) return;
 
-        var probability = this.subEmitters.GetSubEmitterEmitProbability(subEmitterIndex);
+        const probability = this.subEmitters.GetSubEmitterEmitProbability(subEmitterIndex);
         this.subEmitters.GetSubEmitterProperties(subEmitterIndex);
         this.subEmitters.GetSubEmitterType(subEmitterIndex);
 
         particles = particles || this._activeParticles;
 
-        var emits: {
+        let emits: {
             time: number;
             num: number;
             position: Vector3;
             emitInfo: ParticleSystemEmitInfo;
         }[] = [];
 
-        particles.forEach(particle =>
+        particles.forEach((particle) =>
         {
             if (Math.random() > probability) return;
 
             // 粒子所在世界坐标
-            var particleWoldPos = this.transform.localToWorldMatrix.transformPoint3(particle.position);
+            const particleWoldPos = this.transform.localToWorldMatrix.transformPoint3(particle.position);
             // 粒子在子粒子系统的坐标
-            var subEmitPos = subEmitter.transform.worldToLocalMatrix.transformPoint3(particleWoldPos);
+            const subEmitPos = subEmitter.transform.worldToLocalMatrix.transformPoint3(particleWoldPos);
             if (!particle.subEmitInfo)
             {
-                var startDelay = this.main.startDelay.getValue(Math.random());
+                const startDelay = this.main.startDelay.getValue(Math.random());
                 particle.subEmitInfo = {
                     preTime: particle.preTime - particle.birthTime - startDelay,
                     currentTime: particle.preTime - particle.birthTime - startDelay,
@@ -1046,12 +1056,13 @@ export class ParticleSystem extends Renderable
                     rateAtDuration: 0,
                     _leftRateOverDistance: 0,
                     _isRateOverDistance: false,
-                    startDelay: startDelay,
+                    startDelay,
                     moveVec: new Vector3(),
                     speed: new Vector3(),
                     position: subEmitPos,
                 };
-            } else
+            }
+ else
             {
                 particle.subEmitInfo.preTime = particle.preTime - particle.birthTime - particle.subEmitInfo.startDelay;
                 particle.subEmitInfo.currentTime = particle.curTime - particle.birthTime - particle.subEmitInfo.startDelay;
@@ -1059,13 +1070,13 @@ export class ParticleSystem extends Renderable
                 particle.subEmitInfo.position.copy(subEmitPos);
             }
 
-            var subEmits = subEmitter._emit(particle.subEmitInfo);
+            const subEmits = subEmitter._emit(particle.subEmitInfo);
 
             emits = emits.concat(subEmits);
         });
 
-        emits.sort((a, b) => { return a.time - b.time });
-        emits.forEach(v =>
+        emits.sort((a, b) => a.time - b.time);
+        emits.forEach((v) =>
         {
             subEmitter._emitParticles(v);
         });
@@ -1146,11 +1157,11 @@ export interface ParticleSystemEmitInfo
 
 export interface DefaultGeometry
 {
-    "Billboard-Geometry": QuadGeometry;
+    'Billboard-Geometry': QuadGeometry;
 }
-Geometry.setDefault("Billboard-Geometry", new QuadGeometry());
+Geometry.setDefault('Billboard-Geometry', new QuadGeometry());
 
-GameObject.registerPrimitive("Particle System", (g) =>
+GameObject.registerPrimitive('Particle System', (g) =>
 {
     g.addComponent(ParticleSystem);
     g.getComponent(Transform).rx = -90;
@@ -1158,18 +1169,16 @@ GameObject.registerPrimitive("Particle System", (g) =>
 
 export interface PrimitiveGameObject
 {
-    "Particle System": GameObject;
+    'Particle System': GameObject;
 }
 
 // 在 Hierarchy 界面新增右键菜单项
 createNodeMenu.push(
     {
-        path: "Effects/Particle System",
+        path: 'Effects/Particle System',
         priority: -1,
         click: () =>
-        {
-            return GameObject.createPrimitive("Particle System");
-        }
+        GameObject.createPrimitive('Particle System')
     }
 );
 

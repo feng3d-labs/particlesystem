@@ -1,17 +1,16 @@
-
 /**
  * Shape of the emitter volume, which controls where particles are emitted and their initial direction.
  * 发射体体积的形状，它控制粒子发射的位置和初始方向。
  */
 export class ParticleShapeModule extends ParticleModule
 {
-    __class__: "feng3d.ParticleShapeModule";
+    __class__: 'feng3d.ParticleShapeModule';
     /**
      * Type of shape to emit particles from.
      * 发射粒子的形状类型。
      */
     @serialize
-    @watch("_onShapeTypeChanged")
+    @watch('_onShapeTypeChanged')
     shapeType: ParticleSystemShapeType;
 
     /**
@@ -19,26 +18,26 @@ export class ParticleShapeModule extends ParticleModule
      * 发射粒子的形状类型。
      */
     // @oav({ tooltip: "Type of shape to emit particles from.", component: "OAVEnum", componentParam: { enumClass: ParticleSystemShape } })
-    @oav({ tooltip: "发射粒子的形状类型。", component: "OAVEnum", componentParam: { enumClass: ParticleSystemShapeType1 } })
-    @watch("_onShapeChanged")
+    @oav({ tooltip: '发射粒子的形状类型。', component: 'OAVEnum', componentParam: { enumClass: ParticleSystemShapeType1 } })
+    @watch('_onShapeChanged')
     shape: ParticleSystemShapeType1;
 
     /**
      * 当前使用的发射形状
      */
-    @oav({ component: "OAVObjectView" })
+    @oav({ component: 'OAVObjectView' })
     activeShape: ParticleSystemShape;
 
     /**
      * Align particles based on their initial direction of travel.
      * 根据粒子的初始运动方向排列粒子。
-     * 
+     *
      * Using align to Direction in the Shape module forces the system to be rendered using Local Billboard Alignment.
      * 在形状模块中使用align to Direction迫使系统使用本地看板对齐方式呈现。
      */
     @serialize
     // @oav({ tooltip: "Align particles based on their initial direction of travel." })
-    @oav({ tooltip: "根据粒子的初始运动方向排列粒子。" })
+    @oav({ tooltip: '根据粒子的初始运动方向排列粒子。' })
     alignToDirection = false;
 
     /**
@@ -47,7 +46,7 @@ export class ParticleShapeModule extends ParticleModule
      */
     @serialize
     // @oav({ tooltip: "Randomizes the starting direction of particles." })
-    @oav({ tooltip: "随机化粒子的起始方向。" })
+    @oav({ tooltip: '随机化粒子的起始方向。' })
     randomDirectionAmount = 0;
 
     /**
@@ -56,12 +55,12 @@ export class ParticleShapeModule extends ParticleModule
      */
     @serialize
     // @oav({ tooltip: "Spherizes the starting direction of particles." })
-    @oav({ tooltip: "Spherizes the starting direction of particles." })
+    @oav({ tooltip: 'Spherizes the starting direction of particles.' })
     sphericalDirectionAmount = 0;
 
     /**
      * Angle of the cone.
-     * 
+     *
      * 圆锥的角度。
      */
     @serialize
@@ -69,7 +68,7 @@ export class ParticleShapeModule extends ParticleModule
 
     /**
      * Circle arc angle.
-     * 
+     *
      * 圆弧角。
      */
     @serialize
@@ -77,7 +76,7 @@ export class ParticleShapeModule extends ParticleModule
 
     /**
      * The mode used for generating particles around the arc.
-     * 
+     *
      * 在弧线周围产生粒子的模式。
      */
     @serialize
@@ -85,7 +84,7 @@ export class ParticleShapeModule extends ParticleModule
 
     /**
      * When using one of the animated modes, how quickly to move the emission position around the arc.
-     * 
+     *
      * 当使用一个动画模式时，如何快速移动发射位置周围的弧。
      */
     @serialize
@@ -93,7 +92,7 @@ export class ParticleShapeModule extends ParticleModule
 
     /**
      * A multiplier of the arc speed of the emission shape.
-     * 
+     *
      * 发射形状的电弧速度的乘数。
      */
     get arcSpeedMultiplier()
@@ -108,7 +107,7 @@ export class ParticleShapeModule extends ParticleModule
 
     /**
      * Control the gap between emission points around the arc.
-     * 
+     *
      * 控制弧线周围发射点之间的间隙。
      */
     @serialize
@@ -116,7 +115,7 @@ export class ParticleShapeModule extends ParticleModule
 
     /**
      * Scale of the box.
-     * 
+     *
      * 盒子的缩放。
      */
     @serialize
@@ -124,7 +123,7 @@ export class ParticleShapeModule extends ParticleModule
 
     /**
      * Length of the cone.
-     * 
+     *
      * 圆锥的长度（高度）。
      */
     @serialize
@@ -132,36 +131,36 @@ export class ParticleShapeModule extends ParticleModule
 
     /**
      * Mesh to emit particles from.
-     * 
+     *
      * 发射粒子的网格。
-     * 
+     *
      * @todo
      */
     mesh: Geometry;
 
     /**
      * Emit from a single material, or the whole mesh.
-     * 
+     *
      * 从一个单一的材料，或整个网格发射。
-     * 
+     *
      * @todo
      */
     useMeshMaterialIndex: boolean;
 
     /**
      * Emit particles from a single material of a mesh.
-     * 
+     *
      * 从一个网格的单一材料发射粒子。
-     * 
+     *
      * @todo
      */
     meshMaterialIndex: number;
 
     /**
      * MeshRenderer to emit particles from.
-     * 
+     *
      * 从 MeshRenderer 发射粒子。
-     * 
+     *
      * @todo
      */
     // meshRenderer: MeshRenderer
@@ -169,50 +168,50 @@ export class ParticleShapeModule extends ParticleModule
 
     /**
      * SkinnedMeshRenderer to emit particles from.
-     * 
+     *
      * 从 SkinnedMeshRenderer 发射粒子。
-     * 
+     *
      * @todo
      */
     skinnedMeshRenderer: any;
 
     /**
      * Apply a scaling factor to the mesh used for generating source positions.
-     * 
+     *
      * 对用于生成源位置的网格应用缩放因子。
-     * 
+     *
      * @todo
      */
     meshScale = 1;
 
     /**
      * Where on the mesh to emit particles from.
-     * 
+     *
      * 从网格的什么地方发射粒子。
-     * 
+     *
      * @todo
      */
     meshShapeType = ParticleSystemMeshShapeType.Vertex;
 
     /**
      * Modulate the particle colors with the vertex colors, or the material color if no vertex colors exist.
-     * 
+     *
      * 用顶点颜色调节粒子颜色，如果没有顶点颜色，则调节材质颜色。
-     * 
+     *
      * @todo
      */
     useMeshColors = true;
 
     /**
      * Move particles away from the surface of the source mesh.
-     * 
+     *
      * 将粒子从源网格的表面移开。
      */
     normalOffset = 0;
 
     /**
      * Radius of the shape.
-     * 
+     *
      * 形状的半径。
      */
     @serialize
@@ -220,7 +219,7 @@ export class ParticleShapeModule extends ParticleModule
 
     /**
      * The mode used for generating particles around the radius.
-     * 
+     *
      * 在弧线周围产生粒子的模式。
      */
     @serialize
@@ -228,7 +227,7 @@ export class ParticleShapeModule extends ParticleModule
 
     /**
      * When using one of the animated modes, how quickly to move the emission position along the radius.
-     * 
+     *
      * 当使用一个动画模式时，如何快速移动发射位置周围的弧。
      */
     @serialize
@@ -236,7 +235,7 @@ export class ParticleShapeModule extends ParticleModule
 
     /**
      * A multiplier of the radius speed of the emission shape.
-     * 
+     *
      * 发射形状的半径速度的乘法器。
      */
     get radiusSpeedMultiplier()
@@ -251,7 +250,7 @@ export class ParticleShapeModule extends ParticleModule
 
     /**
      * Control the gap between emission points around the radius.
-     * 
+     *
      * 控制弧线周围发射点之间的间隙。
      */
     @serialize
@@ -276,10 +275,10 @@ export class ParticleShapeModule extends ParticleModule
      */
     initParticleState(particle: Particle)
     {
-        var startSpeed = this.particleSystem.main.startSpeed.getValue(particle.birthRateAtDuration);
+        const startSpeed = this.particleSystem.main.startSpeed.getValue(particle.birthRateAtDuration);
         //
-        var position = _temp_position.set(0, 0, 0);
-        var dir = _temp_dir.set(0, 0, 1);
+        const position = _temp_position.set(0, 0, 0);
+        const dir = _temp_dir.set(0, 0, 1);
         //
         if (this.enabled)
         {
@@ -289,7 +288,7 @@ export class ParticleShapeModule extends ParticleModule
         dir.scaleNumber(startSpeed);
         if (this.particleSystem.main.simulationSpace == ParticleSystemSimulationSpace.World)
         {
-            var localToWorldMatrix = this.particleSystem.transform.localToWorldMatrix;
+            const localToWorldMatrix = this.particleSystem.transform.localToWorldMatrix;
 
             localToWorldMatrix.transformPoint3(position, position);
             localToWorldMatrix.transformVector3(dir, dir);
@@ -298,20 +297,20 @@ export class ParticleShapeModule extends ParticleModule
         particle.velocity.add(dir);
 
         if (!this.enabled)
-            return;
+            { return; }
 
         //
         if (this.alignToDirection)
         {
-            var mat = new Matrix4x4();
+            const mat = new Matrix4x4();
             mat.lookAt(particle.velocity, Vector3.Y_AXIS);
 
-            var mat0 = Matrix4x4.fromRotation(particle.rotation.x, particle.rotation.y, particle.rotation.z);
+            const mat0 = Matrix4x4.fromRotation(particle.rotation.x, particle.rotation.y, particle.rotation.z);
             mat0.append(mat);
 
             particle.rotation = mat0.getRotation();
         }
-        var length = particle.velocity.length;
+        const length = particle.velocity.length;
         if (this.randomDirectionAmount > 0)
         {
             var velocity = Vector3.random().scaleNumber(2).subNumber(1).normalize(length);
@@ -322,12 +321,11 @@ export class ParticleShapeModule extends ParticleModule
             var velocity = particle.position.clone().normalize(length);
             particle.velocity.lerpNumber(velocity, this.sphericalDirectionAmount).normalize(length);
         }
-
     }
 
     private _onShapeTypeChanged()
     {
-        var preValue = this.activeShape;
+        const preValue = this.activeShape;
         switch (this.shapeType)
         {
             case ParticleSystemShapeType.Sphere:
@@ -419,7 +417,7 @@ export class ParticleShapeModule extends ParticleModule
                 break;
         }
         serialization.setValue(this.activeShape, preValue);
-        this.emit("refreshView");
+        this.emit('refreshView');
     }
 
     private _onShapeChanged()

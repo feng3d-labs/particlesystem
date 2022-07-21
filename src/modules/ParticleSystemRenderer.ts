@@ -1,4 +1,3 @@
-
 /**
  * Use this class to render particles on to the screen.
  */
@@ -113,5 +112,4 @@ export class ParticleSystemRenderer extends ParticleModule
      * Specifies how much particles stretch depending on their velocity.
      */
     velocityScale: number;
-
 }
