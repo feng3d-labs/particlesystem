@@ -1,80 +1,82 @@
-namespace feng3d
+import { MinMaxCurve } from '@feng3d/math';
+import { oav } from '@feng3d/objectview';
+import { serialization, serialize } from '@feng3d/serialization';
+
+export class ParticleEmissionBurst
 {
-    export class ParticleEmissionBurst
+    __class__: 'feng3d.ParticleEmissionBurst';
+
+    /**
+     * The time that each burst occurs.
+     * 每次爆炸发生的时间。
+     */
+    @serialize
+    // @oav({ tooltip: "The time that each burst occurs." })
+    @oav({ tooltip: '每次爆炸发生的时间。' })
+    time = 0;
+
+    /**
+     * 要发射的粒子数。
+     */
+    @serialize
+    // @oav({ tooltip: "Number of particles to be emitted." })
+    @oav({ tooltip: '要发射的粒子数。' })
+    count = serialization.setValue(new MinMaxCurve(), { constant: 30, constantMin: 30, constantMax: 30 });
+
+    /**
+     * Minimum number of bursts to be emitted.
+     * 要发射的最小爆发数量。
+     */
+    get minCount()
     {
-        __class__: "feng3d.ParticleEmissionBurst";
+        return this.count.constantMin;
+    }
 
-        /**
-         * The time that each burst occurs.
-         * 每次爆炸发生的时间。
-         */
-        @serialize
-        // @oav({ tooltip: "The time that each burst occurs." })
-        @oav({ tooltip: "每次爆炸发生的时间。" })
-        time = 0;
+    set minCount(v)
+    {
+        this.count.constantMin = v;
+    }
 
-        /**
-         * 要发射的粒子数。
-         */
-        @serialize
-        // @oav({ tooltip: "Number of particles to be emitted." })
-        @oav({ tooltip: "要发射的粒子数。" })
-        count = serialization.setValue(new MinMaxCurve(), { constant: 30, constantMin: 30, constantMax: 30 });
+    /**
+     * Maximum number of bursts to be emitted.
+     *
+     * 要发射的最大爆发数量。
+     */
+    get maxCount()
+    {
+        return this.count.constantMax;
+    }
 
-        /**
-         * Minimum number of bursts to be emitted.
-         * 要发射的最小爆发数量。
-         */
-        get minCount()
-        {
-            return this.count.constantMin;
-        }
+    set maxCount(v)
+    {
+        this.count.constantMax = v;
+    }
 
-        set minCount(v)
-        {
-            this.count.constantMin = v;
-        }
+    /**
+     * 喷发被触发的几率。
+     */
+    @serialize
+    // @oav({ tooltip: "The chance that the burst will trigger." })
+    @oav({ tooltip: '喷发被触发的几率。取值在0与1之间，默认1。' })
+    probability = 1.0;
 
-        /**
-         * Maximum number of bursts to be emitted.
-         * 
-         * 要发射的最大爆发数量。
-         */
-        get maxCount()
-        {
-            return this.count.constantMax;
-        }
+    /**
+     * 是否喷发
+     */
+    get isProbability()
+    {
+        return this._isProbability;
+    }
 
-        set maxCount(v)
-        {
-            this.count.constantMax = v;
-        }
+    private _isProbability = true;
 
-        /**
-         * 喷发被触发的几率。
-         */
-        @serialize
-        // @oav({ tooltip: "The chance that the burst will trigger." })
-        @oav({ tooltip: "喷发被触发的几率。取值在0与1之间，默认1。" })
-        probability = 1.0;
+    /**
+     * 通过触发的几率计算是否喷发。
+     */
+    calculateProbability()
+    {
+        this._isProbability = this.probability >= Math.random();
 
-        /**
-         * 是否喷发
-         */
-        get isProbability()
-        {
-            return this._isProbability;
-        }
-
-        private _isProbability = true;
-
-        /**
-         * 通过触发的几率计算是否喷发。
-         */
-        calculateProbability()
-        {
-            this._isProbability = this.probability >= Math.random();
-            return this._isProbability;
-        }
+return this._isProbability;
     }
 }

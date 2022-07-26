@@ -1,47 +1,50 @@
-namespace feng3d
+import { oav } from '@feng3d/objectview';
+import { serialize } from '@feng3d/serialization';
+import { EventEmitter } from '@feng3d/event';
+import { Particle } from '../Particle';
+import { ParticleSystem } from '../ParticleSystem';
+
+/**
+ * 粒子模块
+ */
+export class ParticleModule extends EventEmitter
 {
     /**
-     * 粒子模块
+     * 是否开启
      */
-    export class ParticleModule extends EventEmitter
+    @oav({ tooltip: '是否开启' })
+    @serialize
+    enabled = false;
+
+    /**
+     * 粒子系统
+     */
+    particleSystem: ParticleSystem;
+
+    /**
+     * 初始化粒子状态
+     * @param _particle 粒子
+     */
+    initParticleState(_particle: Particle)
     {
-        /**
-         * 是否开启
-         */
-        @oav({ tooltip: "是否开启" })
-        @serialize
-        enabled = false;
 
-        /**
-         * 粒子系统
-         */
-        particleSystem: ParticleSystem;
+    }
 
-        /**
-         * 初始化粒子状态
-         * @param particle 粒子
-         */
-        initParticleState(particle: Particle)
-        {
+    /**
+     * 更新粒子状态
+     * @param _particle 粒子
+     */
+    updateParticleState(_particle: Particle)
+    {
 
-        }
+    }
 
-        /**
-         * 更新粒子状态
-         * @param particle 粒子
-         */
-        updateParticleState(particle: Particle)
-        {
-
-        }
-
-        /**
-         * 更新
-         * 
-         * @param interval 
-         */
-        update(interval: number)
-        {
-        }
+    /**
+     * 更新
+     *
+     * @param _interval
+     */
+    update(_interval: number)
+    {
     }
 }
